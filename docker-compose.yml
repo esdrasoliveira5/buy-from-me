@@ -1,0 +1,26 @@
+version: '3.9'
+services:
+  backend:
+    build: ./backend
+    container_name: bfm_backend
+    ports:
+      - 3001:3001
+    depends_on:
+      - db
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/postgres
+  db:
+    image: postgres
+    container_name: db
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+    restart: 'always'
+    cap_add:
+      - SYS_NICE 
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
