@@ -1,7 +1,7 @@
-import { Orders, PrismaClient, Products, Users } from '@prisma/client'
+import { PrismaClient, Users } from '@prisma/client'
 const prisma = new PrismaClient();
 
-const users = [
+const users: Users[] = [
   {
     id: '1',
     name: 'Roberto',

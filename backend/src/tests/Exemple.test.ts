@@ -6,7 +6,6 @@
 
 // import { Response } from 'superagent';
 
-
 // chai.use(chaiHttp);
 
 // const { expect } = chai;
@@ -24,7 +23,6 @@
 //       },
 //       token: newToken.generate(1, 'admin@admin.com')
 //     }
-    
 //     const userPayload = {
 //       id: 1,
 //       username: 'Admin',
@@ -37,18 +35,15 @@
 //         .stub(Users, 'findOne')
 //         .resolves( userPayload as Users);
 //     });
-  
 //     after(()=>{
 //       (Users.findOne as sinon.SinonStub).restore();
 //     })
-  
 //     it('Retorna os dados do usuario cadastrado', async () => {
 //       chaiHttpResponse = await chai
 //          .request(app)
 //          .post('/login')
 //          .set('X-API-Key', 'foobar')
 //          .send({ email: 'admin@admin.com', password: 'secret_admin' })
-  
 //       expect(chaiHttpResponse).to.have.status(StatusCodes.OK);
 //       expect(chaiHttpResponse.body.user).to.deep.equal(loginPayload.user);
 //     });

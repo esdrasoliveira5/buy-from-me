@@ -1,43 +1,43 @@
-import { Orders, PrismaClient, Products, Users } from '@prisma/client'
+import { PrismaClient, States } from '@prisma/client'
 const prisma = new PrismaClient();
 
-const states = [
-  { nome: 'MG' },
-  { nome: 'AC' },
-  { nome: 'AL' },
-  { nome: 'AP' },
-  { nome: 'AM' },
-  { nome: 'BA' },
-  { nome: 'CE' },
-  { nome: 'DF' },
-  { nome: 'ES' },
-  { nome: 'GO' },
-  { nome: 'MA' },
-  { nome: 'MT' },
-  { nome: 'MS' },
-  { nome: 'PA' },
-  { nome: 'PB' },
-  { nome: 'PR' },
-  { nome: 'PE' },
-  { nome: 'PI' },
-  { nome: 'RJ' },
-  { nome: 'RN' },
-  { nome: 'RS' },
-  { nome: 'RO' },
-  { nome: 'RR' },
-  { nome: 'SC' },
-  { nome: 'SP' },
-  { nome: 'SE' },
-  { nome: 'TO' },
+const states: Omit<States, 'id'>[] = [
+  { name: 'MG' },
+  { name: 'AC' },
+  { name: 'AL' },
+  { name: 'AP' },
+  { name: 'AM' },
+  { name: 'BA' },
+  { name: 'CE' },
+  { name: 'DF' },
+  { name: 'ES' },
+  { name: 'GO' },
+  { name: 'MA' },
+  { name: 'MT' },
+  { name: 'MS' },
+  { name: 'PA' },
+  { name: 'PB' },
+  { name: 'PR' },
+  { name: 'PE' },
+  { name: 'PI' },
+  { name: 'RJ' },
+  { name: 'RN' },
+  { name: 'RS' },
+  { name: 'RO' },
+  { name: 'RR' },
+  { name: 'SC' },
+  { name: 'SP' },
+  { name: 'SE' },
+  { name: 'TO' },
 ];
 
 async function statesSeed() {
-  const resultState = states.map(async ({nome}, index) =>{
+  const resultState = states.map(async ({name}, index) =>{
     const response = await prisma.states.upsert({
       where: { id: index  },
       update: {},
       create: {
-        name: nome,
+        name: name,
       },
     })
     return response

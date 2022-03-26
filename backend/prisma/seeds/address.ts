@@ -1,4 +1,4 @@
-import { Address, Orders, PrismaClient, Products, Users } from '@prisma/client'
+import { Address, PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient();
 
 const address: Address[] = [

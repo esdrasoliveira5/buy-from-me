@@ -7,4 +7,4 @@ class HandleError {
   };
 }
 
-export default HandleError
+export default HandleError;
