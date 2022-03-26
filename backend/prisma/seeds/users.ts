@@ -3,40 +3,40 @@ const prisma = new PrismaClient();
 
 const users = [
   {
-    id: '123',
+    id: '1',
     name: 'Roberto',
     lastName: 'Vendedor',
     email: 'roberto@email.com',
     contact: 987654321,
     password: '123456789',
-    statesId: 1
+    addressId: 1,
   },
   {
-    id: '234',
+    id: '2',
     name: 'Amanda',
     lastName: 'Comprador',
     email: 'amanda@email.com',
     contact: 987654321,
     password: '123456789',
-    statesId: 2
+    addressId: 2,
   },
   {
-    id: '124',
+    id: '3',
     name: 'Elias',
     lastName: 'Vendedor',
     email: 'elias@email.com',
     contact: 987654321,
     password: '123456789',
-    statesId: 3
+    addressId: 3,
   },
   {
-    id: '134',
+    id: '4',
     name: 'Fernanda',
     lastName: 'Comprador',
     email: 'fernanda@email.com',
     contact: 987654321,
     password: '123456789',
-    statesId: 4
+    addressId: 4,
   },
 ];
 
