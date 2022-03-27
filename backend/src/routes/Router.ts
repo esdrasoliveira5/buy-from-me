@@ -1,16 +1,14 @@
-import { Router, Request, Response } from 'express';
+import * as express from 'express';
+import UserController, { UsersControllers } from '../controllers/UserControllers';
 
-const Routes = Router();
+const Router = express.Router();
 
 class MainRouter {
-  constructor() {
-    Routes.get('/', this.online);
-  }
+  private controller = new UsersControllers();
 
-  online = async (req: Request, res: Response) => {
-    console.log('AQUI');
-    return res.status(200).json({ message: 'Api Online!' });
-  };
+  constructor() {
+    Router.use('/users', UserController);
+  }
 }
 export { MainRouter };
-export default Routes;
+export default Router;

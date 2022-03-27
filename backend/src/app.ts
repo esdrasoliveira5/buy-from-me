@@ -1,7 +1,8 @@
 import Express from 'express';
+import 'express-async-errors';
 import Cors from 'cors';
 import HanldeError from './middlewares/HanldeError';
-import Routes, { MainRouter } from './routes/Router';
+import Router, { MainRouter } from './routes/Router';
 
 class App {
   public app = Express();
@@ -12,8 +13,8 @@ class App {
 
   constructor() {
     this.config();
+    this.app.use('/', Router);
     this.app.use(this.handleError.genericError);
-    this.app.use('/', Routes);
   }
 
   private config():void {
