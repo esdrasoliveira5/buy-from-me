@@ -1,7 +1,7 @@
 import { PrismaClient, Users } from '@prisma/client';
 
 class UsersRepository {
-  public prisma: PrismaClient;
+  private prisma: PrismaClient;
 
   constructor() {
     this.prisma = new PrismaClient();

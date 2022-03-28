@@ -1,5 +1,5 @@
 import * as sinon from 'sinon';
-import * as chai from 'chai';
+import chai from 'chai';
 import chaiHttp = require('chai-http');
 import StatusCode from '../interfaces/StatusCodes'
 import { app } from '../app';
@@ -7,11 +7,12 @@ import { Response } from 'superagent';
 import { PrismaClient, Users } from '@prisma/client';
 
 chai.use(chaiHttp);
+
 const { expect } = chai;
 const client = new PrismaClient();
 
-describe('1 - Testa se e possivel logar o usuario atraves do endpoint /login', () => {
-  describe('1.1 - Se o email e a senha estao corretas', () => {
+describe('Testa se e possivel logar o usuario atraves do endpoint /login', () => {
+  describe('Se o email e a senha estao corretas', () => {
     let chaiHttpResponse: Response;
     const loginPayload = {
       user: {
@@ -42,7 +43,7 @@ describe('1 - Testa se e possivel logar o usuario atraves do endpoint /login', (
     it('Retorna os dados do usuario e um token', async () => {
       chaiHttpResponse = await chai
          .request(app)
-         .post('/login')
+         .post('users/login')
          .set('X-API-Key', 'foobar')
          .send({ email: 'user@email.com', password: 'password' })
       expect(chaiHttpResponse).to.have.status(StatusCode.OK);

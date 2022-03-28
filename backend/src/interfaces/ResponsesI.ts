@@ -13,3 +13,10 @@ export interface ResponseError extends Status {
 export interface ResponseUser extends Status {
   response : Users;
 }
+
+export interface ResponseToken extends Status {
+  response: {
+    user: Users,
+    token: string,
+  }
+}
