@@ -1,4 +1,4 @@
-import { Users } from '@prisma/client';
+import { Products, Users } from '@prisma/client';
 
 export interface Status {
   status: number;
@@ -18,9 +18,13 @@ export interface ResponseToken extends Status {
   response: {
     user: Users,
     token: string,
-  }
+  };
 }
 
 export interface ResponseDelete extends Status {
-  response : { message: string }
+  response : { message: string };
+}
+
+export interface ResponseProducts extends Status {
+  response: Products | Products[];
 }

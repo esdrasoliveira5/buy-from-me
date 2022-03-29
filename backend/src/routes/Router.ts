@@ -1,13 +1,17 @@
 import * as express from 'express';
-import UserController, { UsersControllers } from '../controllers/UserControllers';
+import ProductsRouter, { ProductsControllers } from '../controllers/ProductsControllers';
+import UserRouter, { UsersControllers } from '../controllers/UserControllers';
 
 const Router = express.Router();
 
 class MainRouter {
-  private controller = new UsersControllers();
+  private userController = new UsersControllers();
+
+  private productsController = new ProductsControllers();
 
   constructor() {
-    Router.use('/users', UserController);
+    Router.use('/user', UserRouter);
+    Router.use('/product', ProductsRouter);
   }
 }
 export { MainRouter };

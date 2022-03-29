@@ -21,7 +21,7 @@ class UsersRepository {
     return response;
   }
 
-  async create(data: CreateUserData): Promise< undefined | Users > {
+  async create(data: CreateUserData): Promise<Users > {
     const addressRes = await this.prisma.address.create({
       data: data.address,
     });
@@ -36,7 +36,7 @@ class UsersRepository {
     return response;
   }
 
-  async update(data: UpdateUserData): Promise<undefined | Users> {
+  async update(data: UpdateUserData): Promise<Users> {
     const addressRes = await this.prisma.address.update({
       where: { id: data.user.addressId },
       data: data.address,
