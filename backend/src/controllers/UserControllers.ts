@@ -13,6 +13,7 @@ class UsersControllers {
     Router.post('/login', this.get);
     Router.post('/', this.create);
     Router.put('/', this.update);
+    Router.delete('/', this.delete);
   }
 
   get = async (req: Request, res: Response) => {
@@ -37,6 +38,13 @@ class UsersControllers {
     const user = { id, name, lastName, password, contact, addressId } as Users;
     const address = { street, number, district, zipcode, city, statesId } as Address;
     const { status, response } = await this.services.update(authorization, { user, address });
+    return res.status(status).json(response);
+  };
+
+  delete = async (req: Request, res: Response) => {
+    const { authorization } = req.headers;
+    const { userId } = req.body;
+    const { status, response } = await this.services.delete(authorization, userId);
     return res.status(status).json(response);
   };
 }

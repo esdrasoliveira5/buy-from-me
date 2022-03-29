@@ -14,3 +14,13 @@ export interface UpdateUserData {
   user: Omit<Users, 'email'>;
   address: Omit<Address, 'id'>;
 }
+
+export interface DeleteUserData {
+  userId: string;
+  addressId: number;
+}
+
+export interface UserIdOrEmail {
+  id?: string;
+  email?: string;
+}

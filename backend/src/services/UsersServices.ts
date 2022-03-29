@@ -1,4 +1,9 @@
-import { ResponseError, ResponseToken, ResponseUser } from '../interfaces/ResponsesI';
+import {
+  ResponseDelete,
+  ResponseError,
+  ResponseToken,
+  ResponseUser,
+} from '../interfaces/ResponsesI';
 import StatusCode from '../interfaces/StatusCodes';
 import { CreateUserData, LoginData, UpdateUserData } from '../interfaces/UsersI';
 import UsersRepository from '../repository/UsersRepository';
@@ -44,7 +49,7 @@ class UsersServices {
     const validData = this.validations.login(data);
     if (validData) return validData;
 
-    const response = await this.repository.get(email);
+    const response = await this.repository.get({ email });
     if (response === null) return this._userNotFound;
 
     const validPassword = await this.bcrypt.compareIt(password, response.password);
@@ -64,7 +69,7 @@ class UsersServices {
     const validAddress = this.validations.address(address);
     if (validAddress) return validAddress;
 
-    const userRes = await this.repository.get(user.email);
+    const userRes = await this.repository.get({ email: user.email });
     if (userRes) return this._conflict;
 
     const newPassword = await this.bcrypt.hashIt(user.password);
@@ -79,17 +84,17 @@ class UsersServices {
   Promise<ResponseUser | ResponseError> {
     const { user, address } = data;
 
-    const tokenValid = this.jwt.validate(token);
-    if ('status' in tokenValid) return tokenValid;
-    if (tokenValid.id !== data.user.id) return this._unauthorized;
-
     const validUser = this.validations.userUpdate(user);
     if (validUser) return validUser;
 
     const validAddress = this.validations.address(address);
     if (validAddress) return validAddress;
 
-    const responseUser = await this.repository.get(tokenValid.email);
+    const tokenValid = this.jwt.validate(token);
+    if ('status' in tokenValid) return tokenValid;
+    if (tokenValid.id !== data.user.id) return this._unauthorized;
+
+    const responseUser = await this.repository.get({ email: tokenValid.email });
     if (responseUser === null) return this._userNotFound;
 
     const newPassword = await this.bcrypt.hashIt(user.password);
@@ -98,6 +103,23 @@ class UsersServices {
     const response = await this.repository.update({ user: userData, address });
     if (response === undefined) return this._iternalServerError;
     return { status: StatusCode.OK, response };
+  }
+
+  async delete(token: string | undefined, userId: string):
+  Promise<ResponseError | ResponseDelete> {
+    const validData = this.validations.userDelete(userId);
+    if (validData) return validData;
+
+    const tokenValid = this.jwt.validate(token);
+    if ('status' in tokenValid) return tokenValid;
+    if (tokenValid.id !== userId) return this._unauthorized;
+
+    const responseUser = await this.repository.get({ id: tokenValid.id });
+    if (responseUser === null) return this._userNotFound;
+
+    const response = await this.repository.delete({ userId, addressId: responseUser.addressId });
+    console.log(response);
+    return { status: StatusCode.OK, response: { message: 'user deleted' } };
   }
 }
 

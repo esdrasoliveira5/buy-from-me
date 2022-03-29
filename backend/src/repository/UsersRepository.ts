@@ -1,5 +1,10 @@
 import { PrismaClient, Users } from '@prisma/client';
-import { CreateUserData, UpdateUserData } from '../interfaces/UsersI';
+import {
+  CreateUserData,
+  DeleteUserData,
+  UpdateUserData,
+  UserIdOrEmail,
+} from '../interfaces/UsersI';
 
 class UsersRepository {
   private prisma: PrismaClient;
@@ -8,11 +13,9 @@ class UsersRepository {
     this.prisma = new PrismaClient();
   }
 
-  async get(email:string): Promise<Users | null> {
+  async get(data: UserIdOrEmail): Promise<Users | null> {
     const response = await this.prisma.users.findUnique({
-      where: {
-        email,
-      },
+      where: data,
       include: { address: true },
     });
     return response;
@@ -47,6 +50,14 @@ class UsersRepository {
       include: { address: true },
     });
     return response;
+  }
+
+  async delete(data: DeleteUserData) {
+    const order = await this.prisma.orders.deleteMany({ where: { buyerId: data.userId } });
+    const products = await this.prisma.products.deleteMany({ where: { usersId: data.userId } });
+    const user = await this.prisma.users.delete({ where: { id: data.userId } });
+    const address = await this.prisma.address.delete({ where: { id: data.addressId } });
+    return { order, products, user, address };
   }
 }
 

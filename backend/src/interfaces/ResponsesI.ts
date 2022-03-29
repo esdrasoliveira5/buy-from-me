@@ -20,3 +20,7 @@ export interface ResponseToken extends Status {
     token: string,
   }
 }
+
+export interface ResponseDelete extends Status {
+  response : { message: string }
+}

@@ -61,5 +61,14 @@ class JoiValidations {
       return { status: StatusCode.BAD_REQUEST, response: { error: error.details[0].message } };
     }
   }
+
+  userDelete(userId: string) {
+    const { error } = this.joi.object({
+      userId: Joi.string().not().empty().required(),
+    }).validate({ userId });
+    if (error) {
+      return { status: StatusCode.BAD_REQUEST, response: { error: error.details[0].message } };
+    }
+  }
 }
 export default JoiValidations;
