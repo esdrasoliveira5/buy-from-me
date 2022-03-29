@@ -14,7 +14,6 @@ class UsersRepository {
         email,
       },
     });
-    console.log(response);
     return response;
   }
 
