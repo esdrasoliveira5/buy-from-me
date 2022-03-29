@@ -1,10 +1,10 @@
 import { ResponseError, ResponseToken, ResponseUser } from '../interfaces/ResponsesI';
 import StatusCode from '../interfaces/StatusCodes';
-import { CreateUserData, LoginData } from '../interfaces/UsersI';
+import { CreateUserData, LoginData, UpdateUserData } from '../interfaces/UsersI';
 import UsersRepository from '../repository/UsersRepository';
 import Bcrypt from '../validations/Bcrypt';
 import JoiValidations from '../validations/JoiValidations';
-import Token from '../validations/Token';
+import JwToken from '../validations/JwToken';
 
 class UsersServices {
   private _userNotFound: ResponseError;
@@ -13,13 +13,15 @@ class UsersServices {
 
   private _conflict: ResponseError;
 
+  private _unauthorized: ResponseError;
+
   private validations: JoiValidations;
 
   private repository: UsersRepository;
 
   private bcrypt: Bcrypt;
 
-  private token: Token;
+  private jwt: JwToken;
 
   constructor() {
     this._userNotFound = { status: StatusCode.NOT_FOUND, response: { error: 'User not found' } };
@@ -29,10 +31,11 @@ class UsersServices {
     this._conflict = {
       status: StatusCode.CONFLICT,
       response: { error: 'user already registered' } };
+    this._unauthorized = { status: StatusCode.UNAUTHORIZED, response: { error: 'Invalid token' } };
     this.validations = new JoiValidations();
     this.repository = new UsersRepository();
     this.bcrypt = new Bcrypt();
-    this.token = new Token();
+    this.jwt = new JwToken();
   }
 
   async get(data: LoginData): Promise<ResponseError | ResponseToken> {
@@ -47,7 +50,7 @@ class UsersServices {
     const validPassword = await this.bcrypt.compareIt(password, response.password);
     if (validPassword) return validPassword;
 
-    const newToken = this.token.generate({ id: response.id, email: response.email });
+    const newToken = this.jwt.generate({ id: response.id, email: response.email });
     const newResponse = { user: response, token: newToken };
     return { status: StatusCode.OK, response: newResponse };
   }
@@ -70,6 +73,31 @@ class UsersServices {
     const response = await this.repository.create({ user: userData, address });
     if (response === undefined) return this._iternalServerError;
     return { status: StatusCode.CREATED, response };
+  }
+
+  async update(token: string | undefined, data: UpdateUserData):
+  Promise<ResponseUser | ResponseError> {
+    const { user, address } = data;
+
+    const tokenValid = this.jwt.validate(token);
+    if ('status' in tokenValid) return tokenValid;
+    if (tokenValid.id !== data.user.id) return this._unauthorized;
+
+    const validUser = this.validations.userUpdate(user);
+    if (validUser) return validUser;
+
+    const validAddress = this.validations.address(address);
+    if (validAddress) return validAddress;
+
+    const responseUser = await this.repository.get(tokenValid.email);
+    if (responseUser === null) return this._userNotFound;
+
+    const newPassword = await this.bcrypt.hashIt(user.password);
+    const userData = { ...user, password: newPassword };
+
+    const response = await this.repository.update({ user: userData, address });
+    if (response === undefined) return this._iternalServerError;
+    return { status: StatusCode.OK, response };
   }
 }
 

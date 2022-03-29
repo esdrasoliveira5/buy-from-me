@@ -1,5 +1,5 @@
 import { PrismaClient, Users } from '@prisma/client';
-import { CreateUserData } from '../interfaces/UsersI';
+import { CreateUserData, UpdateUserData } from '../interfaces/UsersI';
 
 class UsersRepository {
   private prisma: PrismaClient;
@@ -13,6 +13,7 @@ class UsersRepository {
       where: {
         email,
       },
+      include: { address: true },
     });
     return response;
   }
@@ -27,6 +28,23 @@ class UsersRepository {
         ...data.user,
         addressId: addressRes.id,
       },
+      include: { address: true },
+    });
+    return response;
+  }
+
+  async update(data: UpdateUserData): Promise<undefined | Users> {
+    const addressRes = await this.prisma.address.update({
+      where: { id: data.user.addressId },
+      data: data.address,
+    });
+    if (addressRes === undefined) return addressRes;
+    const response = await this.prisma.users.update({
+      where: { id: data.user.id },
+      data: {
+        ...data.user,
+      },
+      include: { address: true },
     });
     return response;
   }

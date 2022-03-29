@@ -9,3 +9,8 @@ export interface CreateUserData {
   user: Omit<Users, 'id | addressId'>;
   address: Omit<Address, 'id'>;
 }
+
+export interface UpdateUserData {
+  user: Omit<Users, 'email'>;
+  address: Omit<Address, 'id'>;
+}

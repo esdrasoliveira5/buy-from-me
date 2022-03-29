@@ -46,5 +46,20 @@ class JoiValidations {
       return { status: StatusCode.BAD_REQUEST, response: { error: error.details[0].message } };
     }
   }
+
+  userUpdate(data: Omit<Users, 'email'>) {
+    const { name, lastName, password, contact, addressId } = data;
+    const { error } = this.joi.object({
+      name: Joi.string().not().empty().required(),
+      lastName: Joi.string().not().empty().required(),
+      email: Joi.string().email().not().empty(),
+      password: Joi.string().min(8).max(20).required(),
+      contact: Joi.number().strict().min(9).required(),
+      addressId: Joi.number().strict().required(),
+    }).validate({ name, lastName, password, contact, addressId });
+    if (error) {
+      return { status: StatusCode.BAD_REQUEST, response: { error: error.details[0].message } };
+    }
+  }
 }
 export default JoiValidations;

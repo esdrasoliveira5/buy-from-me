@@ -9,7 +9,7 @@ export type TokenType = {
   email: string;
 };
 
-class Token {
+class JwToken {
   private secret: string;
 
   private jwtConfig: SignOptions;
@@ -36,4 +36,4 @@ class Token {
     }
   }
 }
-export default Token;
+export default JwToken;
