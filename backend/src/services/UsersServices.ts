@@ -5,7 +5,7 @@ import {
   ResponseUser,
 } from '../interfaces/ResponsesI';
 import StatusCode from '../interfaces/StatusCodes';
-import { CreateUserData, LoginData, UpdateUserData } from '../interfaces/UsersI';
+import { CreateUserData, LoginData, Token, UpdateUserData } from '../interfaces/UsersI';
 import UsersRepository from '../repository/UsersRepository';
 import Bcrypt from '../validations/Bcrypt';
 import JoiValidations from '../validations/JoiValidations';
@@ -80,7 +80,7 @@ class UsersServices {
     return { status: StatusCode.CREATED, response };
   }
 
-  async update(token: string | undefined, data: UpdateUserData):
+  async update(token: Token, data: UpdateUserData):
   Promise<ResponseUser | ResponseError> {
     const { user, address } = data;
 
@@ -105,7 +105,7 @@ class UsersServices {
     return { status: StatusCode.OK, response };
   }
 
-  async delete(token: string | undefined, userId: string):
+  async delete(token: Token, userId: string):
   Promise<ResponseError | ResponseDelete> {
     const validData = this.validations.userDelete(userId);
     if (validData) return validData;

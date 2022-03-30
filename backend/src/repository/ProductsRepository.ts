@@ -19,6 +19,9 @@ class ProductsRepository {
     const products = await this.prisma.products.findMany({
       skip: page,
       take: 20,
+      where: {
+        sold: false,
+      },
     });
     return products;
   }
@@ -34,6 +37,16 @@ class ProductsRepository {
       },
     });
     return products;
+  }
+
+  async create(data: Omit<Products, 'id'>) {
+    const newProduct = await this.prisma.products.create({
+      data: {
+        ...data,
+      },
+    });
+
+    return newProduct;
   }
 }
 export default ProductsRepository;

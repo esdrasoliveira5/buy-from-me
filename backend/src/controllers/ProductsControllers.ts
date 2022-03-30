@@ -1,3 +1,4 @@
+import { Products } from '@prisma/client';
 import * as express from 'express';
 import { Request, Response } from 'express';
 import { QueryData } from '../interfaces/ProductsI';
@@ -13,6 +14,7 @@ class ProductsControllers {
     Router.get('/filter', this.getByFilter);
     Router.get('/:id', this.get);
     Router.get('/', this.getAll);
+    Router.post('/', this.create);
   }
 
   get = async (req: Request, res: Response) => {
@@ -40,6 +42,22 @@ class ProductsControllers {
     const pageExists = pag === undefined ? 0 : Number(pag);
 
     const { status, response } = await this.services.getByFilter(pageExists, data);
+
+    return res.status(status).json(response);
+  };
+
+  create = async (req: Request, res: Response) => {
+    const { authorization } = req.headers;
+    const { name, description, price, categoriesId, usersId, newProduct } = req.body;
+    const data = {
+      name,
+      description,
+      price,
+      categoriesId,
+      usersId,
+      new: newProduct,
+    } as Omit<Products, 'id | sold'>;
+    const { status, response } = await this.services.create(authorization, data);
 
     return res.status(status).json(response);
   };

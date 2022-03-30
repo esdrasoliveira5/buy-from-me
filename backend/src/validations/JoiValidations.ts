@@ -1,4 +1,4 @@
-import { Address, Users } from '@prisma/client';
+import { Address, Products, Users } from '@prisma/client';
 import Joi from 'joi';
 import { ResponseError } from '../interfaces/ResponsesI';
 import StatusCode from '../interfaces/StatusCodes';
@@ -18,7 +18,7 @@ class JoiValidations {
     }
   }
 
-  user(data: Omit<Users, 'id | addressId'>) {
+  user(data: Omit<Users, 'id | addressId'>): void | ResponseError {
     const { name, lastName, email, password, contact } = data;
     const { error } = this.joi.object({
       name: Joi.string().not().empty().required(),
@@ -32,7 +32,7 @@ class JoiValidations {
     }
   }
 
-  address(data: Omit<Address, 'id'>) {
+  address(data: Omit<Address, 'id'>): void | ResponseError {
     const { street, number, district, zipcode, city, statesId } = data;
     const { error } = this.joi.object({
       street: Joi.string().not().empty().required(),
@@ -47,7 +47,7 @@ class JoiValidations {
     }
   }
 
-  userUpdate(data: Omit<Users, 'email'>) {
+  userUpdate(data: Omit<Users, 'email'>): void | ResponseError {
     const { name, lastName, password, contact, addressId } = data;
     const { error } = this.joi.object({
       name: Joi.string().not().empty().required(),
@@ -62,10 +62,25 @@ class JoiValidations {
     }
   }
 
-  userDelete(userId: string) {
+  userDelete(userId: string): void | ResponseError {
     const { error } = this.joi.object({
       userId: Joi.string().not().empty().required(),
     }).validate({ userId });
+    if (error) {
+      return { status: StatusCode.BAD_REQUEST, response: { error: error.details[0].message } };
+    }
+  }
+
+  product(data: Omit<Products, 'id | sold'>): void | ResponseError {
+    const { name, description, price, categoriesId, usersId } = data;
+    const { error } = this.joi.object({
+      name: Joi.string().not().empty().required(),
+      description: Joi.string().not().empty().required(),
+      price: Joi.number().strict().not().empty(),
+      categoriesId: Joi.number().strict().required(),
+      usersId: Joi.string().not().empty().required(),
+      new: Joi.boolean().not().empty().required(),
+    }).validate({ name, description, price, categoriesId, usersId, new: data.new });
     if (error) {
       return { status: StatusCode.BAD_REQUEST, response: { error: error.details[0].message } };
     }
