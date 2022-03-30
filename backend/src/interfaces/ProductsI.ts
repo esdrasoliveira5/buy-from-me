@@ -16,3 +16,7 @@ export type SearchData = {
   new?: boolean;
   categoriesId?: number;
 };
+
+export type UpdateSoldData = {
+  sold: boolean;
+};

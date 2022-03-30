@@ -15,6 +15,7 @@ class ProductsControllers {
     Router.get('/:id', this.get);
     Router.get('/', this.getAll);
     Router.post('/', this.create);
+    Router.put('/:id/sold', this.updateSold);
   }
 
   get = async (req: Request, res: Response) => {
@@ -58,6 +59,15 @@ class ProductsControllers {
       new: newProduct,
     } as Omit<Products, 'id | sold'>;
     const { status, response } = await this.services.create(authorization, data);
+
+    return res.status(status).json(response);
+  };
+
+  updateSold = async (req: Request, res: Response) => {
+    const { authorization } = req.headers;
+    const { id } = req.params;
+
+    const { status, response } = await this.services.updateSold(authorization, Number(id));
 
     return res.status(status).json(response);
   };

@@ -61,7 +61,8 @@ class ProductsServices {
     return { status: StatusCode.OK, response };
   }
 
-  async create(token: Token, data: Omit<Products, 'id | sold'>) {
+  async create(token: Token, data: Omit<Products, 'id | sold'>):
+  Promise<ResponseError | ResponseProducts> {
     const validProduct = this.validations.product(data);
     if (validProduct) return validProduct;
 
@@ -74,6 +75,21 @@ class ProductsServices {
 
     const response = await this.repository.create({ ...data, sold: false });
     return { status: StatusCode.CREATED, response };
+  }
+
+  async updateSold(token: Token, id: number): Promise<ResponseError | ResponseProducts> {
+    const tokenValid = this.jwt.validate(token);
+    if ('status' in tokenValid) return tokenValid;
+
+    const responseUser = await this.userRepository.get({ email: tokenValid.email });
+    if (responseUser === null) return this._unauthorized;
+
+    const product = await this.repository.get(id);
+    if (product === null) return this._productsNotFound;
+    if (product.usersId !== tokenValid.id) return this._unauthorized;
+
+    const response = await this.repository.update(id, { sold: !product.sold });
+    return { status: StatusCode.OK, response };
   }
 }
 export default ProductsServices;
