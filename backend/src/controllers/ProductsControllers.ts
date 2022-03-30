@@ -1,7 +1,7 @@
 import { Products } from '@prisma/client';
 import * as express from 'express';
 import { Request, Response } from 'express';
-import { QueryData } from '../interfaces/ProductsI';
+import { ProductUpdateData, QueryData } from '../interfaces/ProductsI';
 import ProductsServices from '../services/ProductsServices';
 
 const Router = express.Router();
@@ -16,6 +16,7 @@ class ProductsControllers {
     Router.get('/', this.getAll);
     Router.post('/', this.create);
     Router.put('/:id/sold', this.updateSold);
+    Router.put('/:id', this.update);
   }
 
   get = async (req: Request, res: Response) => {
@@ -68,6 +69,16 @@ class ProductsControllers {
     const { id } = req.params;
 
     const { status, response } = await this.services.updateSold(authorization, Number(id));
+
+    return res.status(status).json(response);
+  };
+
+  update = async (req: Request, res: Response) => {
+    const { authorization } = req.headers;
+    const { id } = req.params;
+    const { name, description, price, categoriesId, newProduct } = req.body;
+    const data = { name, description, price, categoriesId, new: newProduct } as ProductUpdateData;
+    const { status, response } = await this.services.update(authorization, Number(id), data);
 
     return res.status(status).json(response);
   };

@@ -1,5 +1,5 @@
 import { PrismaClient, Products } from '@prisma/client';
-import { SearchData, UpdateSoldData } from '../interfaces/ProductsI';
+import { ProductUpdateData, SearchData, UpdateSoldData } from '../interfaces/ProductsI';
 
 class ProductsRepository {
   private prisma: PrismaClient;
@@ -49,7 +49,7 @@ class ProductsRepository {
     return newProduct;
   }
 
-  async update(id: number, data: Omit<Products, 'id'> | UpdateSoldData): Promise<Products> {
+  async update(id: number, data: ProductUpdateData | UpdateSoldData): Promise<Products> {
     const product = await this.prisma.products.update({
       where: { id },
       data: {

@@ -20,3 +20,11 @@ export type SearchData = {
 export type UpdateSoldData = {
   sold: boolean;
 };
+
+export type ProductUpdateData = {
+  name: string;
+  description: string;
+  price: number;
+  new: boolean;
+  categoriesId: number;
+};
