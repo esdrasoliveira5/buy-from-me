@@ -1,6 +1,6 @@
 import { Products } from '@prisma/client';
 import { ProductUpdateData, QueryData } from '../interfaces/ProductsI';
-import { ResponseError, ResponseProducts } from '../interfaces/ResponsesI';
+import { ResponseDelete, ResponseError, ResponseProducts } from '../interfaces/ResponsesI';
 import StatusCode from '../interfaces/StatusCodes';
 import { Token } from '../interfaces/UsersI';
 import ProductsRepository from '../repository/ProductsRepository';
@@ -94,7 +94,7 @@ class ProductsServices {
 
   async update(token: Token, id: number, data: ProductUpdateData):
   Promise<ResponseError | ResponseProducts> {
-    const validData = await this.validations.productUpdate(data);
+    const validData = this.validations.productUpdate(data);
     if (validData) return validData;
 
     const tokenValid = this.jwt.validate(token);
@@ -109,6 +109,22 @@ class ProductsServices {
 
     const response = await this.repository.update(id, data);
     return { status: StatusCode.OK, response };
+  }
+
+  async delete(token: Token, id: number): Promise<ResponseError | ResponseDelete> {
+    const tokenValid = this.jwt.validate(token);
+    if ('status' in tokenValid) return tokenValid;
+
+    const responseUser = await this.userRepository.get({ email: tokenValid.email });
+    if (responseUser === null) return this._unauthorized;
+
+    const product = await this.repository.get(id);
+    if (product === null) return this._productsNotFound;
+    if (product.usersId !== tokenValid.id) return this._unauthorized;
+
+    const response = await this.repository.delete(id);
+    console.log(response);
+    return { status: StatusCode.OK, response: { message: 'product deleted' } };
   }
 }
 export default ProductsServices;

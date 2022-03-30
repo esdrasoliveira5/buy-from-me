@@ -58,5 +58,11 @@ class ProductsRepository {
     });
     return product;
   }
+
+  async delete(id: number) {
+    const order = await this.prisma.orders.deleteMany({ where: { productsId: id } });
+    const product = await this.prisma.products.delete({ where: { id } });
+    return { order, product };
+  }
 }
 export default ProductsRepository;

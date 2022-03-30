@@ -17,6 +17,7 @@ class ProductsControllers {
     Router.post('/', this.create);
     Router.put('/:id/sold', this.updateSold);
     Router.put('/:id', this.update);
+    Router.delete('/:id', this.delete);
   }
 
   get = async (req: Request, res: Response) => {
@@ -79,6 +80,15 @@ class ProductsControllers {
     const { name, description, price, categoriesId, newProduct } = req.body;
     const data = { name, description, price, categoriesId, new: newProduct } as ProductUpdateData;
     const { status, response } = await this.services.update(authorization, Number(id), data);
+
+    return res.status(status).json(response);
+  };
+
+  delete = async (req: Request, res: Response) => {
+    const { authorization } = req.headers;
+    const { id } = req.params;
+
+    const { status, response } = await this.services.delete(authorization, Number(id));
 
     return res.status(status).json(response);
   };
