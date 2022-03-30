@@ -24,12 +24,17 @@ class OrdersRepository {
     return orders;
   }
 
-  async create(data: Omit<Orders, 'id'>) {
+  async create(data: Omit<Orders, 'id'>): Promise<Orders> {
     const order = await this.prisma.orders.create({
       data: {
         ...data,
       },
     });
+    return order;
+  }
+
+  async delete(id: number) {
+    const order = await this.prisma.orders.delete({ where: { id } });
     return order;
   }
 }

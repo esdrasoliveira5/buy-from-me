@@ -13,7 +13,7 @@ class UsersControllers {
     Router.post('/login', this.get);
     Router.post('/', this.create);
     Router.put('/', this.update);
-    Router.delete('/', this.delete);
+    Router.delete('/:id', this.delete);
   }
 
   get = async (req: Request, res: Response) => {
@@ -51,9 +51,9 @@ class UsersControllers {
 
   delete = async (req: Request, res: Response) => {
     const { authorization } = req.headers;
-    const { userId } = req.body;
+    const { id } = req.params;
 
-    const { status, response } = await this.services.delete(authorization, userId);
+    const { status, response } = await this.services.delete(authorization, id);
 
     return res.status(status).json(response);
   };

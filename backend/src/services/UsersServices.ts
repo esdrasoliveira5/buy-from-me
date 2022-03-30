@@ -107,9 +107,6 @@ class UsersServices {
 
   async delete(token: Token, userId: string):
   Promise<ResponseError | ResponseDelete> {
-    const validData = this.validations.userDelete(userId);
-    if (validData) return validData;
-
     const tokenValid = this.jwt.validate(token);
     if ('status' in tokenValid) return tokenValid;
     if (tokenValid.id !== userId) return this._unauthorized;

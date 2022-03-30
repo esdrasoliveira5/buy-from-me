@@ -1,5 +1,5 @@
 import { Orders } from '@prisma/client';
-import { ResponseError, ResponseOrders } from '../interfaces/ResponsesI';
+import { ResponseDelete, ResponseError, ResponseOrders } from '../interfaces/ResponsesI';
 import StatusCode from '../interfaces/StatusCodes';
 import { Token } from '../interfaces/UsersI';
 import OrdersRepository from '../repository/OrdersRepository';
@@ -109,6 +109,22 @@ class OrdersServices {
 
     const response = await this.repository.create(data);
     return { status: StatusCode.CREATED, response };
+  }
+
+  async delete(token: Token, id: number): Promise<ResponseError | ResponseDelete> {
+    const tokenValid = this.jwt.validate(token);
+    if ('status' in tokenValid) return tokenValid;
+
+    const responseUser = await this.userRepository.get({ email: tokenValid.email });
+    if (responseUser === null) return this._unauthorized;
+
+    const order = await this.repository.get(id);
+    if (order === null) return this._orderNotFound;
+    if (order.buyerId !== tokenValid.id) return this._unauthorized;
+
+    const response = await this.repository.delete(id);
+    console.log(response);
+    return { status: StatusCode.OK, response: { message: 'order deleted' } };
   }
 }
 

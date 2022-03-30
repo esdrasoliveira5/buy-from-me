@@ -62,15 +62,6 @@ class JoiValidations {
     }
   }
 
-  userDelete(userId: string): void | ResponseError {
-    const { error } = this.joi.object({
-      userId: Joi.string().not().empty().required(),
-    }).validate({ userId });
-    if (error) {
-      return { status: StatusCode.BAD_REQUEST, response: { error: error.details[0].message } };
-    }
-  }
-
   product(data: Omit<Products, 'id | sold'>): void | ResponseError {
     const { name, description, price, categoriesId, usersId } = data;
     const { error } = this.joi.object({

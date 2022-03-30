@@ -11,6 +11,7 @@ class OrdersControllers {
     Router.get('/:id', this.get);
     Router.get('/', this.getAll);
     Router.post('/', this.create);
+    Router.delete('/:id', this.delete);
   }
 
   get = async (req: Request, res: Response) => {
@@ -36,6 +37,15 @@ class OrdersControllers {
     const { productsId } = req.body;
 
     const { status, response } = await this.services.create(authorization, productsId);
+
+    return res.status(status).json(response);
+  };
+
+  delete = async (req: Request, res: Response) => {
+    const { authorization } = req.headers;
+    const { id } = req.params;
+
+    const { status, response } = await this.services.delete(authorization, Number(id));
 
     return res.status(status).json(response);
   };
