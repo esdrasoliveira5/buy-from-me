@@ -6,7 +6,7 @@ import StatusCode from '../interfaces/StatusCodes';
 import { LoginData } from '../interfaces/UsersI';
 
 class JoiValidations {
-  public joi = Joi;
+  private joi = Joi;
 
   login(data: LoginData): ResponseError | void {
     const { email, password } = data;
@@ -95,6 +95,15 @@ class JoiValidations {
       categoriesId: Joi.number().strict().required(),
       new: Joi.boolean().not().empty().required(),
     }).validate({ name, description, price, categoriesId, new: data.new });
+    if (error) {
+      return { status: StatusCode.BAD_REQUEST, response: { error: error.details[0].message } };
+    }
+  }
+
+  order(productsId: number): void | ResponseError {
+    const { error } = this.joi.object({
+      productsId: Joi.number().strict().required(),
+    }).validate({ productsId });
     if (error) {
       return { status: StatusCode.BAD_REQUEST, response: { error: error.details[0].message } };
     }

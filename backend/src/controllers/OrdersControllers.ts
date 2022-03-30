@@ -9,6 +9,8 @@ class OrdersControllers {
   constructor() {
     this.services = new OrdersServices();
     Router.get('/:id', this.get);
+    Router.get('/', this.getAll);
+    Router.post('/', this.create);
   }
 
   get = async (req: Request, res: Response) => {
@@ -16,6 +18,24 @@ class OrdersControllers {
     const { id } = req.params;
 
     const { status, response } = await this.services.get(authorization, Number(id));
+
+    return res.status(status).json(response);
+  };
+
+  getAll = async (req: Request, res: Response) => {
+    const { authorization } = req.headers;
+    const { filter } = req.query;
+
+    const { status, response } = await this.services.getAll(authorization, filter as string);
+
+    return res.status(status).json(response);
+  };
+
+  create = async (req: Request, res: Response) => {
+    const { authorization } = req.headers;
+    const { productsId } = req.body;
+
+    const { status, response } = await this.services.create(authorization, productsId);
 
     return res.status(status).json(response);
   };

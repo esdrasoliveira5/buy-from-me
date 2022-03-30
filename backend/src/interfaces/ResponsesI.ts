@@ -1,4 +1,4 @@
-import { Products, Users } from '@prisma/client';
+import { Orders, Products, Users } from '@prisma/client';
 
 export interface Status {
   status: number;
@@ -27,4 +27,8 @@ export interface ResponseDelete extends Status {
 
 export interface ResponseProducts extends Status {
   response: Products | Products[];
+}
+
+export interface ResponseOrders extends Status {
+  response: Orders | Orders[];
 }

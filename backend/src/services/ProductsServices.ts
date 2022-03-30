@@ -12,6 +12,8 @@ import SearchDataValidation from '../validations/SearchDataValidation';
 class ProductsServices {
   private _productsNotFound: ResponseError;
 
+  private _conflict: ResponseError;
+
   private _unauthorized: ResponseError;
 
   private repository: ProductsRepository;
@@ -29,7 +31,9 @@ class ProductsServices {
       status: StatusCode.NOT_FOUND,
       response: { error: 'product not found' } };
 
-    this._unauthorized = { status: StatusCode.UNAUTHORIZED, response: { error: 'Invalid token' } };
+    this._conflict = { status: StatusCode.CONFLICT, response: { error: 'product already exists' } };
+
+    this._unauthorized = { status: StatusCode.UNAUTHORIZED, response: { error: 'invalid token' } };
 
     this.repository = new ProductsRepository();
 
@@ -72,6 +76,9 @@ class ProductsServices {
 
     const responseUser = await this.userRepository.get({ email: tokenValid.email });
     if (responseUser === null) return this._unauthorized;
+
+    const product = await this.repository.getByFilter(0, data, data.name);
+    if (product.length !== 0) return this._conflict;
 
     const response = await this.repository.create({ ...data, sold: false });
     return { status: StatusCode.CREATED, response };
