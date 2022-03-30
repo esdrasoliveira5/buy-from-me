@@ -10,16 +10,25 @@ class UsersControllers {
 
   constructor() {
     this.services = new UsersServices();
-    Router.post('/login', this.get);
+    Router.get('/:id', this.get);
+    Router.post('/login', this.login);
     Router.post('/', this.create);
     Router.put('/', this.update);
     Router.delete('/:id', this.delete);
   }
 
   get = async (req: Request, res: Response) => {
+    const { authorization } = req.headers;
+    const { id } = req.params;
+    const { status, response } = await this.services.get(authorization, id);
+
+    return res.status(status).json(response);
+  };
+
+  login = async (req: Request, res: Response) => {
     const { email, password } = req.body;
 
-    const { status, response } = await this.services.get({ email, password });
+    const { status, response } = await this.services.login({ email, password });
 
     return res.status(status).json(response);
   };

@@ -225,7 +225,7 @@
   <br/>
 
 ### **Deletar usuário**
-##### `DELETE` /user
+##### `DELETE` /user/:id
   <br/>
 
   Esse endpoint deleta um usuário cadastrado.
@@ -238,13 +238,7 @@
         "Authorization": "(Bearer Token)"
       }
       ```
-  - Exemplo `request body` 
-    ``` json
-      {
-          "id": "7e49fec8-f187-4b44-a9b4-a14e77adbb27",
-      }
-    ```
-
+      
   - Exemplo `response body`
     ```json
       {

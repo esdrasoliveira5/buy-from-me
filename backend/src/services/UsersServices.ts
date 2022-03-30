@@ -43,7 +43,18 @@ class UsersServices {
     this.jwt = new JwToken();
   }
 
-  async get(data: LoginData): Promise<ResponseError | ResponseToken> {
+  async get(token: Token, id: string): Promise<ResponseError | ResponseUser> {
+    const tokenValid = this.jwt.validate(token);
+    if ('status' in tokenValid) return tokenValid;
+    if (tokenValid.id !== id) return this._unauthorized;
+
+    const response = await this.repository.get({ email: tokenValid.email });
+    if (response === null) return this._userNotFound;
+
+    return { status: StatusCode.OK, response };
+  }
+
+  async login(data: LoginData): Promise<ResponseError | ResponseToken> {
     const { email, password } = data;
 
     const validData = this.validations.login(data);
