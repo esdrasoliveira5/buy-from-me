@@ -7,26 +7,30 @@
   - [Instalação](#Instalação)
   - [Instruções para iniciar o projeto](#Intruções-para-iniciar-o-projeto)
 - [Documentação](#Documentação)
-  - [Verificar o estado da Api](#Verificar-o-estado-da-Api)
-  - [Registrar usuário](#Registrar-usuário)
-  - [Atualizar usuário](#Atualizar-usuário) 
+  - [Listar usuário](#Listar-usuário)
+  - [Logar usuário](#Logar-usuário)
+  - [Registrar usuário](#Registrar-usuário) 
+  - [Atualizar usuário](#Atualizar-usuário)
   - [Deletar usuário](#Deletar-usuário)
-  - [Buscar usuário](#Buscar-usuário)
-  - [Criar categoria](#Criar-categoria)
-  - [Listar todas as categorias relacionadas ao usuário](#Listar-todas-as-categorias-relacionadas-ao-usuário)
+  - [Listar produto pelo id](#Listar-produto-pelo-id)
+  - [Listar todos os produtos](#Listar-todos-os-produtos)
   - [Adiciona um game a coleção](#Adiciona-um-game-a-coleção)
-  - [Atualiza a categoria de uma coleção](#Atualiza-a-categoria-de-uma-coleção)
-  - [Deleta um game de uma coleção](#Deleta-um-game-de-uma-coleção)
-  - [Lista uma coleção](#Lista-uma-coleção)
-  - [Lista todas as coleções de um usuário](#Lista-todas-as-coleções-de-um-usuário)
-  - [Lista todas as coleções de um usuário pela categoria](#Lista-todas-as-coleções-de-um-usuário-pela-categoria)
+  - [Listar produtos por filtro](#Listar-produtos-por-filtro)
+  - [Cria um produto](#Cria-um-produto)
+  - [Atualiza um status de um produto](#Atualiza-um-status-de-um-produto)
+  - [Atualiza os dados de um produto](#Atualiza-os-dados-de-um-produto)
+  - [Deleta um produto](#Deleta-um-produto)
+  - [Busca um pedido](#Busca-um-pedido)
+  - [Busca todos os pedidos](#Busca-todos-os-pedidos)
+  - [Cria um pedido](#Cria-um-pedido)
+  - [Deleta um pedido](#Deleta-um-pedido)
 
 
 <br>
 
 ## Descrição
 
-**Objetivo**: Este projeto, foi desenvolvido uma CRUD que gerencia dados de umusuario em um site de catalogo dee games, no formato de uma API RESTful, utilizando Typescript.
+**Objetivo**: Neste projeto foi desenvolvido uma CRUD api que gerencia dados de um usuario e vendedor em um site de vendas, no formato de uma API RESTful, utilizando Typescript.
 
 - Arquitetura REST;
 - Autenticações e Permissões com JWT;
@@ -38,17 +42,17 @@
 
 - `npm version 6.14.13`
 - `node version 14.17.0`
-- `docker`
-- `docker-compose`
+- `docker version 20.10.13`
+- `docker-compose version 1.29.2`
 
 ## Instalação
 
 - Clone o repositório
   ```sh
-    git clone git@github.com:esdrasoliveira5/game-library-backend.git
+    git clone git@github.com:esdrasoliveira5/buy-from-me.git
 - Vá para a pasta da aplicação
   ```sh
-    cd game-library-backend
+    cd buy-from-me
 
 ## Instruções para iniciar o projeto
 
@@ -57,22 +61,7 @@
 - Comando para iniciar
 
   ```sh
-    sudo docker-compose up
-
-- Instalar dependencias
-
-  ```sh
-    npm install
-
-- Configurar prisma client
-
-  ```sh
-    npx prisma generate
-
-- Gerar bacno de dados
-
-  ```sh
-    npx prisma migrate dev
+  sudo docker-compose up
 
 <br/>
 
@@ -80,7 +69,7 @@
 
 <br/>
 
-### **Logar usuário** 
+### **Listar usuário** 
 ##### `GET` /user/:id
   <br/>
 
@@ -264,7 +253,7 @@
 
 
 
-### **Buscar produto**
+### **Listar produto pelo id**
 ##### `GET` /product/:id
   <br/>
 
@@ -285,7 +274,7 @@
     ```
   <br/>
 
-### **Buscar produtos**
+### **Listar todos os produtos**
 ##### `GET` /product?page=1
   <br/>
 
@@ -336,15 +325,14 @@
       ```
   <br/>
 
-### **Listar todas as categorias relacionadas ao usuário**
+### **Listar produtos por filtro**
 ##### `GET` /product/filter?pag=1&filter=gte&price=1500&sold=false&newP=false&category=12&name=tv
   <br/>
 
   Esse endpoint lista todos os produtos em paginas de 20 resultados filtrando pelas querys.
   
-  *Obs: Retorna apenas as categorias criadas pelo usuario.* 
-  *Obs1: Todos os filtros sao opcionais e podems ser usados em qualquer combinação.* 
-  *Obs2: O filtro filter pode ser nos valores gte e lte, sendo gte produtos com o preço maior ou igual ao valor de price, e lte menor ou igual ao valor de price.* 
+  *Obs: Todos os filtros sao opcionais e podems ser usados em qualquer combinação.* 
+  *Obs1: O filtro filter pode ser nos valores gte e lte, sendo gte produtos com o preço maior ou igual ao valor de price, e lte menor ou igual ao valor de price.* 
 
   - Exemplo `response body`
     ```json
@@ -420,6 +408,8 @@
 
   Esse endpoint atualiza o status sold de um produto.
 
+  *Obs: Apenas o usuario que criou o produto pode atualiza-lo.* 
+
   - Exemplo `request headers`
       ```json
       {
@@ -448,6 +438,8 @@
   <br/>
 
   Esse endpoint atualiza os dados de um produto.
+
+  *Obs: Apenas o usuario que criou o produto pode atualiza-lo.* 
 
   - Exemplo `request headers`
       ```json
@@ -489,6 +481,8 @@
 
   Esse endpoint deleta um produto.
 
+  *Obs: Apenas o usuario que criou o produto deleta-lo.* 
+
   - Exemplo `request headers`
       ```json
       {
@@ -505,12 +499,13 @@
   <br/>
 
 
-
-### **Lista todas as coleções de um usuário**
-##### `GET` /collections/user/:page
+### **Busca um pedido**
+##### `GET` /order/:id
   <br/>
 
-  Esse endpoint retorna todas as coleções que pertencem ao usuario do token em paginas de até 20 objetos.
+  Esse endpoint retorna um pedido pelo id caso o token pertença ao comprador ou vendedor.
+
+  *Obs: Apenas o usuario que criou o produto ou que fez o pedido pode acessa-lo.* 
 
   - Exemplo `request headers`
       ```json
@@ -521,56 +516,22 @@
 
   - Exemplo `response body`
     ```json
-      [
-          {
-              "userId": "38000780-44bc-488a-bd17-3c3c7dd0a736",
-              "gamesId": 12345,
-              "categoriesId": 3,
-              "games": {
-                  "id": 12345,
-                  "name": "game1",
-                  "image": "image"
-              }
-          },
-          {
-              "userId": "38000780-44bc-488a-bd17-3c3c7dd0a736",
-              "gamesId": 12435,
-              "categoriesId": 2,
-              "games": {
-                  "id": 12435,
-                  "name": "game2",
-                  "image": "image2"
-              }
-          },
-          {
-              "userId": "38000780-44bc-488a-bd17-3c3c7dd0a736",
-              "gamesId": 13423,
-              "categoriesId": 1,
-              "games": {
-                  "id": 13423,
-                  "name": "game4",
-                  "image": "image4"
-              }
-          },
-          {
-              "userId": "38000780-44bc-488a-bd17-3c3c7dd0a736",
-              "gamesId": 13435,
-              "categoriesId": 1,
-              "games": {
-                  "id": 13435,
-                  "name": "game3",
-                  "image": "image3"
-              }
-          }
-      ]
+      {
+          "id": 1,
+          "productsId": 2,
+          "buyerId": "1",
+          "sellerId": "4"
+      }
       ```
   <br/>
     
-### **Lista todas as coleções de um usuário pela categoria**
-##### `GET` /collections/user/:page/:id
+### **Busca todos os pedidos**
+##### `GET` /order?filter=sellerId
   <br/>
 
-  Esse endpoint retorna todas as coleções que pertencem ao usuario relacionadas a categoria em paginas de até 20 objetos.
+  Esse endpoint retorna todas os pedidos filtrando pela query sellerId ou buyerId.
+
+  *Obs: Apenas o usuario que criou o produto ou que fez o pedido pode acessa-lo.* 
 
   - Exemplo `request headers`
       ```json
@@ -583,25 +544,97 @@
     ```json
       [
           {
-              "userId": "38000780-44bc-488a-bd17-3c3c7dd0a736",
-              "gamesId": 13423,
-              "categoriesId": 1,
-              "games": {
-                  "id": 13423,
-                  "name": "game4",
-                  "image": "image4"
-              }
+              "id": 1,
+              "productsId": 2,
+              "buyerId": "1",
+              "sellerId": "4"
           },
           {
-              "userId": "38000780-44bc-488a-bd17-3c3c7dd0a736",
-              "gamesId": 13435,
-              "categoriesId": 1,
-              "games": {
-                  "id": 13435,
-                  "name": "game3",
-                  "image": "image3"
-              }
+              "id": 4,
+              "productsId": 2,
+              "buyerId": "1",
+              "sellerId": "4"
+          },
+          {
+              "id": 5,
+              "productsId": 2,
+              "buyerId": "1",
+              "sellerId": "4"
+          },
+          {
+              "id": 6,
+              "productsId": 2,
+              "buyerId": "1",
+              "sellerId": "4"
+          },
+          {
+              "id": 7,
+              "productsId": 2,
+              "buyerId": "1",
+              "sellerId": "4"
+          },
+          {
+              "id": 8,
+              "productsId": 2,
+              "buyerId": "1",
+              "sellerId": "4"
           }
       ]
       ```
   <br/>
+
+  ### **Cria um pedido**
+##### `POST` /order
+  <br/>
+
+  Esse endpoint cria e retorna um pedido.
+
+  - Exemplo `request headers`
+      ```json
+      {
+        "Authorization": "(Bearer Token)"
+      }
+      ```
+
+  - Exemplo `request body`
+      ```json
+      {
+          "productsId": 2
+      }
+      ```
+
+  - Exemplo `response body`
+    ```json
+      {
+          "id": 16,
+          "productsId": 2,
+          "buyerId": "4",
+          "sellerId": "2"
+      }
+      ```
+  <br/>
+  
+
+  ### **Deleta um pedido**
+##### `DELETE` /order/:id
+  <br/>
+
+  Esse endpoint deleta um pedido pelo id.
+
+  *Obs: Apenas o usuario que criou o pedido pode deleta-lo.* 
+
+  - Exemplo `request headers`
+      ```json
+      {
+        "Authorization": "(Bearer Token)"
+      }
+      ```
+
+  - Exemplo `response body`
+    ```json
+      {
+          "message": "order deleted"
+      }
+      ```
+  <br/>
+  
