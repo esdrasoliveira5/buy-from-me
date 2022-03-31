@@ -25,4 +25,10 @@ export type UserIdOrEmail = {
   email?: string;
 };
 
+export type UserT = {
+  id: string;
+  name: string;
+  email: string;
+};
+
 export type Token = string | undefined;

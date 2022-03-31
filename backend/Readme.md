@@ -81,6 +81,35 @@
 <br/>
 
 ### **Logar usuário** 
+##### `GET` /user/:id
+  <br/>
+
+  Esse endpoint retorna um usuario.
+
+  - Exemplo `response body`
+    ```json
+      {
+          "id": "e0805cfe-377e-4035-858c-7c9591b54683",
+          "name": "Pedro",
+          "lastName": "Vendedor",
+          "email": "pedros@email.com",
+          "password": "$2b$10$lG55yVCIP/AbhwBh.xmWLe8Q43gs27K6q2idJxr96YJA5odwMuYYK",
+          "contact": 1058685717,
+          "addressId": 8,
+          "address": {
+              "id": 8,
+              "street": "Avamarela",
+              "number": "500A",
+              "district": "Santa Barbara",
+              "zipcode": 321654000,
+              "city": "Santa Avamarela",
+              "statesId": 1
+          }
+      }
+    ```
+  <br/>
+
+### **Logar usuário** 
 ##### `POST` /user/login
   <br/>
 
@@ -102,20 +131,7 @@
           "user": {
               "id": "e0805cfe-377e-4035-858c-7c9591b54683",
               "name": "Pedro",
-              "lastName": "Vendedor",
               "email": "pedros@email.com",
-              "password": "$2b$10$lG55yVCIP/AbhwBh.xmWLe8Q43gs27K6q2idJxr96YJA5odwMuYYK",
-              "contact": 1058685717,
-              "addressId": 8,
-              "address": {
-                  "id": 8,
-                  "street": "Avamarela",
-                  "number": "500A",
-                  "district": "Santa Barbara",
-                  "zipcode": 321654000,
-                  "city": "Santa Avamarela",
-                  "statesId": 1
-              }
           },
           "token": "(bearer token)"
       }
@@ -169,7 +185,7 @@
 <br/>
 
 ### **Atualizar usuário**
-##### `PUT` /user
+##### `PUT` /user/:id
   <br/>
 
   Este endpoint atualiza e retorna os dados de um usuário.
@@ -186,12 +202,10 @@
   - Exemplo `request body` 
     ``` json
       {
-          "id": "7e49fec8-f187-4b44-a9b4-a14e77adbb27",
           "name": "Pedro",
           "lastName": "Cinza",
           "password": "123456789asd",
           "contact": 31123456789,
-          "addressId": 7,
           "street": "Azul",
           "number": "800C",
           "district": "Sao Paulo",
@@ -250,43 +264,32 @@
 
 
 
-### **Buscar usuário**
-##### `GET` /user
+### **Buscar produto**
+##### `GET` /product/:id
   <br/>
 
-  Esse endpoint busca um usuario cadastrado pelo token.
+  Esse endpoint busca e retorna um produto pelo id.
   
-
-  - Exemplo `request headers`
-      ```json
-      {
-        "Authorization": "(Bearer Token)"
-      }
-      ```
-
   - Exemplo `response body`
     ```json
       {
-          "name": "name",
-          "lastName": "lastname",
-          "email": "email@email.com",
-          "avatar": "imageurl"
+          "id": 1,
+          "name": "TV",
+          "description": "FullHd",
+          "price": 1500,
+          "sold": false,
+          "new": false,
+          "categoriesId": 12,
+          "usersId": "1"
       }
     ```
   <br/>
 
-### **Criar categoria**
-##### `POST` /categories
+### **Buscar produtos**
+##### `GET` /product?page=1
   <br/>
 
-  Esse endpoint cria e retorna uma categoria.
-
-  - Exemplo `request headers`
-      ```json
-      {
-        "Authorization": "(Bearer Token)"
-      }
-      ```
+  Esse endpoint retorna uma lista de 20 produtos por pagina.
 
   - Exemplo `request body` 
     ```json
@@ -297,71 +300,84 @@
     
   - Exemplo `response body`
     ```json
-      {
-          "id": 18,
-          "name": "categorie1",
-          "userId": "38000780-44bc-488a-bd17-3c3c7dd0a736"
-      }
+      [
+          {
+              "id": 1,
+              "name": "TV",
+              "description": "FullHd",
+              "price": 1500,
+              "sold": false,
+              "new": false,
+              "categoriesId": 12,
+              "usersId": "1"
+          },
+          {
+              "id": 2,
+              "name": "Celular",
+              "description": "Ifome",
+              "price": 2500,
+              "sold": false,
+              "new": false,
+              "categoriesId": 15,
+              "usersId": "2"
+          },
+          {
+              "id": 3,
+              "name": "TV2",
+              "description": "FullHd2",
+              "price": 1800,
+              "sold": false,
+              "new": false,
+              "categoriesId": 12,
+              "usersId": "2"
+          },
+          ....
+      ]
       ```
   <br/>
 
 ### **Listar todas as categorias relacionadas ao usuário**
-##### `GET` /categories
+##### `GET` /product/filter?pag=1&filter=gte&price=1500&sold=false&newP=false&category=12&name=tv
   <br/>
 
-  Esse endpoint lista todos os pedidos e os retorna em um array.
+  Esse endpoint lista todos os produtos em paginas de 20 resultados filtrando pelas querys.
   
   *Obs: Retorna apenas as categorias criadas pelo usuario.* 
-
-  - Exemplo `request headers`
-    ```json
-        {
-          "Authorization": "(Bearer Token)"
-        }
-    ```
+  *Obs1: Todos os filtros sao opcionais e podems ser usados em qualquer combinação.* 
+  *Obs2: O filtro filter pode ser nos valores gte e lte, sendo gte produtos com o preço maior ou igual ao valor de price, e lte menor ou igual ao valor de price.* 
 
   - Exemplo `response body`
     ```json
         [
-            {
-                "id": 13,
-                "name": "Sem categoria",
-                "userId": "38000780-44bc-488a-bd17-3c3c7dd0a736"
-            },
-            {
-                "id": 14,
-                "name": "Jogando",
-                "userId": "38000780-44bc-488a-bd17-3c3c7dd0a736"
-            },
-            {
-                "id": 15,
-                "name": "Completo",
-                "userId": "38000780-44bc-488a-bd17-3c3c7dd0a736"
-            },
-            {
-                "id": 16,
-                "name": "Não joguei",
-                "userId": "38000780-44bc-488a-bd17-3c3c7dd0a736"
-            },
-            {
-                "id": 17,
-                "name": "testeGame2",
-                "userId": "38000780-44bc-488a-bd17-3c3c7dd0a736"
-            },
-            {
-                "id": 18,
-                "name": "categorie1",
-                "userId": "38000780-44bc-488a-bd17-3c3c7dd0a736"
-            }
+          {
+              "id": 1,
+              "name": "TV",
+              "description": "FullHd",
+              "price": 1500,
+              "sold": false,
+              "new": false,
+              "categoriesId": 12,
+              "usersId": "1"
+          },
+          {
+              "id": 2,
+              "name": "TV 29",
+              "description": "LCD",
+              "price": 2500,
+              "sold": false,
+              "new": false,
+              "categoriesId": 12,
+              "usersId": "2"
+          },
         ]
     ```
   <br/>
   
-### **Adiciona um game a coleção**
-##### `POST` /collections
+### **Cria um produto**
+##### `POST` /product
   <br/>
 
-  Esse endpoint adiciona um game a coleção do usuário.
+  Esse endpoint cria um produto.
 
   - Exemplo `request headers`
       ```json
@@ -373,28 +389,36 @@
   - Exemplo `request body` 
     ```json
       {
-          "id": 12345,
-          "name": "game1",
-          "image": "image"
+          "name": "Computador Gamer",
+          "description": "RGB e RTX3090",
+          "price": 10000,
+          "categoriesId": 1,
+          "usersId": "e0805cfe-377e-4035-858c-7c9591b54683",
+          "newProduct": true
       }
       ```
     
   - Exemplo `response body`
     ```json
-        {
-          "userId": "38000780-44bc-488a-bd17-3c3c7dd0a736",
-          "gamesId": 12345,
-          "categoriesId": 13
-        }
+      {
+          "id": 17,
+          "name": "Computador Gamer",
+          "description": "RGB e RTX3090",
+          "price": 10000,
+          "sold": false,
+          "new": true,
+          "categoriesId": 1,
+          "usersId": "e0805cfe-377e-4035-858c-7c9591b54683"
+      }
       ```
   <br/>
 
   
-### **Atualiza a categoria de uma coleção**
-##### `PUT` /collections/update
+### **Atualiza um status de um produto**
+##### `PUT` /product/:id/sold
   <br/>
 
-  Esse endpoint atualiza a categoria de um game na coleção do usuário e retorna os dados atualizados.
+  Esse endpoint atualiza o status sold de um produto.
 
   - Exemplo `request headers`
       ```json
@@ -403,30 +427,27 @@
       }
       ```
 
-  - Exemplo `request body` 
-    ```json
-        {
-            "gamesId": 12345,
-            "categoriesId": 1
-        }
-      ```
-    
   - Exemplo `response body`
     ```json
-        {
-            "userId": "38000780-44bc-488a-bd17-3c3c7dd0a736",
-            "gamesId": 12345,
-            "categoriesId": 1
-        }
+      {
+          "id": 17,
+          "name": "Computador Gamer",
+          "description": "RGB e RTX3090",
+          "price": 10000,
+          "sold": true,
+          "new": true,
+          "categoriesId": 1,
+          "usersId": "e0805cfe-377e-4035-858c-7c9591b54683"
+      }
       ```
   <br/>
 
   
-### **Deleta um game de uma coleção**
-##### `DELETE` /collections/delete
+### **Atualiza os dados de um produto**
+##### `PUT` /product/:id
   <br/>
 
-  Esse endpoint deleta um game de uma coleção.
+  Esse endpoint atualiza os dados de um produto.
 
   - Exemplo `request headers`
       ```json
@@ -438,18 +459,35 @@
   - Exemplo `request body` 
     ```json
         {
-            "gamesId": 12345,
+          "name": "Computador Gamer",
+          "description": "RGB e RTX3090",
+          "price": 15000,
+          "categoriesId": 12,
+          "newProduct": false
         }
+      ```
+
+  - Exemplo `response body`
+    ```json
+      {
+          "id": 17,
+          "name": "Computador Gamer",
+          "description": "RGB e RTX3090",
+          "price": 15000,
+          "sold": false,
+          "new": false,
+          "categoriesId": 12,
+          "usersId": "e0805cfe-377e-4035-858c-7c9591b54683"
+      }
       ```
   <br/>
 
 
-  
-### **Lista  uma coleção**
-##### `GET` /collections/:id
+### **Deleta um produto**
+##### `DELETE` /product/:id
   <br/>
 
-  Esse endpoint lista uma coleção pelo id do game.
+  Esse endpoint deleta um produto.
 
   - Exemplo `request headers`
       ```json
@@ -458,12 +496,10 @@
       }
       ```
 
-  - Exemplo `request body` 
+  - Exemplo `response body` 
     ```json
       {
-          "userId": "38000780-44bc-488a-bd17-3c3c7dd0a736",
-          "gamesId": 12345,
-          "categoriesId": 13
+          "message": "product deleted"
       }
       ```
   <br/>

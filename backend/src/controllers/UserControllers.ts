@@ -13,7 +13,7 @@ class UsersControllers {
     Router.get('/:id', this.get);
     Router.post('/login', this.login);
     Router.post('/', this.create);
-    Router.put('/', this.update);
+    Router.put('/:id', this.update);
     Router.delete('/:id', this.delete);
   }
 
@@ -47,10 +47,11 @@ class UsersControllers {
 
   update = async (req: Request, res: Response) => {
     const { authorization } = req.headers;
-    const { id, name, lastName, password, contact, addressId } = req.body;
+    const { id } = req.params;
+    const { name, lastName, password, contact } = req.body;
     const { street, number, district, zipcode, city, statesId } = req.body;
 
-    const user = { id, name, lastName, password, contact, addressId } as Users;
+    const user = { id, name, lastName, password, contact } as Users;
     const address = { street, number, district, zipcode, city, statesId } as Address;
 
     const { status, response } = await this.services.update(authorization, { user, address });

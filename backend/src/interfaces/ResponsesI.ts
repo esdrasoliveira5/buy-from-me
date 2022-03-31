@@ -1,4 +1,5 @@
 import { Orders, Products, Users } from '@prisma/client';
+import { UserT } from './UsersI';
 
 export interface Status {
   status: number;
@@ -16,7 +17,7 @@ export interface ResponseUser extends Status {
 
 export interface ResponseToken extends Status {
   response: {
-    user: Users,
+    user: UserT,
     token: string,
   };
 }

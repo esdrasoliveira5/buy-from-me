@@ -50,7 +50,6 @@ class UsersServices {
 
     const response = await this.repository.get({ email: tokenValid.email });
     if (response === null) return this._userNotFound;
-
     return { status: StatusCode.OK, response };
   }
 
@@ -65,9 +64,13 @@ class UsersServices {
 
     const validPassword = await this.bcrypt.compareIt(password, response.password);
     if (validPassword) return validPassword;
-
+    const user = {
+      id: response.id,
+      name: response.name,
+      email: response.email,
+    };
     const newToken = this.jwt.generate({ id: response.id, email: response.email });
-    const newResponse = { user: response, token: newToken };
+    const newResponse = { user, token: newToken };
     return { status: StatusCode.OK, response: newResponse };
   }
 
@@ -109,7 +112,7 @@ class UsersServices {
     if (responseUser === null) return this._userNotFound;
 
     const newPassword = await this.bcrypt.hashIt(user.password);
-    const userData = { ...user, password: newPassword };
+    const userData = { ...user, password: newPassword, addressId: responseUser.addressId };
 
     const response = await this.repository.update({ user: userData, address });
     if (response === undefined) return this._iternalServerError;
