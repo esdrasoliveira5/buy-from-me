@@ -70,4 +70,5 @@ model Orders {
   buyerId    String
   seller     Users    @relation("Sellers", fields: [sellerId], references: [id])
   sellerId   String
+  orderDate  DateTime  @default(now())
 }

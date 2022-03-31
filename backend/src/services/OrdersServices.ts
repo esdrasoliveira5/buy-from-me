@@ -1,4 +1,4 @@
-import { Orders } from '@prisma/client';
+import { OrderData } from '../interfaces/OrdersI';
 import { ResponseDelete, ResponseError, ResponseOrders } from '../interfaces/ResponsesI';
 import StatusCode from '../interfaces/StatusCodes';
 import { Token } from '../interfaces/UsersI';
@@ -98,7 +98,7 @@ class OrdersServices {
     const product = await this.productRepository.get(productsId);
     if (product === null) return this._productsNotFound;
 
-    const data: Omit<Orders, 'id'> = {
+    const data: OrderData = {
       productsId,
       buyerId: tokenValid.id,
       sellerId: product.usersId,

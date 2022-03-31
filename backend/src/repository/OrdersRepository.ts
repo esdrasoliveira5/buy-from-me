@@ -1,5 +1,5 @@
 import { Orders, PrismaClient } from '@prisma/client';
-import { OrderBuyerOrSeller } from '../interfaces/OrdersI';
+import { OrderBuyerOrSeller, OrderData } from '../interfaces/OrdersI';
 
 class OrdersRepository {
   private prisma: PrismaClient;
@@ -24,7 +24,7 @@ class OrdersRepository {
     return orders;
   }
 
-  async create(data: Omit<Orders, 'id'>): Promise<Orders> {
+  async create(data: OrderData): Promise<Orders> {
     const order = await this.prisma.orders.create({
       data: {
         ...data,

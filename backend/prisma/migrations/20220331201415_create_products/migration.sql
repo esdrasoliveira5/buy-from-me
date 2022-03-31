@@ -5,6 +5,7 @@ CREATE TABLE "Products" (
     "description" TEXT NOT NULL,
     "price" INTEGER NOT NULL,
     "sold" BOOLEAN NOT NULL,
+    "new" BOOLEAN NOT NULL,
     "categoriesId" INTEGER NOT NULL,
     "usersId" TEXT NOT NULL,
 

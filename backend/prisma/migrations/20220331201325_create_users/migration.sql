@@ -4,9 +4,9 @@ CREATE TABLE "Users" (
     "name" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "contact" INTEGER NOT NULL,
     "password" TEXT NOT NULL,
-    "statesId" INTEGER NOT NULL,
+    "contact" INTEGER NOT NULL,
+    "addressId" INTEGER NOT NULL,
 
     CONSTRAINT "Users_pkey" PRIMARY KEY ("id")
 );
@@ -14,5 +14,8 @@ CREATE TABLE "Users" (
 -- CreateIndex
 CREATE UNIQUE INDEX "Users_email_key" ON "Users"("email");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "Users_addressId_key" ON "Users"("addressId");
+
 -- AddForeignKey
-ALTER TABLE "Users" ADD CONSTRAINT "Users_statesId_fkey" FOREIGN KEY ("statesId") REFERENCES "States"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Users" ADD CONSTRAINT "Users_addressId_fkey" FOREIGN KEY ("addressId") REFERENCES "Address"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -1,7 +1,7 @@
 import { Orders, PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient();
 
-const orders: Omit<Orders, 'id'>[] = [
+const orders = [
   {
     productsId: 2,
     buyerId: '1',

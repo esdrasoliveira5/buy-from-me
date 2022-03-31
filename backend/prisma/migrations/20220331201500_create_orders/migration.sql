@@ -4,6 +4,7 @@ CREATE TABLE "Orders" (
     "productsId" INTEGER NOT NULL,
     "buyerId" TEXT NOT NULL,
     "sellerId" TEXT NOT NULL,
+    "orderDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Orders_pkey" PRIMARY KEY ("id")
 );
