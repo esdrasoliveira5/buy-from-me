@@ -21,4 +21,24 @@ async function loginUser({ email, password }) {
   }
 }
 
-export default loginUser;
+async function getUser(id, token) {
+  try {
+    const response = await fetch(`${URL_FETCH}user/${id}`, {
+      method: 'GET',
+      headers: {
+        Accept: APLICATION,
+        'Content-Type': APLICATION,
+        Authorization: token,
+      },
+    });
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    return { error };
+  }
+}
+
+export default {
+  loginUser,
+  getUser,
+};

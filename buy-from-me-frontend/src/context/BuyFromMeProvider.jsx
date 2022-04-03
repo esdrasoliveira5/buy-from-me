@@ -6,9 +6,9 @@ function BuyFromMe({ children }) {
   const [logged, setLogged] = useState({
     logged: false,
     name: '',
-    lastName: '',
     email: '',
   });
+
   const contextValue = useMemo(() => ({
     logged,
     setLogged,

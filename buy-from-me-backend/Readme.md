@@ -74,7 +74,13 @@
   <br/>
 
   Esse endpoint retorna um usuario.
-
+  
+  - Exemplo `request headers`
+      ```json
+      {
+        "Authorization": "(Bearer Token)"
+      }
+      `
   - Exemplo `response body`
     ```json
       {

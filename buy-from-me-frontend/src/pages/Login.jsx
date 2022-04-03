@@ -1,22 +1,104 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FormStyled from '../styles/FormStyled';
 import { MainStyled, BodyStyled } from '../styles/BodyStyled';
+import buyFromMeContext from '../context/AppContext';
+import request from '../services/requests';
+import loginValidation from '../validation/loginValidation';
 
 function Login() {
+  const navigate = useNavigate();
+  const { logged, setLogged } = useContext(buyFromMeContext);
+  const [login, setlogin] = useState({
+    email: '',
+    password: '',
+  });
+
+  useEffect(() => {
+    const userLogged = async () => {
+      const localResponse = JSON.parse(localStorage.getItem('buy-from-me'));
+      if (localResponse !== null) {
+        const { token, user } = localResponse;
+        const response = await request.getUser(user.id, token);
+        if (!response.error) {
+          setLogged({
+            id: response.id,
+            name: response.name,
+            email: response.email,
+            logged: true,
+          });
+          navigate('/home');
+        } else {
+          setLogged({ logged: false });
+        }
+      } else {
+        setLogged({ logged: false });
+      }
+    };
+    userLogged();
+  }, []);
+  const handleLogin = ({ target }) => {
+    const { name, value } = target;
+    setlogin({
+      ...login,
+      [name]: value,
+    });
+  };
+
+  async function submitLogin() {
+    const validation = loginValidation(login);
+    if (validation === true) {
+      const result = await request.loginUser(login);
+      if (result.token) {
+        const { token, user } = result;
+        localStorage.setItem('buy-from-me', JSON.stringify({ user, token }));
+        global.alert('Bem Vindo!');
+        navigate('/home');
+      } else {
+        global.alert(result.error);
+      }
+    } else {
+      global.alert(validation);
+    }
+  }
+
   return (
     <BodyStyled>
       <Header />
       <MainStyled>
-        <FormStyled>
-          <h2>Login</h2>
-          <input type="email" />
-          <input type="password" />
-          <button type="button">
-            login
-          </button>
-        </FormStyled>
+        {
+          !logged.logged
+            ? (
+              <FormStyled>
+                <h2>Login</h2>
+                <label htmlFor="email">
+                  <input
+                    type="email"
+                    value={login.email}
+                    name="email"
+                    onChange={(event) => handleLogin(event)}
+                  />
+                </label>
+                <label htmlFor="password">
+                  <input
+                    type="password"
+                    name="password"
+                    value={login.password}
+                    onChange={(event) => handleLogin(event)}
+                  />
+                </label>
+                <button
+                  type="button"
+                  onClick={submitLogin}
+                >
+                  login
+                </button>
+              </FormStyled>
+            ) : <p>Carregando...</p>
+        }
+
       </MainStyled>
       <Footer />
     </BodyStyled>
