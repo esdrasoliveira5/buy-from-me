@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FormStyled from '../styles/FormStyled';
 import { MainStyled, BodyStyled } from '../styles/BodyStyled';
 import buyFromMeContext from '../context/AppContext';
 import request from '../services/requests';
-import loginValidation from '../validation/loginValidation';
+import { loginValidation } from '../validation/validations';
 
 function Login() {
   const navigate = useNavigate();
@@ -39,6 +39,7 @@ function Login() {
     };
     userLogged();
   }, []);
+
   const handleLogin = ({ target }) => {
     const { name, value } = target;
     setlogin({
@@ -78,6 +79,7 @@ function Login() {
                     type="email"
                     value={login.email}
                     name="email"
+                    placeholder="Email"
                     onChange={(event) => handleLogin(event)}
                   />
                 </label>
@@ -85,6 +87,7 @@ function Login() {
                   <input
                     type="password"
                     name="password"
+                    placeholder="Senha"
                     value={login.password}
                     onChange={(event) => handleLogin(event)}
                   />
@@ -95,10 +98,17 @@ function Login() {
                 >
                   login
                 </button>
+                <Link to="/register">
+                  <button
+                    type="button"
+                  >
+                    Cadastrar
+
+                  </button>
+                </Link>
               </FormStyled>
             ) : <p>Carregando...</p>
         }
-
       </MainStyled>
       <Footer />
     </BodyStyled>

@@ -38,7 +38,25 @@ async function getUser(id, token) {
   }
 }
 
+async function createUser(userData) {
+  try {
+    const response = await fetch(`${URL_FETCH}user/`, {
+      method: 'POST',
+      headers: {
+        Accept: APLICATION,
+        'Content-Type': APLICATION,
+      },
+      body: JSON.stringify(userData),
+    });
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    return { error };
+  }
+}
+
 export default {
   loginUser,
   getUser,
+  createUser,
 };
