@@ -55,6 +55,22 @@ async function createUser(userData) {
   }
 }
 
+async function getProductById(id) {
+  try {
+    const response = await fetch(`${URL_FETCH}product/${id}`, {
+      method: 'GET',
+      headers: {
+        Accept: APLICATION,
+        'Content-Type': APLICATION,
+      },
+    });
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    return { error };
+  }
+}
+
 async function getProducts(page) {
   try {
     const response = await fetch(`${URL_FETCH}product?pag=${page}`, {
@@ -93,6 +109,7 @@ export default {
   loginUser,
   getUser,
   createUser,
+  getProductById,
   getProducts,
   getProductsByFilter,
 };

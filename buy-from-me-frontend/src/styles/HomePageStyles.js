@@ -18,6 +18,9 @@ width: 200px;
 export const FilterBox = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
+    height: 100%;
+    width: 25%;
+    button{
+      width: 100%;
+    }
 `;

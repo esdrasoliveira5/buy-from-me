@@ -1,22 +1,19 @@
-import React, { useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, {
+  Suspense, useContext, useEffect, useState,
+} from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import ProductsContainer from '../components/ProductsContainer';
-import ProductsFilters from '../components/ProductsFilters';
-import ProfileBar from '../components/ProfileBar';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
 import { BodyStyled, MainStyled } from '../styles/BodyStyles';
 
-function Home() {
+function Products() {
   const navigate = useNavigate();
-  const {
-    setLogged,
-    setProducts,
-    filters,
-    products,
-  } = useContext(buyFromMeContext);
+  const location = useLocation();
+  const path = Number(location.pathname.split('/')[2]);
+  const { setLogged } = useContext(buyFromMeContext);
+  const [product, setProduct] = useState({});
 
   useEffect(() => {
     const userLogged = async () => {
@@ -24,7 +21,7 @@ function Home() {
       if (localResponse !== null) {
         const { token, user } = localResponse;
         const userResponse = await requests.getUser(user.id, token);
-        const productsResponse = await requests.getProducts(1);
+        const productsResponse = await requests.getProductById(path);
         if (!userResponse.error) {
           setLogged({
             id: userResponse.id,
@@ -32,9 +29,7 @@ function Home() {
             email: userResponse.email,
             logged: true,
           });
-          if (products.length === 0) {
-            setProducts(productsResponse);
-          }
+          setProduct(productsResponse);
         } else {
           setLogged({ logged: false });
           navigate('/');
@@ -47,24 +42,22 @@ function Home() {
     userLogged();
   }, []);
 
-  useEffect(() => {
-    const searchProducts = async () => {
-      const newProducts = await requests.getProductsByFilter(1, filters);
-      setProducts(newProducts);
-    };
-    searchProducts();
-  }, [filters]);
-
   return (
     <BodyStyled>
       <Header />
       <MainStyled>
-        <ProductsFilters />
-        <ProductsContainer />
-        <ProfileBar />
+        <Suspense fallback={<p>Carregando...</p>}>
+          <div>
+            <h3>{product.name}</h3>
+            <p>{product.description}</p>
+            <p>{product.price}</p>
+            <p>{product.new ? 'Novo' : 'Usado'}</p>
+          </div>
+        </Suspense>
       </MainStyled>
       <Footer />
     </BodyStyled>
   );
 }
-export default Home;
+
+export default Products;

@@ -16,7 +16,7 @@ class UsersRepository {
   async get(data: UserIdOrEmail): Promise<Users | null> {
     const response = await this.prisma.users.findUnique({
       where: data,
-      include: { address: true },
+      include: { address: true, Products: true, Orders: true, sales: true },
     });
     return response;
   }
