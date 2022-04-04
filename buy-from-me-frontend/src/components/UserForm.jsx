@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import requests from '../services/requests';
-import FormStyled from '../styles/FormStyled';
+import FormStyled from '../styles/FormStyles';
 import { userValidation, addressValidation } from '../validation/validations';
 
 const states = [
@@ -68,7 +68,7 @@ function UserForm() {
     }
   };
 
-  async function submitForm() {
+  const submitForm = async () => {
     const validation = addressValidation(formData);
     if (validation === true) {
       const contact = Number(formData.contact);
@@ -89,7 +89,7 @@ function UserForm() {
     } else {
       global.alert(validation);
     }
-  }
+  };
 
   return (
     <div>

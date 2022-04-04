@@ -32,7 +32,6 @@ class ProductsControllers {
     const { pag } = req.query;
 
     const pageExists = pag === undefined ? 0 : Number(pag);
-
     const { status, response } = await this.services.getAll(pageExists);
 
     return res.status(status).json(response);

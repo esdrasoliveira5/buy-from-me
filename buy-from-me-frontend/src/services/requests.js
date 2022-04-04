@@ -55,8 +55,44 @@ async function createUser(userData) {
   }
 }
 
+async function getProducts(page) {
+  try {
+    const response = await fetch(`${URL_FETCH}product?pag=${page}`, {
+      method: 'GET',
+      headers: {
+        Accept: APLICATION,
+        'Content-Type': APLICATION,
+      },
+    });
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    return { error };
+  }
+}
+
+async function getProductsByFilter(pag, {
+  name, category, newP, sold, price, filter,
+}) {
+  try {
+    const response = await fetch(`${URL_FETCH}product/filter?pag=${pag}&filter=${filter}&price=${price}&sold=${sold}&newP=${newP}&category=${category}&name=${name}`, {
+      method: 'GET',
+      headers: {
+        Accept: APLICATION,
+        'Content-Type': APLICATION,
+      },
+    });
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    return { error };
+  }
+}
+
 export default {
   loginUser,
   getUser,
   createUser,
+  getProducts,
+  getProductsByFilter,
 };

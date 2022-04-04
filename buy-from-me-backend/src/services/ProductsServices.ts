@@ -61,8 +61,9 @@ class ProductsServices {
 
   async getByFilter(page:number, data: QueryData):
   Promise<ResponseProducts | ResponseError> {
+    const skip = (page * 20) - 20;
     const searchData = this.searchDataValidation.dataSearch(data);
-    const response = await this.repository.getByFilter(page, searchData, data.name);
+    const response = await this.repository.getByFilter(skip, searchData, data.name);
     return { status: StatusCode.OK, response };
   }
 

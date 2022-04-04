@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import FormStyled from '../styles/FormStyled';
-import { MainStyled, BodyStyled } from '../styles/BodyStyled';
+import FormStyled from '../styles/FormStyles';
+import { MainStyled, BodyStyled } from '../styles/BodyStyles';
 import buyFromMeContext from '../context/AppContext';
 import request from '../services/requests';
 import { loginValidation } from '../validation/validations';
@@ -48,7 +48,7 @@ function Login() {
     });
   };
 
-  async function submitLogin() {
+  const submitLogin = async () => {
     const validation = loginValidation(login);
     if (validation === true) {
       const result = await request.loginUser(login);
@@ -63,7 +63,7 @@ function Login() {
     } else {
       global.alert(validation);
     }
-  }
+  };
 
   return (
     <BodyStyled>

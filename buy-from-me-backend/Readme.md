@@ -281,7 +281,7 @@
   <br/>
 
 ### **Listar todos os produtos**
-##### `GET` /product?page=1
+##### `GET` /product?pag=1
   <br/>
 
   Esse endpoint retorna uma lista de 20 produtos por pagina.
