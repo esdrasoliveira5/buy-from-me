@@ -11,7 +11,14 @@ function ProductsContainer() {
       <SearchBar />
       <ProductContainerStyled>
         {products
-          ? products.map(({ name, id, price }) => <Product name={name} id={id} price={price} />)
+          ? products.map(({ name, id, price }) => (
+            <Product
+              key={id}
+              name={name}
+              id={id}
+              price={price}
+            />
+          ))
           : []}
       </ProductContainerStyled>
     </div>

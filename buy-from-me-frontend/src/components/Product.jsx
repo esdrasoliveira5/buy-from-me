@@ -5,7 +5,7 @@ import { ProductStyled } from '../styles/HomePageStyles';
 
 function Product({ id, name, price }) {
   return (
-    <ProductStyled key={id}>
+    <ProductStyled value={id}>
       <img src={Image} alt={name} />
       <h4>{name}</h4>
       <p>{`R$ ${price}`}</p>
@@ -14,7 +14,7 @@ function Product({ id, name, price }) {
 }
 
 Product.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
 };

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import ProductsContainer from '../components/ProductsContainer';
+import ProductsFilters from '../components/ProductsFilters';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
 import { BodyStyled, MainStyled } from '../styles/BodyStyles';
@@ -57,7 +58,7 @@ function Home() {
     <BodyStyled>
       <Header />
       <MainStyled>
-        <h2>FilterBar</h2>
+        <ProductsFilters />
         <ProductsContainer />
         <h2>ProfileBar</h2>
       </MainStyled>

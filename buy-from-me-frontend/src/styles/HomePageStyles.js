@@ -14,3 +14,10 @@ width: 200px;
     width: 100%;
   }
 `;
+
+export const FilterBox = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+`;
