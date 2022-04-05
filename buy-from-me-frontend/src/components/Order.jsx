@@ -1,27 +1,37 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Order({
-  id, productsId, buyerId, sellerId, orderDate,
+  id, orderDate, product, buyer, seller,
 }) {
+  const date = new Date(orderDate);
   return (
     <tr>
       <td>{id}</td>
-      <td>{productsId}</td>
-      <td>{buyerId}</td>
-      <td>{sellerId}</td>
-      <td>{orderDate}</td>
-      <td>Visualizar</td>
+      <td>{product.id}</td>
+      <td>{product.name}</td>
+      <td>{buyer.name}</td>
+      <td>{seller.name}</td>
+      <td>{date.toLocaleString()}</td>
+      <td><Link to={`/order/${id}`}>Vizualizar</Link></td>
     </tr>
   );
 }
 
 Order.propTypes = {
-  buyerId: PropTypes.string.isRequired,
+  buyer: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }).isRequired,
   id: PropTypes.number.isRequired,
   orderDate: PropTypes.string.isRequired,
-  productsId: PropTypes.number.isRequired,
-  sellerId: PropTypes.string.isRequired,
+  product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  seller: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Order;

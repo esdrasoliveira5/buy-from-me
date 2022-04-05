@@ -4,32 +4,26 @@ import React, {
 import { useLocation, useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import ProductsContainer from '../components/ProductsContainer';
-import OrdersContainer from '../components/OrdersContainer';
+import OrderInfo from '../components/OrderInfo';
 import ProfileBar from '../components/ProfileBar';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
 import { BodyStyled, MainStyled } from '../styles/BodyStyles';
 
-function ProfileProducts() {
-  const localResponse = JSON.parse(localStorage.getItem('buy-from-me'));
+function Order() {
   const navigate = useNavigate();
   const location = useLocation();
-  const path = location.pathname.split('/')[2];
+  const path = Number(location.pathname.split('/')[2]);
   const { setLogged } = useContext(buyFromMeContext);
-  const [profile, setProfile] = useState({});
-  const [order, setOrder] = useState({
-    order: [],
-    sales: [],
-  });
+  const [order, setOrder] = useState({});
 
   useEffect(() => {
     const userLogged = async () => {
+      const localResponse = JSON.parse(localStorage.getItem('buy-from-me'));
       if (localResponse !== null) {
         const { token, user } = localResponse;
         const userResponse = await requests.getUser(user.id, token);
-        const ordersResponse = await requests.getOrders(token, 'buyerId');
-        const salesResponse = await requests.getOrders(token, 'sellerId');
+        const orderResponse = await requests.getOrder(token, path);
         if (!userResponse.error) {
           setLogged({
             id: userResponse.id,
@@ -37,11 +31,7 @@ function ProfileProducts() {
             email: userResponse.email,
             logged: true,
           });
-          setProfile(userResponse);
-          setOrder({
-            order: ordersResponse,
-            sales: salesResponse,
-          });
+          setOrder(orderResponse);
         } else {
           setLogged({ logged: false });
           navigate('/');
@@ -54,31 +44,27 @@ function ProfileProducts() {
     userLogged();
   }, []);
 
-  const container = () => {
-    if (path === 'products') {
-      return (
-        <ProductsContainer products={profile.Products} />
-      );
-    }
-    if (path === 'orders') {
-      return (
-        <OrdersContainer orders={order.order} />
-      );
-    }
-    return (
-      <OrdersContainer orders={order.sales} />
-    );
-  };
-
   return (
     <BodyStyled>
       <Header />
       <MainStyled>
+        {
+          order.id ? (
+            <OrderInfo
+              id={order.id}
+              product={order.product}
+              buyer={order.buyer}
+              seller={order.seller}
+              orderDate={order.orderDate}
+            />
+          )
+            : ''
+        }
         <ProfileBar />
-        {profile.address ? container() : ''}
       </MainStyled>
       <Footer />
     </BodyStyled>
   );
 }
-export default ProfileProducts;
+
+export default Order;

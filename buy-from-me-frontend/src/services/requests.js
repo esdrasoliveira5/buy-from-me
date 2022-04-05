@@ -105,6 +105,40 @@ async function getProductsByFilter(pag, {
   }
 }
 
+async function getOrders(token, filter) {
+  try {
+    const response = await fetch(`${URL_FETCH}order?filter=${filter}`, {
+      method: 'GET',
+      headers: {
+        Accept: APLICATION,
+        'Content-Type': APLICATION,
+        Authorization: token,
+      },
+    });
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    return { error };
+  }
+}
+
+async function getOrder(token, id) {
+  try {
+    const response = await fetch(`${URL_FETCH}order/${id}`, {
+      method: 'GET',
+      headers: {
+        Accept: APLICATION,
+        'Content-Type': APLICATION,
+        Authorization: token,
+      },
+    });
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    return { error };
+  }
+}
+
 export default {
   loginUser,
   getUser,
@@ -112,4 +146,6 @@ export default {
   getProductById,
   getProducts,
   getProductsByFilter,
+  getOrders,
+  getOrder,
 };

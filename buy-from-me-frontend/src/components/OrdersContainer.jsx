@@ -8,7 +8,8 @@ function OrdersContainer({ orders }) {
       <table>
         <thead>
           <tr>
-            <th>Pedido</th>
+            <th>Pedido Id</th>
+            <th>Produto Id</th>
             <th>Produto</th>
             <th>Comprador</th>
             <th>Vendedor</th>
@@ -19,15 +20,16 @@ function OrdersContainer({ orders }) {
         <tbody>
           {orders
             ? orders.map(({
-              productsId, id, buyerId, sellerId, orderDate,
+              productsId, id, orderDate, product, buyer, seller,
             }) => (
               <Order
                 key={id}
                 productsId={productsId}
                 id={id}
-                buyerId={buyerId}
-                sellerId={sellerId}
                 orderDate={orderDate}
+                product={product}
+                buyer={buyer}
+                seller={seller}
               />
             ))
             : []}

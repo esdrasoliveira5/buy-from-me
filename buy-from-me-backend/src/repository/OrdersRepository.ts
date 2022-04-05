@@ -11,6 +11,11 @@ class OrdersRepository {
   async get(id: number): Promise<Orders | null> {
     const order = await this.prisma.orders.findUnique({
       where: { id },
+      include: {
+        product: true,
+        seller: { select: { name: true, lastName: true, contact: true, email: true } },
+        buyer: { select: { name: true, lastName: true, contact: true, email: true } },
+      },
     });
     return order;
   }
@@ -19,6 +24,11 @@ class OrdersRepository {
     const orders = await this.prisma.orders.findMany({
       where: {
         ...data,
+      },
+      include: {
+        product: { select: { name: true } },
+        seller: { select: { name: true } },
+        buyer: { select: { name: true } },
       },
     });
     return orders;

@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import Provider from './context/BuyFromMeProvider';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import Order from './pages/Order';
 import Products from './pages/Product';
 import Profile from './pages/Profile';
 import ProfileProducts from './pages/ProfileProducts';
@@ -20,6 +21,7 @@ function App() {
         <Route path="/profile/orders" element={<ProfileProducts />} />
         <Route path="/profile/sales" element={<ProfileProducts />} />
         <Route path="/product/:id" element={<Products />} />
+        <Route path="/order/:id" element={<Order />} />
       </Routes>
     </Provider>
   );
