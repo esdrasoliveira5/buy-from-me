@@ -1,11 +1,10 @@
-import React, { useContext } from 'react';
-import buyFromMeContext from '../context/AppContext';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { ProductContainerStyled } from '../styles/HomePageStyles';
 import Product from './Product';
 import SearchBar from './SearchBar';
 
-function ProductsContainer() {
-  const { products } = useContext(buyFromMeContext);
+function ProductsContainer({ products }) {
   return (
     <div>
       <SearchBar />
@@ -24,5 +23,9 @@ function ProductsContainer() {
     </div>
   );
 }
+
+ProductsContainer.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+};
 
 export default ProductsContainer;

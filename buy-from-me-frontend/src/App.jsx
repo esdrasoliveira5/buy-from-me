@@ -4,6 +4,8 @@ import Provider from './context/BuyFromMeProvider';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Products from './pages/Product';
+import Profile from './pages/Profile';
+import ProfileProducts from './pages/ProfileProducts';
 import Register from './pages/Register';
 
 function App() {
@@ -13,6 +15,10 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/products" element={<ProfileProducts />} />
+        <Route path="/profile/orders" element={<ProfileProducts />} />
+        <Route path="/profile/sales" element={<ProfileProducts />} />
         <Route path="/product/:id" element={<Products />} />
       </Routes>
     </Provider>

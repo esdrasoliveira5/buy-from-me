@@ -1,21 +1,19 @@
 import React, {
   useContext, useEffect, useState,
 } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import ProductInfo from '../components/ProductInfo';
 import ProfileBar from '../components/ProfileBar';
+import ProfileInfo from '../components/ProfileInfo';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
 import { BodyStyled, MainStyled } from '../styles/BodyStyles';
 
-function Products() {
+function Profile() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const path = Number(location.pathname.split('/')[2]);
   const { setLogged } = useContext(buyFromMeContext);
-  const [product, setProduct] = useState({});
+  const [profile, setProfile] = useState({});
 
   useEffect(() => {
     const userLogged = async () => {
@@ -23,7 +21,6 @@ function Products() {
       if (localResponse !== null) {
         const { token, user } = localResponse;
         const userResponse = await requests.getUser(user.id, token);
-        const productsResponse = await requests.getProductById(path);
         if (!userResponse.error) {
           setLogged({
             id: userResponse.id,
@@ -31,7 +28,7 @@ function Products() {
             email: userResponse.email,
             logged: true,
           });
-          setProduct(productsResponse);
+          setProfile(userResponse);
         } else {
           setLogged({ logged: false });
           navigate('/');
@@ -48,22 +45,23 @@ function Products() {
     <BodyStyled>
       <Header />
       <MainStyled>
+        <ProfileBar />
         {
-          product.name ? (
-            <ProductInfo
-              name={product.name}
-              description={product.description}
-              price={product.price}
-              newP={product.new}
-            />
-          )
+          profile.address
+            ? (
+              <ProfileInfo
+                name={profile.name}
+                lastName={profile.lastName}
+                email={profile.email}
+                contact={profile.contact}
+                address={profile.address}
+              />
+            )
             : ''
         }
-        <ProfileBar />
       </MainStyled>
       <Footer />
     </BodyStyled>
   );
 }
-
-export default Products;
+export default Profile;

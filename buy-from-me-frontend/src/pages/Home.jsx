@@ -60,7 +60,7 @@ function Home() {
       <Header />
       <MainStyled>
         <ProductsFilters />
-        <ProductsContainer />
+        <ProductsContainer products={products} />
         <ProfileBar />
       </MainStyled>
       <Footer />

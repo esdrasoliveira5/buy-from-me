@@ -8,19 +8,20 @@ function ProfileBar() {
   const { logged } = useContext(buyFromMeContext);
   return (
     <FilterBox>
-      <div>
+      <Link to="/profile">
         <img src={Image} alt="profile" width="100px" />
         <h4>{logged.name}</h4>
-        <p>{logged.email}</p>
-        <p>Editar Perfil</p>
-      </div>
-      <Link to="/create-product">
+      </Link>
+      <Link to="/profile/create-product">
         <button type="button">Criar produto</button>
       </Link>
-      <Link to="/orders">
+      <Link to="/profile/products">
+        <button type="button">Meus Produtos</button>
+      </Link>
+      <Link to="/profile/orders">
         <button type="button">Minhas Compras</button>
       </Link>
-      <Link to="/sell">
+      <Link to="/profile/sales">
         <button type="button">Minhas Vendas</button>
       </Link>
     </FilterBox>

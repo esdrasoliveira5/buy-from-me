@@ -4,18 +4,19 @@ import React, {
 import { useLocation, useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import ProductInfo from '../components/ProductInfo';
+import ProductsContainer from '../components/ProductsContainer';
+import OrdersContainer from '../components/OrdersContainer';
 import ProfileBar from '../components/ProfileBar';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
 import { BodyStyled, MainStyled } from '../styles/BodyStyles';
 
-function Products() {
+function ProfileProducts() {
   const navigate = useNavigate();
   const location = useLocation();
-  const path = Number(location.pathname.split('/')[2]);
+  const path = location.pathname.split('/')[2];
   const { setLogged } = useContext(buyFromMeContext);
-  const [product, setProduct] = useState({});
+  const [profile, setProfile] = useState({});
 
   useEffect(() => {
     const userLogged = async () => {
@@ -23,7 +24,6 @@ function Products() {
       if (localResponse !== null) {
         const { token, user } = localResponse;
         const userResponse = await requests.getUser(user.id, token);
-        const productsResponse = await requests.getProductById(path);
         if (!userResponse.error) {
           setLogged({
             id: userResponse.id,
@@ -31,7 +31,7 @@ function Products() {
             email: userResponse.email,
             logged: true,
           });
-          setProduct(productsResponse);
+          setProfile(userResponse);
         } else {
           setLogged({ logged: false });
           navigate('/');
@@ -44,26 +44,32 @@ function Products() {
     userLogged();
   }, []);
 
+  const container = () => {
+    if (path === 'products') {
+      return (
+        <ProductsContainer products={profile.Products} />
+      );
+    }
+
+    if (path === 'orders') {
+      return (
+        <OrdersContainer orders={profile.Orders} />
+      );
+    }
+    return (
+      <OrdersContainer orders={profile.sales} />
+    );
+  };
+
   return (
     <BodyStyled>
       <Header />
       <MainStyled>
-        {
-          product.name ? (
-            <ProductInfo
-              name={product.name}
-              description={product.description}
-              price={product.price}
-              newP={product.new}
-            />
-          )
-            : ''
-        }
         <ProfileBar />
+        {profile.address ? container() : ''}
       </MainStyled>
       <Footer />
     </BodyStyled>
   );
 }
-
-export default Products;
+export default ProfileProducts;
