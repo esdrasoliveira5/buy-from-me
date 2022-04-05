@@ -1,11 +1,23 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Image from '../images/relogio.jpg';
+import requests from '../services/requests';
 
 function OrderInfo({
   id, product, buyer, seller, orderDate,
 }) {
+  const navigate = useNavigate();
   const date = new Date(orderDate);
+
+  const orderDelete = async () => {
+    const localResponse = JSON.parse(localStorage.getItem('buy-from-me'));
+    const orderResponse = await requests.deleteOrder(localResponse.token, id);
+    if (orderResponse.message === 'order deleted') {
+      global.alert('Pedido Cancelado');
+      navigate('/profile/orders');
+    }
+  };
 
   return (
     <div>
@@ -20,6 +32,12 @@ function OrderInfo({
       <p>{product.description}</p>
       <p>{`R$ ${product.price}`}</p>
       <p>{product.newP ? 'Novo' : 'Usado'}</p>
+      <button
+        type="button"
+        onClick={orderDelete}
+      >
+        Cancelar Pedido
+      </button>
     </div>
   );
 }

@@ -139,6 +139,23 @@ async function getOrder(token, id) {
   }
 }
 
+async function deleteOrder(token, id) {
+  try {
+    const response = await fetch(`${URL_FETCH}order/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: APLICATION,
+        'Content-Type': APLICATION,
+        Authorization: token,
+      },
+    });
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    return { error };
+  }
+}
+
 export default {
   loginUser,
   getUser,
@@ -148,4 +165,5 @@ export default {
   getProductsByFilter,
   getOrders,
   getOrder,
+  deleteOrder,
 };
