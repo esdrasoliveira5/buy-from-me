@@ -5,6 +5,11 @@ import Product from './Product';
 import SearchBar from './SearchBar';
 
 function ProductsContainer({ products }) {
+  if (products.error) {
+    return (
+      <h1>Voce nao tem produtos</h1>
+    );
+  }
   return (
     <div>
       <SearchBar />

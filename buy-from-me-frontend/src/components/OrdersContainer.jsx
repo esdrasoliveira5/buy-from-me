@@ -3,6 +3,11 @@ import React from 'react';
 import Order from './Order';
 
 function OrdersContainer({ orders }) {
+  if (orders.error) {
+    return (
+      <h1>Voce nao tem pedidos</h1>
+    );
+  }
   return (
     <div>
       <table>
@@ -18,7 +23,7 @@ function OrdersContainer({ orders }) {
           </tr>
         </thead>
         <tbody>
-          {orders
+          {!orders.error
             ? orders.map(({
               productsId, id, orderDate, product, buyer, seller,
             }) => (
