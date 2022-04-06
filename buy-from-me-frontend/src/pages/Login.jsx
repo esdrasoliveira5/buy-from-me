@@ -55,6 +55,12 @@ function Login() {
       if (result.token) {
         const { token, user } = result;
         localStorage.setItem('buy-from-me', JSON.stringify({ user, token }));
+        setLogged({
+          id: result.user.id,
+          name: result.user.name,
+          email: result.user.email,
+          logged: true,
+        });
         global.alert('Bem Vindo!');
         navigate('/home');
       } else {

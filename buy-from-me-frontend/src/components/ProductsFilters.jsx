@@ -70,21 +70,11 @@ function ProductsFilters() {
   };
 
   const submitCategory = ({ target }) => {
-    if (target.name === 'newP') {
-      const { name, checked } = target;
-      setFilters({
-        ...filters,
-        [name]: checked,
-      });
-    }
-
-    if (target.name === 'category') {
-      const { name, value } = target;
-      setFilters({
-        ...filters,
-        [name]: value,
-      });
-    }
+    const { name, value } = target;
+    setFilters({
+      ...filters,
+      [name]: value,
+    });
   };
 
   return (
@@ -132,7 +122,25 @@ function ProductsFilters() {
         Novo
         <input
           name="newP"
-          type="checkbox"
+          type="radio"
+          checked={filters.newP === 'true'}
+          value="true"
+          onChange={(event) => submitCategory(event)}
+        />
+        Usado
+        <input
+          name="newP"
+          type="radio"
+          value="false"
+          checked={filters.newP === 'false'}
+          onChange={(event) => submitCategory(event)}
+        />
+        Todos
+        <input
+          name="newP"
+          type="radio"
+          value=""
+          checked={filters.newP === ''}
           onChange={(event) => submitCategory(event)}
         />
       </label>

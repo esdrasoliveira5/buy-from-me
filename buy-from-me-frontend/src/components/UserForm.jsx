@@ -47,7 +47,7 @@ function UserForm() {
     district: '',
     zipcode: '',
     city: '',
-    statesId: 1,
+    statesId: '1',
   });
 
   const handleFormData = ({ target }) => {

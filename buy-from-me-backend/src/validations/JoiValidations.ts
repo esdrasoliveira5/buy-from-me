@@ -69,7 +69,7 @@ class JoiValidations {
       price: Joi.number().strict().not().empty(),
       categoriesId: Joi.number().strict().required(),
       usersId: Joi.string().not().empty().required(),
-      new: Joi.boolean().not().empty().required(),
+      new: Joi.boolean().not().empty().strict(),
     }).validate({ name, description, price, categoriesId, usersId, new: data.new });
     if (error) {
       return { status: StatusCode.BAD_REQUEST, response: { error: error.details[0].message } };

@@ -27,11 +27,9 @@ const addressValidation = (data) => {
 };
 
 const productValidation = (data) => {
-  if (!data.street || data.street.length === 0) return 'Rua nao pode ser vazio!';
-  if (!data.number || data.number.length === 0) return 'Numero nao pode ser vazio!';
-  if (!data.district || data.district.length === 0) return 'Bairro nao pode ser vazio!';
-  if (!data.zipcode || data.zipcode.length < 8) return 'CEP invalido!';
-  if (!data.city || data.city.length === 0) return 'Cidade nao pode ser vazio!';
+  if (!data.name || data.name.length === 0) return 'Nome nao pode ser vazio!';
+  if (!data.description || data.description.length === 0) return 'Descricao nao pode ser vazio!';
+  if (!data.price || data.price.length === 0) return 'Preco nao pode ser vazio!';
   return true;
 };
 

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import requests from '../services/requests';
 import FormStyled from '../styles/FormStyles';
 import { productValidation } from '../validation/validations';
 import Image from '../images/relogio.jpg';
+import buyFromMeContext from '../context/AppContext';
 
 const categories = [
   { name: 'Acessórios para Veículos' },
@@ -34,30 +35,44 @@ const categories = [
 
 function ProductForm() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
+  const { logged } = useContext(buyFromMeContext);
+  const [productData, setProductData] = useState({
     name: '',
     description: '',
     price: '',
-    categoriesId: 1,
-    usersId: '',
-    newProduct: '',
+    categoriesId: '1',
+    newProduct: 'false',
   });
 
-  const handleFormData = ({ target }) => {
+  const handleproductData = ({ target }) => {
+    if (target.name === 'newProduct') {
+      const { name, checked } = target;
+      setProductData({
+        ...productData,
+        [name]: checked,
+      });
+    }
     const { name, value } = target;
-    setFormData({
-      ...formData,
+    setProductData({
+      ...productData,
       [name]: value,
     });
   };
 
   const submitForm = async () => {
-    const validation = productValidation(formData);
+    const { token } = JSON.parse(localStorage.getItem('buy-from-me'));
+    const validation = productValidation(productData);
     if (validation === true) {
-      const result = await requests.createProduct({});
+      const result = await requests.createProduct(token, {
+        ...productData,
+        categoriesId: Number(productData.categoriesId),
+        price: Number(productData.price),
+        newProduct: productData.newProduct === 'true',
+        usersId: logged.id,
+      });
       if (!result.error) {
         global.alert('Produto criado com sucesso!');
-        navigate('/');
+        navigate('/profile/products');
       } else {
         global.alert(result.error);
       }
@@ -73,43 +88,43 @@ function ProductForm() {
       <label htmlFor="name">
         <input
           type="text"
-          value={formData.name}
+          value={productData.name}
           name="name"
           placeholder="Nome"
-          onChange={(event) => handleFormData(event)}
+          onChange={(event) => handleproductData(event)}
         />
       </label>
       <label htmlFor="description">
         <textarea
-          value={formData.description}
+          value={productData.description}
           name="description"
           placeholder="Descricao"
-          onChange={(event) => handleFormData(event)}
+          onChange={(event) => handleproductData(event)}
         />
       </label>
       <label htmlFor="price">
         <input
-          type="email"
-          value={formData.email}
+          type="number"
+          value={productData.price}
           name="price"
           placeholder="1000"
-          onChange={(event) => handleFormData(event)}
+          onChange={(event) => handleproductData(event)}
         />
       </label>
       <label htmlFor="newProduct">
         Novo:
         <input
           type="checkbox"
-          value={formData.newProduct}
+          value={productData.newProduct}
           name="password"
           placeholder="Password"
-          onChange={(event) => handleFormData(event)}
+          onChange={(event) => handleproductData(event)}
         />
       </label>
-      <label htmlFor="statesId">
+      <label htmlFor="categoriesId">
         <select
-          name="statesId"
-          onChange={(event) => handleFormData(event)}
+          name="categoriesId"
+          onChange={(event) => handleproductData(event)}
         >
           {categories.map(({ name }, index) => (
             <option
