@@ -105,6 +105,24 @@ async function getProductsByFilter(pag, {
   }
 }
 
+async function createProduct(token, data) {
+  try {
+    const response = await fetch(`${URL_FETCH}product`, {
+      method: 'POST',
+      headers: {
+        Accept: APLICATION,
+        'Content-Type': APLICATION,
+        Authorization: token,
+      },
+      body: JSON.stringify(data),
+    });
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    return { error };
+  }
+}
+
 async function getOrders(token, filter) {
   try {
     const response = await fetch(`${URL_FETCH}order?filter=${filter}`, {
@@ -183,6 +201,7 @@ export default {
   getProductById,
   getProducts,
   getProductsByFilter,
+  createProduct,
   getOrders,
   getOrder,
   createOrder,

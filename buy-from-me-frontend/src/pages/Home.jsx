@@ -12,6 +12,7 @@ import { BodyStyled, MainStyled } from '../styles/BodyStyles';
 function Home() {
   const navigate = useNavigate();
   const {
+    logged,
     setLogged,
     setProducts,
     filters,
@@ -25,6 +26,7 @@ function Home() {
         const { token, user } = localResponse;
         const userResponse = await requests.getUser(user.id, token);
         const productsResponse = await requests.getProducts(1);
+        const newProducts = productsResponse.filter(({ usersId }) => usersId !== userResponse.id);
         if (!userResponse.error) {
           setLogged({
             id: userResponse.id,
@@ -33,7 +35,7 @@ function Home() {
             logged: true,
           });
           if (products.length === 0) {
-            setProducts(productsResponse);
+            setProducts(newProducts);
           }
         } else {
           setLogged({ logged: false });
@@ -50,7 +52,8 @@ function Home() {
   useEffect(() => {
     const searchProducts = async () => {
       const newProducts = await requests.getProductsByFilter(1, filters);
-      setProducts(newProducts);
+      const filterProducts = newProducts.filter(({ usersId }) => usersId !== logged.id);
+      setProducts(filterProducts);
     };
     searchProducts();
   }, [filters]);
