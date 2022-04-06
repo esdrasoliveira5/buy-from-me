@@ -14,7 +14,7 @@ function Products() {
   const navigate = useNavigate();
   const location = useLocation();
   const path = Number(location.pathname.split('/')[2]);
-  const { setLogged } = useContext(buyFromMeContext);
+  const { logged, setLogged } = useContext(buyFromMeContext);
   const [product, setProduct] = useState({});
   const [order, setOrder] = useState({});
 
@@ -61,6 +61,30 @@ function Products() {
       global.alert('Pedido ja criado');
     }
   };
+
+  if (product.usersId === logged.id) {
+    return (
+      <BodyStyled>
+        <Header />
+        <MainStyled>
+          {
+          product.name ? (
+            <ProductInfo
+              name={product.name}
+              description={product.description}
+              price={product.price}
+              newP={product.new}
+            />
+          )
+            : ''
+        }
+          <ProfileBar />
+        </MainStyled>
+        <Footer />
+      </BodyStyled>
+    );
+  }
+
   return (
     <BodyStyled>
       <Header />

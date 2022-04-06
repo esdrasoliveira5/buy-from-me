@@ -1,12 +1,13 @@
 import PropTypes from 'prop-types';
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import Image from '../images/relogio.jpg';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import requests from '../services/requests';
+import buyFromMeContext from '../context/AppContext';
 
 function OrderInfo({
-  id, product, buyer, seller, orderDate,
+  id, product, seller, orderDate, buyer,
 }) {
+  const { logged } = useContext(buyFromMeContext);
   const navigate = useNavigate();
   const date = new Date(orderDate);
 
@@ -18,20 +19,40 @@ function OrderInfo({
       navigate('/profile/orders');
     }
   };
+  const buyerOrSeller = () => {
+    if (seller.email === logged.email) {
+      return (
+        <div>
+          <h3>Pedido</h3>
+          <p>{id}</p>
+          <p>{`Comprador ${buyer.name}`}</p>
+          <p>{`Contato ${buyer.contact}`}</p>
+          <p>{`Email ${buyer.email}`}</p>
+          <p>{date.toLocaleString()}</p>
+        </div>
+      );
+    }
+
+    return (
+      <div>
+        <h3>Pedido</h3>
+        <p>{id}</p>
+        <p>{`Vendedor ${seller.name}`}</p>
+        <p>{`Contato ${seller.contact}`}</p>
+        <p>{`Email ${seller.email}`}</p>
+        <p>{date.toLocaleString()}</p>
+      </div>
+    );
+  };
 
   return (
     <div>
-      <h3>Pedido</h3>
-      <p>{id}</p>
-      <p>{`Comprador ${buyer.name}`}</p>
-      <p>{`Vendedor ${seller.name}`}</p>
-      <p>{date.toLocaleString()}</p>
+      {buyerOrSeller()}
       <h3>Produto</h3>
-      <img src={Image} alt={product.name} width="400px" />
       <h3>{product.name}</h3>
-      <p>{product.description}</p>
       <p>{`R$ ${product.price}`}</p>
-      <p>{product.newP ? 'Novo' : 'Usado'}</p>
+      <p>{product.new ? 'Novo' : 'Usado'}</p>
+      <Link to={`/product/${product.id}`}><h3>Vizualizar Produto</h3></Link>
       <button
         type="button"
         onClick={orderDelete}
@@ -43,19 +64,24 @@ function OrderInfo({
 }
 
 OrderInfo.propTypes = {
-  buyer: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-  }).isRequired,
   id: PropTypes.number.isRequired,
   orderDate: PropTypes.string.isRequired,
   product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    newP: PropTypes.string.isRequired,
-    price: PropTypes.string.isRequired,
+    new: PropTypes.bool.isRequired,
+    price: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
   }).isRequired,
   seller: PropTypes.shape({
     name: PropTypes.string.isRequired,
+    contact: PropTypes.number.isRequired,
+    email: PropTypes.string.isRequired,
+  }).isRequired,
+  buyer: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    contact: PropTypes.number.isRequired,
+    email: PropTypes.string.isRequired,
   }).isRequired,
 };
 

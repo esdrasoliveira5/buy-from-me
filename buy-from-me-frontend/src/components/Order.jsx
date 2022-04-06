@@ -9,7 +9,6 @@ function Order({
   return (
     <tr>
       <td>{id}</td>
-      <td>{product.id}</td>
       <td>{product.name}</td>
       <td>{buyer.name}</td>
       <td>{seller.name}</td>
@@ -26,7 +25,6 @@ Order.propTypes = {
   id: PropTypes.number.isRequired,
   orderDate: PropTypes.string.isRequired,
   product: PropTypes.shape({
-    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
   seller: PropTypes.shape({

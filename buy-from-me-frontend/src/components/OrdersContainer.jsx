@@ -14,7 +14,6 @@ function OrdersContainer({ orders }) {
         <thead>
           <tr>
             <th>Pedido Id</th>
-            <th>Produto Id</th>
             <th>Produto</th>
             <th>Comprador</th>
             <th>Vendedor</th>
@@ -25,11 +24,10 @@ function OrdersContainer({ orders }) {
         <tbody>
           {!orders.error
             ? orders.map(({
-              productsId, id, orderDate, product, buyer, seller,
+              id, orderDate, product, buyer, seller,
             }) => (
               <Order
                 key={id}
-                productsId={productsId}
                 id={id}
                 orderDate={orderDate}
                 product={product}
