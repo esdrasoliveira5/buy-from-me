@@ -215,21 +215,21 @@ function UserForm() {
                     </option>
                   )) }
                 </select>
-                <button
-                  type="button"
-                  name="form"
-                  value="user"
-                  onClick={(event) => handleForm(event)}
-                >
-                  Anterior
-                </button>
-                <button
-                  type="button"
-                  onClick={submitForm}
-                >
-                  Registrar
-                </button>
               </label>
+              <button
+                type="button"
+                name="form"
+                value="user"
+                onClick={(event) => handleForm(event)}
+              >
+                Anterior
+              </button>
+              <button
+                type="button"
+                onClick={submitForm}
+              >
+                Registrar
+              </button>
             </FormStyled>
           )
       }

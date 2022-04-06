@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Provider from './context/BuyFromMeProvider';
+import CreateProduct from './pages/CreateProduct';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Order from './pages/Order';
@@ -17,6 +18,7 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/profile/create-product" element={<CreateProduct />} />
         <Route path="/profile/products" element={<ProfileProducts />} />
         <Route path="/profile/orders" element={<ProfileProducts />} />
         <Route path="/profile/sales" element={<ProfileProducts />} />
@@ -26,5 +28,4 @@ function App() {
     </Provider>
   );
 }
-
 export default App;

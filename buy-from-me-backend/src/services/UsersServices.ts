@@ -5,7 +5,7 @@ import {
   ResponseUser,
 } from '../interfaces/ResponsesI';
 import StatusCode from '../interfaces/StatusCodes';
-import { CreateUserData, LoginData, Token, UpdateUserData } from '../interfaces/UsersI';
+import { CreateUserData, LoginData, Token, UpdateUserData, UserT } from '../interfaces/UsersI';
 import UsersRepository from '../repository/UsersRepository';
 import Bcrypt from '../validations/Bcrypt';
 import JoiValidations from '../validations/JoiValidations';
@@ -64,7 +64,7 @@ class UsersServices {
 
     const validPassword = await this.bcrypt.compareIt(password, response.password);
     if (validPassword) return validPassword;
-    const user = {
+    const user: UserT = {
       id: response.id,
       name: response.name,
       email: response.email,
