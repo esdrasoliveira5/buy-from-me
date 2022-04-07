@@ -13,7 +13,7 @@ import { BodyStyled, MainStyled } from '../styles/BodyStyles';
 function Products() {
   const navigate = useNavigate();
   const location = useLocation();
-  const path = Number(location.pathname.split('/')[2]);
+  const path = Number(location.pathname.split('/login')[2]);
   const { logged, setLogged } = useContext(buyFromMeContext);
   const [product, setProduct] = useState({});
   const [order, setOrder] = useState({});
@@ -40,11 +40,11 @@ function Products() {
           }
         } else {
           setLogged({ logged: false });
-          navigate('/');
+          navigate('/login');
         }
       } else {
         setLogged({ logged: false });
-        navigate('/');
+        navigate('/login');
       }
     };
     userLogged();

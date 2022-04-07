@@ -14,7 +14,7 @@ import { BodyStyled, MainStyled } from '../styles/BodyStyles';
 function CreateProduct() {
   const navigate = useNavigate();
   const location = useLocation();
-  const path = location.pathname.split('/')[2];
+  const path = location.pathname.split('/login')[2];
   const { setLogged } = useContext(buyFromMeContext);
 
   useEffect(() => {
@@ -32,11 +32,11 @@ function CreateProduct() {
           });
         } else {
           setLogged({ logged: false });
-          navigate('/');
+          navigate('/login');
         }
       } else {
         setLogged({ logged: false });
-        navigate('/');
+        navigate('/login');
       }
     };
     userLogged();

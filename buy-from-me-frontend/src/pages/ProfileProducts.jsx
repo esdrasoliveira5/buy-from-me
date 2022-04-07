@@ -15,7 +15,7 @@ function ProfileProducts() {
   const localResponse = JSON.parse(localStorage.getItem('buy-from-me'));
   const navigate = useNavigate();
   const location = useLocation();
-  const path = location.pathname.split('/')[2];
+  const path = location.pathname.split('/login')[2];
   const { setLogged } = useContext(buyFromMeContext);
   const [profile, setProfile] = useState({});
   const [order, setOrder] = useState({
@@ -44,11 +44,11 @@ function ProfileProducts() {
           });
         } else {
           setLogged({ logged: false });
-          navigate('/');
+          navigate('/login');
         }
       } else {
         setLogged({ logged: false });
-        navigate('/');
+        navigate('/login');
       }
     };
     userLogged();

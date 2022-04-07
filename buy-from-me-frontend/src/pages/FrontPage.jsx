@@ -1,19 +1,19 @@
-import React, {
-  useContext, useEffect, useState,
-} from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import ProfileBar from '../components/ProfileBar';
-import ProfileInfo from '../components/ProfileInfo';
+import ProductsContainer from '../components/ProductsContainer';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
 import { BodyStyled, MainStyled } from '../styles/BodyStyles';
 
-function Profile() {
-  const navigate = useNavigate();
-  const { setLogged } = useContext(buyFromMeContext);
-  const [profile, setProfile] = useState({});
+function FrontPage() {
+  const {
+    logged,
+    setLogged,
+    setProducts,
+    filters,
+    products,
+  } = useContext(buyFromMeContext);
 
   useEffect(() => {
     const userLogged = async () => {
@@ -21,6 +21,8 @@ function Profile() {
       if (localResponse !== null) {
         const { token, user } = localResponse;
         const userResponse = await requests.getUser(user.id, token);
+        const productsResponse = await requests.getProducts(1);
+        const newProducts = productsResponse.filter(({ usersId }) => usersId !== userResponse.id);
         if (!userResponse.error) {
           setLogged({
             id: userResponse.id,
@@ -28,40 +30,36 @@ function Profile() {
             email: userResponse.email,
             logged: true,
           });
-          setProfile(userResponse);
+          if (products.length === 0) {
+            setProducts(newProducts);
+          }
         } else {
           setLogged({ logged: false });
-          navigate('/login');
         }
       } else {
         setLogged({ logged: false });
-        navigate('/login');
       }
     };
     userLogged();
   }, []);
 
+  useEffect(() => {
+    const searchProducts = async () => {
+      const newProducts = await requests.getProductsByFilter(1, filters);
+      const filterProducts = newProducts.filter(({ usersId }) => usersId !== logged.id);
+      setProducts(filterProducts);
+    };
+    searchProducts();
+  }, [filters]);
+
   return (
     <BodyStyled>
       <Header />
       <MainStyled>
-        <ProfileBar />
-        {
-          profile.address
-            ? (
-              <ProfileInfo
-                name={profile.name}
-                lastName={profile.lastName}
-                email={profile.email}
-                contact={profile.contact}
-                address={profile.address}
-              />
-            )
-            : ''
-        }
+        <ProductsContainer products={products} />
       </MainStyled>
       <Footer />
     </BodyStyled>
   );
 }
-export default Profile;
+export default FrontPage;

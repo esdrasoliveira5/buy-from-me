@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import requests from '../services/requests';
 import FormStyled from '../styles/FormStyles';
 import { userValidation, addressValidation } from '../validation/validations';
@@ -41,6 +41,7 @@ function UserForm() {
     lastName: '',
     email: '',
     password: '',
+    confirm: '',
     contact: '',
     street: '',
     number: '',
@@ -82,7 +83,9 @@ function UserForm() {
       });
       if (!result.error) {
         global.alert('Usuario criado com sucesso!');
-        navigate('/');
+        navigate('/login');
+      } else if (result.error === 'user already registered') {
+        global.alert('Email ja Cadastrado');
       } else {
         global.alert(result.error);
       }
@@ -130,7 +133,16 @@ function UserForm() {
                   type="password"
                   value={formData.password}
                   name="password"
-                  placeholder="Password"
+                  placeholder="Senha"
+                  onChange={(event) => handleFormData(event)}
+                />
+              </label>
+              <label htmlFor="confirm">
+                <input
+                  type="password"
+                  value={formData.confirm}
+                  name="confirm"
+                  placeholder="Confirme a senha"
                   onChange={(event) => handleFormData(event)}
                 />
               </label>
@@ -143,6 +155,13 @@ function UserForm() {
                   onChange={(event) => handleFormData(event)}
                 />
               </label>
+              <Link to="/login">
+                <button
+                  type="button"
+                >
+                  Cancelar
+                </button>
+              </Link>
               <button
                 type="button"
                 name="form"
@@ -216,6 +235,13 @@ function UserForm() {
                   )) }
                 </select>
               </label>
+              <Link to="/login">
+                <button
+                  type="button"
+                >
+                  Cancelar
+                </button>
+              </Link>
               <button
                 type="button"
                 name="form"

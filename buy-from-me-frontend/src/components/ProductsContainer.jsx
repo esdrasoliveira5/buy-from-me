@@ -7,7 +7,7 @@ import SearchBar from './SearchBar';
 
 function ProductsContainer({ products }) {
   const location = useLocation();
-  const path = location.pathname.split('/')[1];
+  const path = location.pathname.split('/login')[1];
 
   if (products.length === 0) {
     return (
@@ -17,7 +17,7 @@ function ProductsContainer({ products }) {
   return (
     <div>
       {
-        path === 'home'
+        path !== 'profile'
           ? <SearchBar /> : ''
       }
       <ProductContainerStyled>

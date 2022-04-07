@@ -13,7 +13,7 @@ import { BodyStyled, MainStyled } from '../styles/BodyStyles';
 function Order() {
   const navigate = useNavigate();
   const location = useLocation();
-  const path = Number(location.pathname.split('/')[2]);
+  const path = Number(location.pathname.split('/login')[2]);
   const { setLogged } = useContext(buyFromMeContext);
   const [order, setOrder] = useState({});
 
@@ -34,11 +34,11 @@ function Order() {
           setOrder(orderResponse);
         } else {
           setLogged({ logged: false });
-          navigate('/');
+          navigate('/login');
         }
       } else {
         setLogged({ logged: false });
-        navigate('/');
+        navigate('/login');
       }
     };
     userLogged();

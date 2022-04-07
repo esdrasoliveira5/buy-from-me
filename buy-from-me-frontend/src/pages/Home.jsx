@@ -39,11 +39,11 @@ function Home() {
           }
         } else {
           setLogged({ logged: false });
-          navigate('/');
+          navigate('/login');
         }
       } else {
         setLogged({ logged: false });
-        navigate('/');
+        navigate('/login');
       }
     };
     userLogged();

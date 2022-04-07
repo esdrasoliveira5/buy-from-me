@@ -105,7 +105,7 @@ function UserFormUpdate() {
       });
       if (!result.error) {
         global.alert('Usuario atualizado com sucesso!');
-        navigate('/');
+        navigate('/login');
       } else {
         global.alert(result.error);
       }

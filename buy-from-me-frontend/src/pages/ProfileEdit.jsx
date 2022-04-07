@@ -29,11 +29,11 @@ function ProfileEdit() {
           });
         } else {
           setLogged({ logged: false });
-          navigate('/');
+          navigate('/login');
         }
       } else {
         setLogged({ logged: false });
-        navigate('/');
+        navigate('/login');
       }
     };
     userLogged();
@@ -51,7 +51,7 @@ function ProfileEdit() {
           email: '',
           logged: false,
         });
-        navigate('/');
+        navigate('/login');
       }
     }
   };

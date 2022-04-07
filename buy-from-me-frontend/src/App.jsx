@@ -2,6 +2,7 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Provider from './context/BuyFromMeProvider';
 import CreateProduct from './pages/CreateProduct';
+import FrontPage from './pages/FrontPage';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Order from './pages/Order';
@@ -15,7 +16,8 @@ function App() {
   return (
     <Provider>
       <Routes>
-        <Route path="/" element={<Login />} />
+        <Route path="/" element={<FrontPage />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
