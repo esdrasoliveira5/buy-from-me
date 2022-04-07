@@ -5,7 +5,8 @@ import Header from '../components/Header';
 import ProductsContainer from '../components/ProductsContainer';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
-import { BodyStyled, MainStyled } from '../styles/BodyStyles';
+import { BodyStyled } from '../styles/BodyStyles';
+import { MainStyled } from '../styles/MainStyles';
 
 function FrontPage() {
   const navigate = useNavigate();
@@ -59,6 +60,7 @@ function FrontPage() {
     <BodyStyled>
       <Header />
       <MainStyled>
+        <h1>BUY FROM ME</h1>
         <ProductsContainer products={products} />
       </MainStyled>
       <Footer />

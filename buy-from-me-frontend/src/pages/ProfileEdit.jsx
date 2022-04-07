@@ -8,7 +8,8 @@ import ProfileBar from '../components/ProfileBar';
 import UserFormUpdate from '../components/UserFormUpdate';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
-import { BodyStyled, MainStyled } from '../styles/BodyStyles';
+import { BodyStyled } from '../styles/BodyStyles';
+import { MainStyled } from '../styles/MainStyles';
 
 function ProfileEdit() {
   const localResponse = JSON.parse(localStorage.getItem('buy-from-me'));

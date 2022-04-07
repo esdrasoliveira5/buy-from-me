@@ -9,13 +9,14 @@ import OrdersContainer from '../components/OrdersContainer';
 import ProfileBar from '../components/ProfileBar';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
-import { BodyStyled, MainStyled } from '../styles/BodyStyles';
+import { BodyStyled } from '../styles/BodyStyles';
+import { MainStyled } from '../styles/MainStyles';
 
 function ProfileProducts() {
   const localResponse = JSON.parse(localStorage.getItem('buy-from-me'));
   const navigate = useNavigate();
   const location = useLocation();
-  const path = location.pathname.split('/login')[2];
+  const path = location.pathname.split('/')[2];
   const { setLogged } = useContext(buyFromMeContext);
   const [profile, setProfile] = useState({});
   const [order, setOrder] = useState({
@@ -55,6 +56,7 @@ function ProfileProducts() {
   }, []);
 
   const container = () => {
+    console.log(path);
     if (path === 'products') {
       return (
         <ProductsContainer products={profile.Products} />

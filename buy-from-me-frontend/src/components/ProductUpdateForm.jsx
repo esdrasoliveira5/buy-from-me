@@ -36,7 +36,7 @@ const categories = [
 function ProductUpdateForm() {
   const navigate = useNavigate();
   const location = useLocation();
-  const path = Number(location.pathname.split('/login')[3]);
+  const path = Number(location.pathname.split('/')[3]);
   const { logged } = useContext(buyFromMeContext);
   const [productData, setProductData] = useState({
     name: '',

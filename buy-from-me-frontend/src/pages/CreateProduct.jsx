@@ -9,12 +9,13 @@ import ProductUpdateForm from '../components/ProductUpdateForm';
 import ProfileBar from '../components/ProfileBar';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
-import { BodyStyled, MainStyled } from '../styles/BodyStyles';
+import { BodyStyled } from '../styles/BodyStyles';
+import { MainStyled } from '../styles/MainStyles';
 
 function CreateProduct() {
   const navigate = useNavigate();
   const location = useLocation();
-  const path = location.pathname.split('/login')[2];
+  const path = location.pathname.split('/')[2];
   const { setLogged } = useContext(buyFromMeContext);
 
   useEffect(() => {

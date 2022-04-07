@@ -6,6 +6,7 @@ const FormStyled = styled.form`
   background-color: #F8961E;
   padding: 15px;
   color: #FFFFFF;
+  width: 100%;
   input {
     outline: 0;
     background: #f2f2f2;
@@ -20,24 +21,7 @@ const FormStyled = styled.form`
   input:focus {
     background: #DEE2E6;
   }
-  button {
-    margin-top: 10px;
-    text-transform: uppercase;
-    outline: 0;
-    background: #43AA8B;
-    width: 100%;
-    border: 0;
-    border-radius: 5px;
-    padding: 15px;
-    color: #FFFFFF;
-    font-size: 14px;
-    -webkit-transition: all 0.3 ease;
-    transition: all 0.3 ease;
-    cursor: pointer;
-  }
-  button:hover {
-    background-color: #90BE6D;
-  }
+
   select {
     padding: 7px 40px 7px 12px;
     width: 100%;

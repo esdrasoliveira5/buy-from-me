@@ -7,7 +7,7 @@ import login from '../images/login.png';
 
 function Header() {
   const location = useLocation();
-  const path = location.pathname.split('/login')[1];
+  const path = location.pathname.split('/')[1];
   return (
     <HeaderStyled>
       <Link to="/">

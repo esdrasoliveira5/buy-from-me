@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import requests from '../services/requests';
+import { ButtonGreen, ButtonRed, ButtonYellow } from '../styles/ButtonsStyles';
 import FormStyled from '../styles/FormStyles';
 import { userValidation, addressValidation } from '../validation/validations';
 
@@ -155,26 +156,30 @@ function UserForm() {
                   onChange={(event) => handleFormData(event)}
                 />
               </label>
-              <Link to="/login">
+              <ButtonRed>
+                <Link to="/login">
+                  <button
+                    type="button"
+                  >
+                    Cancelar
+                  </button>
+                </Link>
+              </ButtonRed>
+              <ButtonGreen>
                 <button
                   type="button"
+                  name="form"
+                  value="address"
+                  onClick={(event) => handleForm(event)}
                 >
-                  Cancelar
+                  Próximo
                 </button>
-              </Link>
-              <button
-                type="button"
-                name="form"
-                value="address"
-                onClick={(event) => handleForm(event)}
-              >
-                Proximo
-              </button>
+              </ButtonGreen>
             </FormStyled>
           )
           : (
             <FormStyled>
-              <h2>Endereco</h2>
+              <h2>Endereço</h2>
               <label htmlFor="street">
                 <input
                   type="text"
@@ -189,7 +194,7 @@ function UserForm() {
                   type="text"
                   value={formData.number}
                   name="number"
-                  placeholder="Numero"
+                  placeholder="Número"
                   onChange={(event) => handleFormData(event)}
                 />
               </label>
@@ -235,27 +240,33 @@ function UserForm() {
                   )) }
                 </select>
               </label>
-              <Link to="/login">
+              <ButtonRed>
+                <Link to="/login">
+                  <button
+                    type="button"
+                  >
+                    Cancelar
+                  </button>
+                </Link>
+              </ButtonRed>
+              <ButtonYellow>
                 <button
                   type="button"
+                  name="form"
+                  value="user"
+                  onClick={(event) => handleForm(event)}
                 >
-                  Cancelar
+                  Anterior
                 </button>
-              </Link>
-              <button
-                type="button"
-                name="form"
-                value="user"
-                onClick={(event) => handleForm(event)}
-              >
-                Anterior
-              </button>
-              <button
-                type="button"
-                onClick={submitForm}
-              >
-                Registrar
-              </button>
+              </ButtonYellow>
+              <ButtonGreen>
+                <button
+                  type="button"
+                  onClick={submitForm}
+                >
+                  Registrar
+                </button>
+              </ButtonGreen>
             </FormStyled>
           )
       }

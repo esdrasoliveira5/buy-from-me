@@ -8,12 +8,13 @@ import OrderInfo from '../components/OrderInfo';
 import ProfileBar from '../components/ProfileBar';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
-import { BodyStyled, MainStyled } from '../styles/BodyStyles';
+import { BodyStyled } from '../styles/BodyStyles';
+import { MainStyled } from '../styles/MainStyles';
 
 function Order() {
   const navigate = useNavigate();
   const location = useLocation();
-  const path = Number(location.pathname.split('/login')[2]);
+  const path = Number(location.pathname.split('/')[2]);
   const { setLogged } = useContext(buyFromMeContext);
   const [order, setOrder] = useState({});
 

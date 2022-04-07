@@ -8,12 +8,13 @@ import ProductInfo from '../components/ProductInfo';
 import ProfileBar from '../components/ProfileBar';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
-import { BodyStyled, MainStyled } from '../styles/BodyStyles';
+import { BodyStyled } from '../styles/BodyStyles';
+import { MainStyled } from '../styles/MainStyles';
 
 function Products() {
   const navigate = useNavigate();
   const location = useLocation();
-  const path = Number(location.pathname.split('/login')[2]);
+  const path = Number(location.pathname.split('/')[2]);
   const { logged, setLogged } = useContext(buyFromMeContext);
   const [product, setProduct] = useState({});
   const [order, setOrder] = useState({});

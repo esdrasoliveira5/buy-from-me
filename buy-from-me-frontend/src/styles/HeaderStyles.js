@@ -33,7 +33,7 @@ const HeaderStyled = styled.header`
     button {
       width: 80px;
       outline: 0;
-      background: #43AA8B;
+      background: #02c39a;
       border: 0;
       border-radius: 0px 5px 5px 0px;
       color: #FFFFFF;
@@ -48,7 +48,7 @@ const HeaderStyled = styled.header`
       }
     }
     button:hover {
-      background-color: #90BE6D;
+      background-color: #00a896;
     }
   }
 `;

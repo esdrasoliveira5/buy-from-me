@@ -18,21 +18,33 @@ export const ProductStyled = styled.div`
   width: 100%;
   padding: 10px;
   align-items: center;
-  img {
-    width: 100%;
-  }
+  z-index: 1;
   a {
     text-decoration: none;
     color: #023047;
-    text-align: center;
-  }
-  a:hover {
-    background-color: #8ECAE6;
+    img {
+      width: 100%;
     }
+    h4, p {
+      visibility: hidden;
+    }
+  }
+
+
+  a:hover {
+    background-color: #fff;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    transition: all 200ms ease-out;
+    text-align: center;
+    h4, p {
+      display: block;
+      visibility: visible;
+    }
+  }
   @media screen and (min-width: 600px) {
     width: 50%;
   }
-  @media screen and (min-width: 1000px) {
+  @media screen and (min-width: 1100px) {
     width: 25%;
   }
 `;

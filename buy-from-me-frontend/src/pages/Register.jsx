@@ -5,7 +5,8 @@ import Header from '../components/Header';
 import UserForm from '../components/UserForm';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
-import { BodyStyled, MainStyled } from '../styles/BodyStyles';
+import { BodyStyled } from '../styles/BodyStyles';
+import { RegisterMainStyled } from '../styles/MainStyles';
 
 function Register() {
   const navigate = useNavigate();
@@ -37,11 +38,9 @@ function Register() {
   return (
     <BodyStyled>
       <Header />
-      <MainStyled>
-        <div>
-          <UserForm />
-        </div>
-      </MainStyled>
+      <RegisterMainStyled>
+        <UserForm />
+      </RegisterMainStyled>
       <Footer />
     </BodyStyled>
   );

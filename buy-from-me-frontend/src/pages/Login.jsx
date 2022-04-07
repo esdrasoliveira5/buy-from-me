@@ -3,10 +3,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FormStyled from '../styles/FormStyles';
-import { MainStyled, BodyStyled } from '../styles/BodyStyles';
+import { BodyStyled } from '../styles/BodyStyles';
+import { LoginMainStyled } from '../styles/MainStyles';
 import buyFromMeContext from '../context/AppContext';
 import request from '../services/requests';
 import { loginValidation } from '../validation/validations';
+import { ButtonGreen, ButtonRed } from '../styles/ButtonsStyles';
 
 function Login() {
   const navigate = useNavigate();
@@ -74,7 +76,7 @@ function Login() {
   return (
     <BodyStyled>
       <Header />
-      <MainStyled>
+      <LoginMainStyled>
         {
           !logged.logged
             ? (
@@ -98,24 +100,28 @@ function Login() {
                     onChange={(event) => handleLogin(event)}
                   />
                 </label>
-                <button
-                  type="button"
-                  onClick={submitLogin}
-                >
-                  login
-                </button>
-                <Link to="/register">
+                <ButtonGreen>
                   <button
                     type="button"
+                    onClick={submitLogin}
                   >
-                    Cadastrar
-
+                    login
                   </button>
+                </ButtonGreen>
+                <Link to="/register">
+                  <ButtonRed>
+                    <button
+                      type="button"
+                    >
+                      Cadastrar
+
+                    </button>
+                  </ButtonRed>
                 </Link>
               </FormStyled>
             ) : <p>Carregando...</p>
         }
-      </MainStyled>
+      </LoginMainStyled>
       <Footer />
     </BodyStyled>
   );
