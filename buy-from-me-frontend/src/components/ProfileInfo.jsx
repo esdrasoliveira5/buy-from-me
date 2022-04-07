@@ -11,9 +11,6 @@ function ProfileInfo({
       <p>{lastName}</p>
       <p>{email}</p>
       <p>{contact}</p>
-      <button type="button">
-        Editar Perfil
-      </button>
       <h2>Endereco</h2>
       <p>{address.street}</p>
       <p>{address.number}</p>
@@ -21,8 +18,10 @@ function ProfileInfo({
       <p>{address.district}</p>
       <p>{address.city}</p>
       <p>{address.statesId}</p>
-      <button type="button">
-        Editar Endereco
+      <button
+        type="button"
+      >
+        Editar Perfil
       </button>
     </div>
   );

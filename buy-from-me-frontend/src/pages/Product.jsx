@@ -63,11 +63,14 @@ function Products() {
   };
 
   const handleDelete = async () => {
-    const localResponse = JSON.parse(localStorage.getItem('buy-from-me'));
-    const responseOrder = await requests.deleteProduct(localResponse.token, path);
-    if (responseOrder.message) {
-      global.alert('Produto Deletado!');
-      navigate('/profile/products');
+    const response = global.confirm('Deletar o produto?');
+    if (response === true) {
+      const localResponse = JSON.parse(localStorage.getItem('buy-from-me'));
+      const responseOrder = await requests.deleteProduct(localResponse.token, path);
+      if (responseOrder.message) {
+        global.alert('Produto Deletado!');
+        navigate('/profile/products');
+      }
     }
   };
   if (product.usersId === logged.id) {

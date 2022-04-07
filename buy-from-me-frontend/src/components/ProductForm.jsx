@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import requests from '../services/requests';
 import FormStyled from '../styles/FormStyles';
 import { productValidation } from '../validation/validations';
@@ -136,6 +136,13 @@ function ProductForm() {
           )) }
         </select>
       </label>
+      <Link to="/profile/products">
+        <button
+          type="button"
+        >
+          Cancelar
+        </button>
+      </Link>
       <button
         type="button"
         onClick={submitForm}

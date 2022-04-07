@@ -12,20 +12,26 @@ function OrderInfo({
   const date = new Date(orderDate);
 
   const orderDelete = async () => {
-    const localResponse = JSON.parse(localStorage.getItem('buy-from-me'));
-    const orderResponse = await requests.deleteOrder(localResponse.token, id);
-    if (orderResponse.message === 'order deleted') {
-      global.alert('Pedido Cancelado');
-      navigate('/profile/orders');
+    const response = global.confirm('Excluir o pedido?');
+    if (response === true) {
+      const localResponse = JSON.parse(localStorage.getItem('buy-from-me'));
+      const orderResponse = await requests.deleteOrder(localResponse.token, id);
+      if (orderResponse.message === 'order deleted') {
+        global.alert('Pedido Cancelado');
+        navigate('/profile/orders');
+      }
     }
   };
 
   const orderConclude = async () => {
-    const localResponse = JSON.parse(localStorage.getItem('buy-from-me'));
-    const soldProduct = await requests.deleteProduct(localResponse.token, product.id);
-    if (soldProduct.message) {
-      global.alert('Pedido Concluido');
-      navigate('/profile/sales');
+    const response = global.confirm('Concluir o pedido?');
+    if (response === true) {
+      const localResponse = JSON.parse(localStorage.getItem('buy-from-me'));
+      const soldProduct = await requests.deleteProduct(localResponse.token, product.id);
+      if (soldProduct.message) {
+        global.alert('Pedido Concluido');
+        navigate('/profile/sales');
+      }
     }
   };
 
