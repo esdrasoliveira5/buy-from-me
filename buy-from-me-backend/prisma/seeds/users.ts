@@ -3,40 +3,40 @@ const prisma = new PrismaClient();
 
 const users: Users[] = [
   {
-    id: '1',
+    id: '11',
     name: 'Roberto',
     lastName: 'Vendedor',
     email: 'roberto@email.com',
     contact: 987654321,
     password: '$2b$10$Wqd2FoGq/7Rk3BUVR1tcMuitl.SX32bmFLz5lvXYu7VF0V7NXdrTO',//roberto_password
-    addressId: 1,
+    addressId: 11,
   },
   {
-    id: '2',
+    id: '12',
     name: 'Amanda',
     lastName: 'Comprador',
     email: 'amanda@email.com',
     contact: 987654321,
     password: '$2b$10$Wqd2FoGq/7Rk3BUVR1tcMuOR4r5ax7.OhT0pICGqnbWx5VF0A87tW',//amanda_password
-    addressId: 2,
+    addressId: 12,
   },
   {
-    id: '3',
+    id: '13',
     name: 'Elias',
     lastName: 'Vendedor',
     email: 'elias@email.com',
     contact: 987654321,
     password: '$2b$10$Wqd2FoGq/7Rk3BUVR1tcMuVULm5UlVaC/fXmgFRB9AXiGdYYMXOm6',//elias_password
-    addressId: 3,
+    addressId: 13,
   },
   {
-    id: '4',
+    id: '14',
     name: 'Fernanda',
     lastName: 'Comprador',
     email: 'fernanda@email.com',
     contact: 987654321,
     password: '$2b$10$Wqd2FoGq/7Rk3BUVR1tcMuF6mbNYjy/6tIpw6IGdymEe2HXMfOECi',//fernanda_password
-    addressId: 4,
+    addressId: 14,
   },
 ];
 

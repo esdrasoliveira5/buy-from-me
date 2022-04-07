@@ -3,24 +3,44 @@ const prisma = new PrismaClient();
 
 const orders = [
   {
-    productsId: 2,
-    buyerId: '1',
-    sellerId: '4',
+    productsId: 11,
+    buyerId: '12',
+    sellerId: '11',
   },
   {
-    productsId: 1,
-    buyerId: '3',
-    sellerId: '1',
+    productsId: 12,
+    buyerId: '11',
+    sellerId: '12',
   },
   {
-    productsId: 4,
-    buyerId: '1',
-    sellerId: '3',
+    productsId: 13,
+    buyerId: '14',
+    sellerId: '13',
   },
   {
-    productsId: 5,
-    buyerId: '4',
-    sellerId: '2',
+    productsId: 14,
+    buyerId: '13',
+    sellerId: '14',
+  },
+  {
+    productsId: 18,
+    buyerId: '12',
+    sellerId: '14',
+  },
+  {
+    productsId: 17,
+    buyerId: '11',
+    sellerId: '13',
+  },
+  {
+    productsId: 16,
+    buyerId: '14',
+    sellerId: '12',
+  },
+  {
+    productsId: 15,
+    buyerId: '13',
+    sellerId: '11',
   },
 ];
 

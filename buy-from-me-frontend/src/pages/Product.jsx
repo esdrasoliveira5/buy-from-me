@@ -70,7 +70,6 @@ function Products() {
       navigate('/profile/products');
     }
   };
-
   if (product.usersId === logged.id) {
     return (
       <BodyStyled>

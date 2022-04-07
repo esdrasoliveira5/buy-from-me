@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 const address: Address[] = [
   {
-    id: 1,
+    id: 11,
     street: 'Pedra',
     number: '1000',
     district: 'Santa Monica',
@@ -12,7 +12,7 @@ const address: Address[] = [
     statesId: 1,
   },
   {
-    id: 2,
+    id: 12,
     street: 'Amarela',
     number: '500A',
     district: 'Dom',
@@ -21,7 +21,7 @@ const address: Address[] = [
     statesId: 2,
   },
   {
-    id: 3,
+    id: 13,
     street: 'Azaleia',
     number: '800',
     district: 'Mastervile',
@@ -30,7 +30,7 @@ const address: Address[] = [
     statesId: 3,
   },
   {
-    id: 4,
+    id: 14,
     street: 'Centro',
     number: '50C',
     district: 'Carlos Prates',

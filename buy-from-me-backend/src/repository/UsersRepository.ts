@@ -21,11 +21,12 @@ class UsersRepository {
     return response;
   }
 
-  async create(data: CreateUserData): Promise<Users > {
+  async create(data: CreateUserData): Promise<Users> {
+    console.log(data);
     const addressRes = await this.prisma.address.create({
       data: data.address,
     });
-    if (addressRes === undefined) return addressRes;
+    console.log(addressRes);
     const response = await this.prisma.users.create({
       data: {
         ...data.user,
@@ -33,6 +34,7 @@ class UsersRepository {
       },
       include: { address: true },
     });
+    console.log(response);
     return response;
   }
 
