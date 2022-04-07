@@ -55,7 +55,6 @@ class ProductsServices {
   async getAll(page:number): Promise<ResponseProducts | ResponseError> {
     const skip = (page * 20) - 20;
     const response = await this.repository.getAll(skip);
-    if (response === null) return this._productsNotFound;
     return { status: StatusCode.OK, response };
   }
 

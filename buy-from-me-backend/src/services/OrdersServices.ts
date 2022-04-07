@@ -80,8 +80,6 @@ class OrdersServices {
 
     const response = await this.repository.getAll(data);
 
-    if (response.length === 0) return this._orderNotFound;
-
     return { status: StatusCode.OK, response };
   }
 
@@ -120,7 +118,9 @@ class OrdersServices {
 
     const order = await this.repository.get(id);
     if (order === null) return this._orderNotFound;
-    if (order.buyerId !== tokenValid.id) return this._unauthorized;
+    if (order.buyerId !== tokenValid.id && order.sellerId !== tokenValid.id) {
+      return this._unauthorized;
+    }
 
     const response = await this.repository.delete(id);
     console.log(response);

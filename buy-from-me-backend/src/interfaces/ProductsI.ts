@@ -27,4 +27,5 @@ export type ProductUpdateData = {
   price: number;
   new: boolean;
   categoriesId: number;
+  sold?: boolean;
 };

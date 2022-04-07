@@ -140,6 +140,24 @@ async function updateProduct(token, id, data) {
     return { error };
   }
 }
+
+async function soldProduct(token, id) {
+  try {
+    const response = await fetch(`${URL_FETCH}product/${id}/sold`, {
+      method: 'PUT',
+      headers: {
+        Accept: APLICATION,
+        'Content-Type': APLICATION,
+        Authorization: token,
+      },
+    });
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    return { error };
+  }
+}
+
 async function deleteProduct(token, id) {
   try {
     const response = await fetch(`${URL_FETCH}product/${id}`, {
@@ -237,6 +255,7 @@ export default {
   getProductsByFilter,
   createProduct,
   updateProduct,
+  soldProduct,
   deleteProduct,
   getOrders,
   getOrder,

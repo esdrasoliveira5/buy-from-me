@@ -1,18 +1,25 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import { ProductContainerStyled } from '../styles/HomePageStyles';
 import Product from './Product';
 import SearchBar from './SearchBar';
 
 function ProductsContainer({ products }) {
-  if (products.error) {
+  const location = useLocation();
+  const path = location.pathname.split('/')[1];
+
+  if (products.length === 0) {
     return (
       <h1>Voce nao tem produtos</h1>
     );
   }
   return (
     <div>
-      <SearchBar />
+      {
+        path === 'home'
+          ? <SearchBar /> : ''
+      }
       <ProductContainerStyled>
         {products
           ? products.map(({ name, id, price }) => (

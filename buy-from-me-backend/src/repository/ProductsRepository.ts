@@ -50,6 +50,9 @@ class ProductsRepository {
   }
 
   async update(id: number, data: ProductUpdateData | UpdateSoldData): Promise<Products> {
+    if (data.sold !== undefined && data.sold === true) {
+      await this.prisma.orders.deleteMany({ where: { productsId: id } });
+    }
     const product = await this.prisma.products.update({
       where: { id },
       data: {

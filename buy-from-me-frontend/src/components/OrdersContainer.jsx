@@ -3,7 +3,7 @@ import React from 'react';
 import Order from './Order';
 
 function OrdersContainer({ orders }) {
-  if (orders.error) {
+  if (orders.length === 0) {
     return (
       <h1>Voce nao tem pedidos</h1>
     );

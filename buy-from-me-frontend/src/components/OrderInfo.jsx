@@ -19,6 +19,16 @@ function OrderInfo({
       navigate('/profile/orders');
     }
   };
+
+  const orderConclude = async () => {
+    const localResponse = JSON.parse(localStorage.getItem('buy-from-me'));
+    const soldProduct = await requests.deleteProduct(localResponse.token, product.id);
+    if (soldProduct.message) {
+      global.alert('Pedido Concluido');
+      navigate('/profile/sales');
+    }
+  };
+
   const buyerOrSeller = () => {
     if (seller.email === logged.email) {
       return (
@@ -59,6 +69,17 @@ function OrderInfo({
       >
         Cancelar Pedido
       </button>
+      {
+        seller.email === logged.email
+          ? (
+            <button
+              type="button"
+              onClick={orderConclude}
+            >
+              Concluir Pedido
+            </button>
+          ) : ''
+      }
     </div>
   );
 }
