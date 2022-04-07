@@ -84,6 +84,7 @@ function Products() {
                 description={product.description}
                 price={product.price}
                 newP={product.new}
+                category={product.categoriesId}
               />
               <button
                 type="button"
@@ -91,6 +92,13 @@ function Products() {
               >
                 Deletar Produto
               </button>
+              <Link to={`/product/update/${path}`}>
+                <button
+                  type="button"
+                >
+                  Editar Produto
+                </button>
+              </Link>
             </div>
           )
             : ''
@@ -114,6 +122,7 @@ function Products() {
                 description={product.description}
                 price={product.price}
                 newP={product.new}
+                category={product.categoriesId}
               />
               {
                 order.id

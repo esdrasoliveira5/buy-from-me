@@ -1,10 +1,11 @@
 import React, {
   useContext, useEffect,
 } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import ProductForm from '../components/ProductForm';
+import ProductUpdateForm from '../components/productUpdateForm';
 import ProfileBar from '../components/ProfileBar';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
@@ -12,6 +13,8 @@ import { BodyStyled, MainStyled } from '../styles/BodyStyles';
 
 function CreateProduct() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const path = location.pathname.split('/')[2];
   const { setLogged } = useContext(buyFromMeContext);
 
   useEffect(() => {
@@ -38,12 +41,13 @@ function CreateProduct() {
     };
     userLogged();
   }, []);
-
   return (
     <BodyStyled>
       <Header />
       <MainStyled>
-        <ProductForm />
+        {
+          path === 'update' ? <ProductUpdateForm /> : <ProductForm />
+        }
         <ProfileBar />
       </MainStyled>
       <Footer />

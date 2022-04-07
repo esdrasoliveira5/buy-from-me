@@ -3,7 +3,7 @@ import React from 'react';
 import Image from '../images/relogio.jpg';
 
 function ProductInfo({
-  name, description, price, newP,
+  name, description, price, newP, category,
 }) {
   return (
     <div>
@@ -12,6 +12,7 @@ function ProductInfo({
       <p>{description}</p>
       <p>{`R$ ${price}`}</p>
       <p>{newP ? 'Novo' : 'Usado'}</p>
+      <p>{category}</p>
     </div>
   );
 }
@@ -21,6 +22,7 @@ ProductInfo.propTypes = {
   name: PropTypes.string.isRequired,
   newP: PropTypes.bool.isRequired,
   price: PropTypes.number.isRequired,
+  category: PropTypes.number.isRequired,
 };
 
 export default ProductInfo;

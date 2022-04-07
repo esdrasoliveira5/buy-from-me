@@ -1,43 +1,44 @@
 import { PrismaClient, States } from '@prisma/client'
 const prisma = new PrismaClient();
 
-const states: Omit<States, 'id'>[] = [
-  { name: 'MG' },
-  { name: 'AC' },
-  { name: 'AL' },
-  { name: 'AP' },
-  { name: 'AM' },
-  { name: 'BA' },
-  { name: 'CE' },
-  { name: 'DF' },
-  { name: 'ES' },
-  { name: 'GO' },
-  { name: 'MA' },
-  { name: 'MT' },
-  { name: 'MS' },
-  { name: 'PA' },
-  { name: 'PB' },
-  { name: 'PR' },
-  { name: 'PE' },
-  { name: 'PI' },
-  { name: 'RJ' },
-  { name: 'RN' },
-  { name: 'RS' },
-  { name: 'RO' },
-  { name: 'RR' },
-  { name: 'SC' },
-  { name: 'SP' },
-  { name: 'SE' },
-  { name: 'TO' },
+const states: States[] = [
+  { id: 1, name: 'MG' },
+  { id: 2, name: 'AC' },
+  { id: 3, name: 'AL' },
+  { id: 4, name: 'AP' },
+  { id: 5, name: 'AM' },
+  { id: 6, name: 'BA' },
+  { id: 7, name: 'CE' },
+  { id: 8, name: 'DF' },
+  { id: 9, name: 'ES' },
+  { id: 10, name: 'GO' },
+  { id: 11, name: 'MA' },
+  { id: 12, name: 'MT' },
+  { id: 13, name: 'MS' },
+  { id: 14, name: 'PA' },
+  { id: 15, name: 'PB' },
+  { id: 16, name: 'PR' },
+  { id: 17, name: 'PE' },
+  { id: 18, name: 'PI' },
+  { id: 19, name: 'RJ' },
+  { id: 20, name: 'RN' },
+  { id: 21, name: 'RS' },
+  { id: 22, name: 'RO' },
+  { id: 23, name: 'RR' },
+  { id: 24, name: 'SC' },
+  { id: 25, name: 'SP' },
+  { id: 26, name: 'SE' },
+  { id: 27, name: 'TO' },
 ];
 
 async function statesSeed() {
-  const resultState = states.map(async ({name}, index) =>{
+  const resultState = states.map(async ({id, name}) =>{
     const response = await prisma.states.upsert({
-      where: { id: index  },
+      where: { id },
       update: {},
       create: {
-        name: name,
+        id,
+        name,
       },
     })
     return response

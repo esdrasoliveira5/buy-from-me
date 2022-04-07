@@ -123,6 +123,23 @@ async function createProduct(token, data) {
   }
 }
 
+async function updateProduct(token, id, data) {
+  try {
+    const response = await fetch(`${URL_FETCH}product/${id}`, {
+      method: 'PUT',
+      headers: {
+        Accept: APLICATION,
+        'Content-Type': APLICATION,
+        Authorization: token,
+      },
+      body: JSON.stringify(data),
+    });
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    return { error };
+  }
+}
 async function deleteProduct(token, id) {
   try {
     const response = await fetch(`${URL_FETCH}product/${id}`, {
@@ -219,6 +236,7 @@ export default {
   getProducts,
   getProductsByFilter,
   createProduct,
+  updateProduct,
   deleteProduct,
   getOrders,
   getOrder,

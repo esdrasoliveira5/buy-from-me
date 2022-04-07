@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import requests from '../services/requests';
 import FormStyled from '../styles/FormStyles';
 import { productValidation } from '../validation/validations';
@@ -33,16 +33,29 @@ const categories = [
   { id: 24, name: 'Serviços' },
 ];
 
-function ProductForm() {
+function ProductUpdateForm() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const path = Number(location.pathname.split('/')[3]);
   const { logged } = useContext(buyFromMeContext);
   const [productData, setProductData] = useState({
     name: '',
     description: '',
     price: '',
+    newProduct: false,
     categoriesId: '1',
-    newProduct: 'false',
   });
+
+  useEffect(() => {
+    const getProduct = async () => {
+      const response = await requests.getProductById(path);
+      setProductData({
+        ...response,
+        newProduct: response.new,
+      });
+    };
+    getProduct();
+  }, []);
 
   const handleproductData = ({ target }) => {
     if (target.name === 'newProduct') {
@@ -64,14 +77,14 @@ function ProductForm() {
     const { token } = JSON.parse(localStorage.getItem('buy-from-me'));
     const validation = productValidation(productData);
     if (validation === true) {
-      const result = await requests.createProduct(token, {
+      const result = await requests.updateProduct(token, path, {
         ...productData,
         categoriesId: Number(productData.categoriesId),
         price: Number(productData.price),
         usersId: logged.id,
       });
       if (!result.error) {
-        global.alert('Produto criado com sucesso!');
+        global.alert('Produto atualizado com sucesso!');
         navigate('/profile/products');
       } else {
         global.alert(result.error);
@@ -115,7 +128,7 @@ function ProductForm() {
         Novo:
         <input
           type="checkbox"
-          value={productData.newProduct}
+          checked={productData.newProduct}
           name="newProduct"
           onChange={(event) => handleproductData(event)}
         />
@@ -136,14 +149,20 @@ function ProductForm() {
           )) }
         </select>
       </label>
+      <Link to="/profile/products">
+        <button
+          type="button"
+        >
+          Cancelar
+        </button>
+      </Link>
       <button
         type="button"
         onClick={submitForm}
       >
-        Criar Produto
+        Atualizar
       </button>
     </FormStyled>
-
   );
 }
-export default ProductForm;
+export default ProductUpdateForm;
