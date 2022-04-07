@@ -10,7 +10,7 @@ const HeaderStyled = styled.header`
   top: 0;
   width: 100%;
   z-index: 10;
-  background-color: #FCA311;
+  background-color: #FB8500;
   color: #577590;
   div {
     display: flex;

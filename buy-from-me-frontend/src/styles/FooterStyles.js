@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 const FooterStyled = styled.footer`
-  background-color: #577590;
+  background-color: #219EBC;
   padding: 20px;
-  color: #F9C74F;
+  color: #023047;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -18,6 +18,7 @@ const FooterStyled = styled.footer`
     flex-direction: row;
     align-items: center;
     a {
+    text-decoration: none;
     img {
       width: 30px;
     }

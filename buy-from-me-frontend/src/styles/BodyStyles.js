@@ -8,11 +8,11 @@ export const BodyStyled = styled.div`
   position: relative;
   min-height: 100vh;
   overflow: hidden;
-  background-color: #F9C74F;
-
+  background-color: #FFB703;
   `;
 
 export const MainStyled = styled.main`
+  background-color: aliceblue;
   margin-top: 200px;
   margin-bottom: 100px;
   display: flex;
@@ -20,4 +20,10 @@ export const MainStyled = styled.main`
   justify-content: space-around;
   align-items: center;
   width: 100%;
+  @media screen and (min-width: 1000px) {
+    width: 60%;
+  }
+  @media screen and (min-width: 600px) {
+    width: 80%;
+  }
 `;
