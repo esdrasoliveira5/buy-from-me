@@ -55,7 +55,11 @@ class UsersRepository {
   }
 
   async delete(data: DeleteUserData) {
-    const order = await this.prisma.orders.deleteMany({ where: { buyerId: data.userId } });
+    const order = await this.prisma.orders.deleteMany({
+      where: {
+        OR: [{ buyerId: data.userId }, { sellerId: data.userId }],
+      },
+    });
     const products = await this.prisma.products.deleteMany({ where: { usersId: data.userId } });
     const user = await this.prisma.users.delete({ where: { id: data.userId } });
     const address = await this.prisma.address.delete({ where: { id: data.addressId } });

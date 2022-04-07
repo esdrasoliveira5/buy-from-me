@@ -11,12 +11,12 @@ import requests from '../services/requests';
 import { BodyStyled, MainStyled } from '../styles/BodyStyles';
 
 function ProfileEdit() {
+  const localResponse = JSON.parse(localStorage.getItem('buy-from-me'));
   const navigate = useNavigate();
-  const { setLogged } = useContext(buyFromMeContext);
+  const { logged, setLogged } = useContext(buyFromMeContext);
 
   useEffect(() => {
     const userLogged = async () => {
-      const localResponse = JSON.parse(localStorage.getItem('buy-from-me'));
       if (localResponse !== null) {
         const { token, user } = localResponse;
         const userResponse = await requests.getUser(user.id, token);
@@ -39,12 +39,38 @@ function ProfileEdit() {
     userLogged();
   }, []);
 
+  const handleDelete = async () => {
+    const response = global.confirm('Tem certeza?');
+    if (response === true) {
+      const userDelete = await requests.deleteUser(localResponse.token, logged.id);
+      if (userDelete.message === 'user deleted') {
+        global.alert('Usuario deletado');
+        setLogged({
+          id: '',
+          name: '',
+          email: '',
+          logged: false,
+        });
+        navigate('/');
+      }
+    }
+  };
+
   return (
     <BodyStyled>
       <Header />
       <MainStyled>
         <ProfileBar />
         <UserFormUpdate />
+        <div>
+          <p>Deletar a conta e todas as informacoes?</p>
+          <button
+            type="button"
+            onClick={handleDelete}
+          >
+            Excluir Conta
+          </button>
+        </div>
       </MainStyled>
       <Footer />
     </BodyStyled>

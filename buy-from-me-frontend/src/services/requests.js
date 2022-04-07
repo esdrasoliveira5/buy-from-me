@@ -73,6 +73,23 @@ async function updateUser(token, id, userData) {
   }
 }
 
+async function deleteUser(token, id) {
+  try {
+    const response = await fetch(`${URL_FETCH}user/${id}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: APLICATION,
+        'Content-Type': APLICATION,
+        Authorization: token,
+      },
+    });
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    return { error };
+  }
+}
+
 async function getProductById(id) {
   try {
     const response = await fetch(`${URL_FETCH}product/${id}`, {
@@ -269,6 +286,7 @@ export default {
   getUser,
   createUser,
   updateUser,
+  deleteUser,
   getProductById,
   getProducts,
   getProductsByFilter,
