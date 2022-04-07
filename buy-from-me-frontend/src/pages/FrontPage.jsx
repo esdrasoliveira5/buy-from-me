@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import ProductsContainer from '../components/ProductsContainer';
@@ -7,6 +8,7 @@ import requests from '../services/requests';
 import { BodyStyled, MainStyled } from '../styles/BodyStyles';
 
 function FrontPage() {
+  const navigate = useNavigate();
   const {
     logged,
     setLogged,
@@ -33,6 +35,7 @@ function FrontPage() {
           if (products.length === 0) {
             setProducts(newProducts);
           }
+          navigate('/home');
         } else {
           setLogged({ logged: false });
         }

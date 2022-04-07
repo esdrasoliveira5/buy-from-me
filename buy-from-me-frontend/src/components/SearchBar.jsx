@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import buyFromMeContext from '../context/AppContext';
+import search from '../images/search.png';
 
 function SearchBar() {
   const { filters, setFilters } = useContext(buyFromMeContext);
@@ -21,13 +22,14 @@ function SearchBar() {
       <input
         type="text"
         value={searchValue}
+        placeholder="Pesquisar"
         onChange={(event) => handleSearch(event)}
       />
       <button
         type="button"
         onClick={submitSearch}
       >
-        Pesquisar
+        <img src={search} alt="search" />
       </button>
     </div>
   );
