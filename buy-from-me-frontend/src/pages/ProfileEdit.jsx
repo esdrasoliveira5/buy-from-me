@@ -1,20 +1,17 @@
 import React, {
   useContext, useEffect,
 } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import ProductForm from '../components/ProductForm';
-import ProductUpdateForm from '../components/ProductUpdateForm';
 import ProfileBar from '../components/ProfileBar';
+import UserFormUpdate from '../components/UserFormUpdate';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
 import { BodyStyled, MainStyled } from '../styles/BodyStyles';
 
-function CreateProduct() {
+function ProfileEdit() {
   const navigate = useNavigate();
-  const location = useLocation();
-  const path = location.pathname.split('/')[2];
   const { setLogged } = useContext(buyFromMeContext);
 
   useEffect(() => {
@@ -41,18 +38,16 @@ function CreateProduct() {
     };
     userLogged();
   }, []);
+
   return (
     <BodyStyled>
       <Header />
       <MainStyled>
-        {
-          path === 'update' ? <ProductUpdateForm /> : <ProductForm />
-        }
         <ProfileBar />
+        <UserFormUpdate />
       </MainStyled>
       <Footer />
     </BodyStyled>
   );
 }
-
-export default CreateProduct;
+export default ProfileEdit;

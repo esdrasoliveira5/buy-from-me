@@ -13,6 +13,7 @@ const userValidation = (data) => {
   if (!data.lastName || data.lastName.length === 0) return 'Sobrenome nao pode ser vazio!';
   if (!validEmail) return 'Email invalido!';
   if (!data.password || data.password.length < 8) return 'Senha nao pode ser menor que 8 digitos';
+  if (data.password !== data.confirm) return 'As senhas precisam ser iguais';
   if (!data.contact || data.contact.length < 11) return 'Telefone invalido!';
   return true;
 };

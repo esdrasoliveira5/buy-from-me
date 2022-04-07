@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function ProfileInfo({
   name, lastName, email, contact, address,
@@ -18,11 +19,13 @@ function ProfileInfo({
       <p>{address.district}</p>
       <p>{address.city}</p>
       <p>{address.statesId}</p>
-      <button
-        type="button"
-      >
-        Editar Perfil
-      </button>
+      <Link to="/profile/edit">
+        <button
+          type="button"
+        >
+          Editar Perfil
+        </button>
+      </Link>
     </div>
   );
 }

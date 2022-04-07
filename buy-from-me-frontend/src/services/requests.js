@@ -55,6 +55,24 @@ async function createUser(userData) {
   }
 }
 
+async function updateUser(token, id, userData) {
+  try {
+    const response = await fetch(`${URL_FETCH}user/${id}`, {
+      method: 'PUT',
+      headers: {
+        Accept: APLICATION,
+        'Content-Type': APLICATION,
+        Authorization: token,
+      },
+      body: JSON.stringify(userData),
+    });
+    const results = await response.json();
+    return results;
+  } catch (error) {
+    return { error };
+  }
+}
+
 async function getProductById(id) {
   try {
     const response = await fetch(`${URL_FETCH}product/${id}`, {
@@ -250,6 +268,7 @@ export default {
   loginUser,
   getUser,
   createUser,
+  updateUser,
   getProductById,
   getProducts,
   getProductsByFilter,
