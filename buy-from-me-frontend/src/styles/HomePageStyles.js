@@ -6,17 +6,29 @@ export const ProductContainerStyled = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  height: 800px;
+  overflow: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 export const ProductStyled = styled.div`
+  display: flex;
+  width: 100%;
+  padding: 10px;
+  align-items: center;
   img {
     width: 100%;
   }
   a {
     text-decoration: none;
     color: #023047;
+    text-align: center;
   }
-  width: 100%;
+  a:hover {
+    background-color: #8ECAE6;
+    }
   @media screen and (min-width: 600px) {
     width: 50%;
   }

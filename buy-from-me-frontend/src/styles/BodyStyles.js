@@ -7,19 +7,17 @@ export const BodyStyled = styled.div`
   align-items: center;
   position: relative;
   min-height: 100vh;
-  overflow: hidden;
   background-color: #FFB703;
   `;
 
 export const MainStyled = styled.main`
-  background-color: aliceblue;
-  margin-top: 200px;
-  margin-bottom: 100px;
+  padding-top: 200px;
+  padding-bottom: 100px;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  width: 100%;
+  min-height: 100vh;
   @media screen and (min-width: 1000px) {
     width: 60%;
   }
