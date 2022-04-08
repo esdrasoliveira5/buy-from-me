@@ -74,7 +74,13 @@
   <br/>
 
   Esse endpoint retorna um usuario.
-
+  
+  - Exemplo `request headers`
+      ```json
+      {
+        "Authorization": "(Bearer Token)"
+      }
+      `
   - Exemplo `response body`
     ```json
       {
@@ -86,14 +92,44 @@
           "contact": 1058685717,
           "addressId": 8,
           "address": {
-              "id": 8,
-              "street": "Avamarela",
-              "number": "500A",
-              "district": "Santa Barbara",
-              "zipcode": 321654000,
-              "city": "Santa Avamarela",
-              "statesId": 1
-          }
+            "id": 8,
+            "street": "Avamarela",
+            "number": "500A",
+            "district": "Santa Barbara",
+            "zipcode": 321654000,
+            "city": "Santa Avamarela",
+            "statesId": 1
+          },
+          "Products": [
+            {
+              "id": 2,
+              "name": "Outra Coisa",
+              "description": "Sei la",
+              "price": 700,
+              "sold": false,
+              "new": true,
+              "categoriesId": 2,
+              "usersId": "e0805cfe-377e-4035-858c-7c9591b54683"
+            }
+          ],
+          "Orders": [
+            {
+              "id": 2,
+              "productsId": 5,
+              "buyerId": "4",
+              "sellerId": "2",
+              "orderDate": "2022-03-31T20:19:29.715Z"
+            }
+          ],
+          "sales": [
+            {
+              "id": 1,
+              "productsId": 2,
+              "buyerId": "1",
+              "sellerId": "4",
+              "orderDate": "2022-03-31T20:19:29.715Z"
+            }
+          ]
       }
     ```
   <br/>
@@ -275,7 +311,7 @@
   <br/>
 
 ### **Listar todos os produtos**
-##### `GET` /product?page=1
+##### `GET` /product?pag=1
   <br/>
 
   Esse endpoint retorna uma lista de 20 produtos por pagina.
