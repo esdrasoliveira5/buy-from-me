@@ -9,7 +9,9 @@ import ProfileBar from '../components/ProfileBar';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
 import BodyStyled from '../styles/BodyStyles';
+import { ButtonGreen, ButtonRed, ButtonYellow } from '../styles/ButtonsStyles';
 import { MainStyled } from '../styles/MainStyles';
+import { ProdutoInfoStyle } from '../styles/ProfileStyles';
 
 function Products() {
   const navigate = useNavigate();
@@ -81,7 +83,7 @@ function Products() {
         <MainStyled>
           {
           product.name ? (
-            <div>
+            <ProdutoInfoStyle>
               <ProductInfo
                 name={product.name}
                 description={product.description}
@@ -89,20 +91,24 @@ function Products() {
                 newP={product.new}
                 category={product.categoriesId}
               />
-              <button
-                type="button"
-                onClick={handleDelete}
-              >
-                Deletar Produto
-              </button>
-              <Link to={`/product/update/${path}`}>
+              <ButtonRed>
                 <button
                   type="button"
+                  onClick={handleDelete}
                 >
-                  Editar Produto
+                  Deletar Produto
                 </button>
-              </Link>
-            </div>
+              </ButtonRed>
+              <ButtonYellow>
+                <Link to={`/product/update/${path}`}>
+                  <button
+                    type="button"
+                  >
+                    Editar Produto
+                  </button>
+                </Link>
+              </ButtonYellow>
+            </ProdutoInfoStyle>
           )
             : ''
         }
@@ -119,7 +125,7 @@ function Products() {
       <MainStyled>
         {
           product.name ? (
-            <div>
+            <ProdutoInfoStyle>
               <ProductInfo
                 name={product.name}
                 description={product.description}
@@ -137,15 +143,17 @@ function Products() {
                     </Link>
                   )
                   : (
-                    <button
-                      type="button"
-                      onClick={handleOrder}
-                    >
-                      Criar Pedido
-                    </button>
+                    <ButtonGreen>
+                      <button
+                        type="button"
+                        onClick={handleOrder}
+                      >
+                        Criar Pedido
+                      </button>
+                    </ButtonGreen>
                   )
               }
-            </div>
+            </ProdutoInfoStyle>
           )
             : ''
         }

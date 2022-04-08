@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import ProfileInfoStyle from '../styles/ProfileStyles';
+import { ProfileInfoStyle } from '../styles/ProfileStyles';
 
 const states = [
   { id: 1, name: 'MG' },

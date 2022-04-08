@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import requests from '../services/requests';
 import buyFromMeContext from '../context/AppContext';
+import { OrderInfoStyle } from '../styles/ProfileStyles';
 
 function OrderInfo({
   id, product, seller, orderDate, buyer,
@@ -40,11 +41,11 @@ function OrderInfo({
       return (
         <div>
           <h3>Pedido</h3>
-          <p>{id}</p>
-          <p>{`Comprador ${buyer.name}`}</p>
+          <p>{`Id: ${id}`}</p>
+          <p>{`Comprador: ${buyer.name}`}</p>
           <p>{`Contato ${buyer.contact}`}</p>
-          <p>{`Email ${buyer.email}`}</p>
-          <p>{date.toLocaleString()}</p>
+          <p>{`Email: ${buyer.email}`}</p>
+          <p>{`Data do Pedido: ${date.toLocaleString()}`}</p>
         </div>
       );
     }
@@ -52,22 +53,22 @@ function OrderInfo({
     return (
       <div>
         <h3>Pedido</h3>
-        <p>{id}</p>
-        <p>{`Vendedor ${seller.name}`}</p>
-        <p>{`Contato ${seller.contact}`}</p>
-        <p>{`Email ${seller.email}`}</p>
-        <p>{date.toLocaleString()}</p>
+        <p>{`Id: ${id}`}</p>
+        <p>{`Vendedor: ${seller.name}`}</p>
+        <p>{`Contato: ${seller.contact}`}</p>
+        <p>{`Email: ${seller.email}`}</p>
+        <p>{`Data do Pedido: ${date.toLocaleString()}`}</p>
       </div>
     );
   };
 
   return (
-    <div>
+    <OrderInfoStyle>
       {buyerOrSeller()}
       <h3>Produto</h3>
-      <h3>{product.name}</h3>
-      <p>{`R$ ${product.price}`}</p>
-      <p>{product.new ? 'Novo' : 'Usado'}</p>
+      <p>{`Produto: ${product.name}`}</p>
+      <p>{`Preço: R$ ${product.price}`}</p>
+      <p>{`Estado: ${product.new ? 'Novo' : 'Usado'}`}</p>
       <Link to={`/product/${product.id}`}><h3>Vizualizar Produto</h3></Link>
       <button
         type="button"
@@ -86,7 +87,7 @@ function OrderInfo({
             </button>
           ) : ''
       }
-    </div>
+    </OrderInfoStyle>
   );
 }
 
