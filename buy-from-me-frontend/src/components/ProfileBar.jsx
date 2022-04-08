@@ -9,7 +9,7 @@ import Menu from '../images/menu2.png';
 
 function ProfileBar() {
   const { logged } = useContext(buyFromMeContext);
-  const [menu, setMenu] = useState(true);
+  const [menu, setMenu] = useState(false);
 
   function handlemenu() {
     setMenu(!menu);
@@ -18,9 +18,9 @@ function ProfileBar() {
   return (
     <HidenBox>
       <label htmlFor="profile">
-        <img src={menu ? Menu : Close} alt="menu" width="40px" />
+        <img src={!menu ? Menu : Close} alt="menu" width="40px" />
       </label>
-      <input type="checkbox" id="profile" onClick={handlemenu} />
+      <input type="checkbox" id="profile" onClick={handlemenu} checked={menu} />
       <ProfileBox>
         <div>
           <Link to="/profile">

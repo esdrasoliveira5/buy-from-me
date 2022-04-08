@@ -137,9 +137,9 @@ function Products() {
                 order.id
                   ? (
                     <Link to={`/order/${order.id}`}>
-                      <button type="button">
+                      <h3>
                         Vizualizar Pedido
-                      </button>
+                      </h3>
                     </Link>
                   )
                   : (

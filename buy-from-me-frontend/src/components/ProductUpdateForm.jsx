@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import requests from '../services/requests';
-import FormStyled from '../styles/FormStyles';
+import { ProductFormStyled } from '../styles/FormStyles';
 import { productValidation } from '../validation/validations';
-import Image from '../images/relogio.jpg';
 import buyFromMeContext from '../context/AppContext';
+import { ButtonGreen, ButtonRed } from '../styles/ButtonsStyles';
+import categoryImage from '../services/categoryImage';
 
 const categories = [
   { id: 1, name: 'Acessórios para Veículos' },
@@ -95,9 +96,9 @@ function ProductUpdateForm() {
   };
 
   return (
-    <FormStyled>
-      <h2>Produto</h2>
-      <img src={Image} alt="product" width="300px" />
+    <ProductFormStyled>
+      <h1>Produto</h1>
+      <img src={categoryImage(productData.categoriesId)} alt="product" />
       <label htmlFor="name">
         <input
           type="text"
@@ -111,7 +112,7 @@ function ProductUpdateForm() {
         <textarea
           value={productData.description}
           name="description"
-          placeholder="Descricao"
+          placeholder="Descrição"
           onChange={(event) => handleproductData(event)}
         />
       </label>
@@ -120,18 +121,20 @@ function ProductUpdateForm() {
           type="number"
           value={productData.price}
           name="price"
-          placeholder="1000"
+          placeholder="Valor"
+          min="1"
+          max="1000000"
           onChange={(event) => handleproductData(event)}
         />
       </label>
       <label htmlFor="newProduct">
-        Novo:
         <input
           type="checkbox"
           checked={productData.newProduct}
           name="newProduct"
           onChange={(event) => handleproductData(event)}
         />
+        Novo
       </label>
       <label htmlFor="categoriesId">
         <select
@@ -149,20 +152,24 @@ function ProductUpdateForm() {
           )) }
         </select>
       </label>
-      <Link to="/profile/products">
+      <ButtonRed>
+        <Link to="/profile/products">
+          <button
+            type="button"
+          >
+            Cancelar
+          </button>
+        </Link>
+      </ButtonRed>
+      <ButtonGreen>
         <button
           type="button"
+          onClick={submitForm}
         >
-          Cancelar
+          Atualizar
         </button>
-      </Link>
-      <button
-        type="button"
-        onClick={submitForm}
-      >
-        Atualizar
-      </button>
-    </FormStyled>
+      </ButtonGreen>
+    </ProductFormStyled>
   );
 }
 export default ProductUpdateForm;

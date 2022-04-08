@@ -53,25 +53,6 @@ export const OrderInfoStyle = styled.div`
     color: white;
   }
 
-  button {
-    margin-top: 10px;
-    text-transform: uppercase;
-    outline: 0;
-    background: #e5383b;
-    width: 100%;
-    border: 0;
-    border-radius: 5px;
-    padding: 15px;
-    color: #FFFFFF;
-    font-size: 14px;
-    -webkit-transition: all 0.3 ease;
-    transition: all 0.3 ease;
-  cursor: pointer;
-  }
-  button:hover {
-    background-color: #ba181b;
-  }
-
   @media screen and (min-width: 600px) {
     width: 60%;
   }
@@ -81,16 +62,16 @@ export const OrderInfoStyle = styled.div`
 `;
 
 export const ProdutoInfoStyle = styled.div`
-  background-color: rgba(251, 133, 0);
+  background-color: rgba(251, 133, 0, 0.6);
+  border-radius: 15px;
   display: flex;
   flex-direction: column;
   width: 100%;
   height: 100%;
-  padding: 20px;
-  justify-content: space-around;
+  padding: 25px;
   img {
-    margin: 10px;
     align-self: center;
+    width: 100%;
   }
   h3 {
     margin: 5px;
@@ -108,9 +89,9 @@ export const ProdutoInfoStyle = styled.div`
   }
 
   @media screen and (min-width: 600px) {
-    width: 60%;
+    width: 80%;
   }
   @media screen and (min-width: 1100px) {
-    width: 40%;
+    width: 50%;
   }
 `;

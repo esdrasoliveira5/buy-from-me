@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import requests from '../services/requests';
 import buyFromMeContext from '../context/AppContext';
 import { OrderInfoStyle } from '../styles/InfoStyles';
+import { ButtonGreen, ButtonRed } from '../styles/ButtonsStyles';
 
 function OrderInfo({
   id, product, seller, orderDate, buyer,
@@ -70,21 +71,26 @@ function OrderInfo({
       <p>{`Preço: R$ ${product.price}`}</p>
       <p>{`Estado: ${product.new ? 'Novo' : 'Usado'}`}</p>
       <Link to={`/product/${product.id}`}><h3>Vizualizar Produto</h3></Link>
-      <button
-        type="button"
-        onClick={orderDelete}
-      >
-        Cancelar Pedido
-      </button>
+      <ButtonRed>
+        <button
+          type="button"
+          onClick={orderDelete}
+        >
+          Cancelar Pedido
+        </button>
+      </ButtonRed>
       {
         seller.email === logged.email
           ? (
-            <button
-              type="button"
-              onClick={orderConclude}
-            >
-              Concluir Pedido
-            </button>
+            <ButtonGreen>
+              <button
+                type="button"
+                onClick={orderConclude}
+              >
+                Concluir Pedido
+              </button>
+            </ButtonGreen>
+
           ) : ''
       }
     </OrderInfoStyle>

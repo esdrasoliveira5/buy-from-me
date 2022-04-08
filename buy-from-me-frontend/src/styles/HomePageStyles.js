@@ -120,7 +120,8 @@ export const ProfileBox = styled.div`
   }
   @media screen and (min-width: 1100px) {
     width: 15%;
-  }  a {
+  }  
+  a {
     text-decoration: none;
     color: #023047;
   }
@@ -136,6 +137,7 @@ export const ProfileBox = styled.div`
       flex-direction: row;
     }
   }
+  
   button {
     padding: 10px;
     background: none;
@@ -180,7 +182,7 @@ export const HidenBox = styled.div`
       position: absolute;
       flex-direction: column;
       justify-content: center;
-      background-color: #FFB703;
+      background-color: #FB8500;
       left: 0%;
       right: 0%;
       top: 0%;
@@ -191,7 +193,6 @@ export const HidenBox = styled.div`
 `;
 
 export const HidenBoxFilter = styled.div`
-  height: 100%;
   #filter[type=checkbox] {
     z-index: 10;
     display: none;
@@ -215,8 +216,12 @@ export const HidenBoxFilter = styled.div`
     }
     #filter[type=checkbox]:checked + div{
       position: absolute;
-      background-color: #FFB703;
+      background-color: #FB8500;
       z-index: 10;
+      left: 0%;
+      right: 0%;
+      top: 15%;
+      bottom: 0%;
     }
   }
 `;

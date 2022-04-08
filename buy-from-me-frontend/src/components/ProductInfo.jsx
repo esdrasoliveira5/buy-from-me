@@ -34,7 +34,7 @@ function ProductInfo({
 }) {
   return (
     <div>
-      <img src={categoryImage(category)} alt={name} width="400px" />
+      <img src={categoryImage(category)} alt={name} />
       <h3>{name}</h3>
       <p>{description}</p>
       <p>{`R$ ${price}`}</p>

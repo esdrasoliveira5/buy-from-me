@@ -1,13 +1,19 @@
 import styled from 'styled-components';
 
 const TableStyled = styled.div`
+  display: flex;
+  flex-direction: row;
+  height: 100%;
   width: 100%;
   font-size: 15px;
   text-align: center;
   td, th {
     border: 1px solid #ddd;
-    padding: 8px;
-    white-space: nowrap;
+
+    @media screen and (min-width: 600px) {
+      white-space: nowrap;
+      padding: 8px;
+    }
   }
   th {
     background-color: rgb(251, 133, 0);
