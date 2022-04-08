@@ -16,6 +16,16 @@ export const MainStyled = styled.main`
   }
 `;
 
+export const HomeMainStyled = styled.main`
+  padding-top: 200px;
+  padding-bottom: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+`;
+
 export const RegisterMainStyled = styled.main`
   padding-top: 200px;
   padding-bottom: 100px;

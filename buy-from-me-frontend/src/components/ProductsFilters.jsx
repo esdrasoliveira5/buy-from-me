@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import buyFromMeContext from '../context/AppContext';
 import { FilterBox } from '../styles/HomePageStyles';
+import clear from '../images/clear.png';
+import search2 from '../images/search2.png';
 
 const categories = [
   { id: 1, name: 'Acessórios para Veículos' },
@@ -80,15 +82,31 @@ function ProductsFilters() {
   return (
     <FilterBox>
       <div>
-        <input
-          type="text"
-          placeholder="Preco"
-          name="price"
-          value={values.price}
-          onChange={(event) => handleFilters(event)}
-        />
+        <label htmlFor="price">
+          <input
+            type="text"
+            placeholder="Preco"
+            name="price"
+            value={values.price}
+            onChange={(event) => handleFilters(event)}
+          />
+          <button
+            type="button"
+            onClick={submitFilter}
+          >
+            <img src={search2} alt="search" width="20px" />
+          </button>
+          <button
+            type="button"
+            onClick={cleanFilters}
+          >
+            <img src={clear} alt="clear" width="20px" />
+          </button>
+        </label>
+      </div>
+      <div>
         <label htmlFor="lte">
-          Menor que
+          Menor
           <input
             type="radio"
             name="filter"
@@ -97,7 +115,7 @@ function ProductsFilters() {
           />
         </label>
         <label htmlFor="gte">
-          Maior que
+          Maior
           <input
             type="radio"
             name="filter"
@@ -105,45 +123,35 @@ function ProductsFilters() {
             onChange={(event) => handleFilters(event)}
           />
         </label>
-        <button
-          type="button"
-          onClick={submitFilter}
-        >
-          Search
-        </button>
-        <button
-          type="button"
-          onClick={cleanFilters}
-        >
-          Limpar
-        </button>
       </div>
-      <label htmlFor="new">
-        Novo
-        <input
-          name="newP"
-          type="radio"
-          checked={filters.newP === 'true'}
-          value="true"
-          onChange={(event) => submitCategory(event)}
-        />
-        Usado
-        <input
-          name="newP"
-          type="radio"
-          value="false"
-          checked={filters.newP === 'false'}
-          onChange={(event) => submitCategory(event)}
-        />
-        Todos
-        <input
-          name="newP"
-          type="radio"
-          value=""
-          checked={filters.newP === ''}
-          onChange={(event) => submitCategory(event)}
-        />
-      </label>
+      <div>
+        <label htmlFor="new">
+          Novo
+          <input
+            name="newP"
+            type="radio"
+            checked={filters.newP === 'true'}
+            value="true"
+            onChange={(event) => submitCategory(event)}
+          />
+          Usado
+          <input
+            name="newP"
+            type="radio"
+            value="false"
+            checked={filters.newP === 'false'}
+            onChange={(event) => submitCategory(event)}
+          />
+          Todos
+          <input
+            name="newP"
+            type="radio"
+            value=""
+            checked={filters.newP === ''}
+            onChange={(event) => submitCategory(event)}
+          />
+        </label>
+      </div>
       {
         categories.map(({ id, name }) => (
           <button

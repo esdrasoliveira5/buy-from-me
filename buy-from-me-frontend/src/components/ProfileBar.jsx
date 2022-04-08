@@ -1,17 +1,19 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import buyFromMeContext from '../context/AppContext';
-import Image from '../images/relogio.jpg';
-import { FilterBox } from '../styles/HomePageStyles';
+import profile from '../images/profile.webp';
+import { ProfileBox } from '../styles/HomePageStyles';
 
 function ProfileBar() {
   const { logged } = useContext(buyFromMeContext);
   return (
-    <FilterBox>
-      <Link to="/profile">
-        <img src={Image} alt="profile" width="100px" />
-        <h4>{logged.name}</h4>
-      </Link>
+    <ProfileBox>
+      <div>
+        <Link to="/profile">
+          <img src={profile} alt="profile" width="100px" />
+          <h4>{logged.name}</h4>
+        </Link>
+      </div>
       <Link to="/profile/create-product">
         <button type="button">Criar produto</button>
       </Link>
@@ -24,7 +26,7 @@ function ProfileBar() {
       <Link to="/profile/sales">
         <button type="button">Minhas Vendas</button>
       </Link>
-    </FilterBox>
+    </ProfileBox>
   );
 }
 

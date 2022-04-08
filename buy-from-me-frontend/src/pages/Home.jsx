@@ -8,7 +8,7 @@ import ProfileBar from '../components/ProfileBar';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
 import { BodyStyled } from '../styles/BodyStyles';
-import { MainStyled } from '../styles/MainStyles';
+import { HomeMainStyled } from '../styles/MainStyles';
 
 function Home() {
   const navigate = useNavigate();
@@ -62,11 +62,11 @@ function Home() {
   return (
     <BodyStyled>
       <Header />
-      <MainStyled>
+      <HomeMainStyled>
         <ProductsFilters />
         <ProductsContainer products={products} />
         <ProfileBar />
-      </MainStyled>
+      </HomeMainStyled>
       <Footer />
     </BodyStyled>
   );
