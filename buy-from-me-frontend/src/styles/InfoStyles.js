@@ -26,6 +26,13 @@ export const ProfileInfoStyle = styled.div`
   button:hover {
     background-color: #fdc500;
   }
+
+  @media screen and (min-width: 600px) {
+    width: 60%;
+  }
+  @media screen and (min-width: 1100px) {
+    width: 40%;
+  }
 `;
 
 export const OrderInfoStyle = styled.div`
@@ -64,6 +71,13 @@ export const OrderInfoStyle = styled.div`
   button:hover {
     background-color: #ba181b;
   }
+
+  @media screen and (min-width: 600px) {
+    width: 60%;
+  }
+  @media screen and (min-width: 1100px) {
+    width: 40%;
+  }
 `;
 
 export const ProdutoInfoStyle = styled.div`
@@ -93,4 +107,10 @@ export const ProdutoInfoStyle = styled.div`
     color: white;
   }
 
+  @media screen and (min-width: 600px) {
+    width: 60%;
+  }
+  @media screen and (min-width: 1100px) {
+    width: 40%;
+  }
 `;

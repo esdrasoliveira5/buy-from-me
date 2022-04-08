@@ -59,6 +59,7 @@ export const FilterBox = styled.div`
   font-size: 15px;
   height: 800px;
   overflow: scroll;
+
   ::-webkit-scrollbar {
     display: none;
   }
@@ -113,8 +114,13 @@ export const ProfileBox = styled.div`
   min-width: 250px;
   background: rgba(255, 255, 255, 0.2);
   font-size: 15px;
-  height: 100%;
-  a {
+  width: 100%;
+  @media screen and (min-width: 600px) {
+    width: 25%;
+  }
+  @media screen and (min-width: 1100px) {
+    width: 15%;
+  }  a {
     text-decoration: none;
     color: #023047;
   }
@@ -143,5 +149,74 @@ export const ProfileBox = styled.div`
 
   button:hover {
     background: rgba(255, 255, 255, 0.2);
+  }
+
+`;
+
+export const HidenBox = styled.div`
+  height: 100%;
+  #profile[type=checkbox] {
+    z-index: 11;
+    display: none;
+  }
+  label {
+    display: none;
+  } 
+
+  @media screen and (max-width: 1000px) {
+    label {
+      position: absolute;
+      z-index: 9;
+      display: unset;
+      height: 200px;
+      top: 100px;
+      right: 20px;
+    }
+    #profile[type=checkbox]:not(:checked)+ div{
+      display: none;
+    }
+    #profile[type=checkbox]:checked + div{
+      display: flex;
+      position: absolute;
+      flex-direction: column;
+      justify-content: center;
+      background-color: #FFB703;
+      left: 0%;
+      right: 0%;
+      top: 0%;
+      bottom: 0%;
+      z-index: 8;
+    }
+  }
+`;
+
+export const HidenBoxFilter = styled.div`
+  height: 100%;
+  #filter[type=checkbox] {
+    z-index: 10;
+    display: none;
+  }
+  #labelFilter {
+    display: none;
+  } 
+
+  @media screen and (max-width: 600px) {
+    #labelFilter {
+      position: absolute;
+      z-index: 9;
+      display: unset;
+      height: 200px;
+      top: 100px;
+      left: 20px;
+    }
+
+    #filter[type=checkbox]:not(:checked)+ div{
+      display: none;
+    }
+    #filter[type=checkbox]:checked + div{
+      position: absolute;
+      background-color: #FFB703;
+      z-index: 10;
+    }
   }
 `;

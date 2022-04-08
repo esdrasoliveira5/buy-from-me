@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import requests from '../services/requests';
 import buyFromMeContext from '../context/AppContext';
-import { OrderInfoStyle } from '../styles/ProfileStyles';
+import { OrderInfoStyle } from '../styles/InfoStyles';
 
 function OrderInfo({
   id, product, seller, orderDate, buyer,

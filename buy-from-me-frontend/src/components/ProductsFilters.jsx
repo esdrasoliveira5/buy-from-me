@@ -1,8 +1,11 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useContext, useState } from 'react';
 import buyFromMeContext from '../context/AppContext';
-import { FilterBox } from '../styles/HomePageStyles';
+import { FilterBox, HidenBoxFilter } from '../styles/HomePageStyles';
 import clear from '../images/clear.png';
 import search2 from '../images/search2.png';
+import Close from '../images/configClose.png';
+import Config from '../images/confiOpen.png';
 
 const categories = [
   { id: 1, name: 'Acessórios para Veículos' },
@@ -32,6 +35,7 @@ const categories = [
 ];
 
 function ProductsFilters() {
+  const [menu, setMenu] = useState(true);
   const { filters, setFilters } = useContext(buyFromMeContext);
   const [values, setValues] = useState({
     price: '',
@@ -79,80 +83,89 @@ function ProductsFilters() {
     });
   };
 
+  function handlemenu() {
+    setMenu(!menu);
+  }
+
   return (
-    <FilterBox>
-      <div>
-        <label htmlFor="price">
-          <input
-            type="text"
-            placeholder="Preco"
-            name="price"
-            value={values.price}
-            onChange={(event) => handleFilters(event)}
-          />
-          <button
-            type="button"
-            onClick={submitFilter}
-          >
-            <img src={search2} alt="search" width="20px" />
-          </button>
-          <button
-            type="button"
-            onClick={cleanFilters}
-          >
-            <img src={clear} alt="clear" width="20px" />
-          </button>
-        </label>
-      </div>
-      <div>
-        <label htmlFor="lte">
-          Menor
-          <input
-            type="radio"
-            name="filter"
-            value="lte"
-            onChange={(event) => handleFilters(event)}
-          />
-        </label>
-        <label htmlFor="gte">
-          Maior
-          <input
-            type="radio"
-            name="filter"
-            value="gte"
-            onChange={(event) => handleFilters(event)}
-          />
-        </label>
-      </div>
-      <div>
-        <label htmlFor="new">
-          Novo
-          <input
-            name="newP"
-            type="radio"
-            checked={filters.newP === 'true'}
-            value="true"
-            onChange={(event) => submitCategory(event)}
-          />
-          Usado
-          <input
-            name="newP"
-            type="radio"
-            value="false"
-            checked={filters.newP === 'false'}
-            onChange={(event) => submitCategory(event)}
-          />
-          Todos
-          <input
-            name="newP"
-            type="radio"
-            value=""
-            checked={filters.newP === ''}
-            onChange={(event) => submitCategory(event)}
-          />
-        </label>
-      </div>
-      {
+    <HidenBoxFilter>
+      <label htmlFor="filter" id="labelFilter">
+        <img src={menu ? Config : Close} alt="menu" width="40px" />
+      </label>
+      <input type="checkbox" id="filter" onClick={handlemenu} />
+      <FilterBox>
+        <div>
+          <label htmlFor="price">
+            <input
+              type="text"
+              placeholder="Preco"
+              name="price"
+              value={values.price}
+              onChange={(event) => handleFilters(event)}
+            />
+            <button
+              type="button"
+              onClick={submitFilter}
+            >
+              <img src={search2} alt="search" width="20px" />
+            </button>
+            <button
+              type="button"
+              onClick={cleanFilters}
+            >
+              <img src={clear} alt="clear" width="20px" />
+            </button>
+          </label>
+        </div>
+        <div>
+          <label htmlFor="lte">
+            Menor
+            <input
+              type="radio"
+              name="filter"
+              value="lte"
+              onChange={(event) => handleFilters(event)}
+            />
+          </label>
+          <label htmlFor="gte">
+            Maior
+            <input
+              type="radio"
+              name="filter"
+              value="gte"
+              onChange={(event) => handleFilters(event)}
+            />
+          </label>
+        </div>
+        <div>
+          <label htmlFor="new">
+            Novo
+            <input
+              name="newP"
+              type="radio"
+              checked={filters.newP === 'true'}
+              value="true"
+              onChange={(event) => submitCategory(event)}
+            />
+            Usado
+            <input
+              name="newP"
+              type="radio"
+              value="false"
+              checked={filters.newP === 'false'}
+              onChange={(event) => submitCategory(event)}
+            />
+            Todos
+            <input
+              name="newP"
+              type="radio"
+              value=""
+              checked={filters.newP === ''}
+              onChange={(event) => submitCategory(event)}
+            />
+          </label>
+        </div>
+        {
         categories.map(({ id, name }) => (
           <button
             type="button"
@@ -165,7 +178,8 @@ function ProductsFilters() {
           </button>
         ))
       }
-    </FilterBox>
+      </FilterBox>
+    </HidenBoxFilter>
   );
 }
 

@@ -11,7 +11,7 @@ import requests from '../services/requests';
 import BodyStyled from '../styles/BodyStyles';
 import { ButtonGreen, ButtonRed, ButtonYellow } from '../styles/ButtonsStyles';
 import { MainStyled } from '../styles/MainStyles';
-import { ProdutoInfoStyle } from '../styles/ProfileStyles';
+import { ProdutoInfoStyle } from '../styles/InfoStyles';
 
 function Products() {
   const navigate = useNavigate();
