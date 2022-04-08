@@ -1,6 +1,8 @@
 import React, { useContext, useState } from 'react';
 import buyFromMeContext from '../context/AppContext';
 import search from '../images/search.png';
+import { ButtonHeader } from '../styles/ButtonsStyles';
+import SearchBarStyle from '../styles/SearchStyles';
 
 function SearchBar() {
   const { filters, setFilters } = useContext(buyFromMeContext);
@@ -18,20 +20,22 @@ function SearchBar() {
   };
 
   return (
-    <div>
+    <SearchBarStyle>
       <input
         type="text"
         value={searchValue}
         placeholder="Pesquisar"
         onChange={(event) => handleSearch(event)}
       />
-      <button
-        type="button"
-        onClick={submitSearch}
-      >
-        <img src={search} alt="search" />
-      </button>
-    </div>
+      <ButtonHeader>
+        <button
+          type="button"
+          onClick={submitSearch}
+        >
+          <img src={search} alt="search" />
+        </button>
+      </ButtonHeader>
+    </SearchBarStyle>
   );
 }
 

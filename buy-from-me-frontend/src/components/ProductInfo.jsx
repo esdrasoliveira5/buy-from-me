@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import Image from '../images/relogio.jpg';
+import categoryImage from '../services/categoryImage';
 
 function ProductInfo({
   name, description, price, newP, category,
 }) {
   return (
     <div>
-      <img src={Image} alt={name} width="400px" />
+      <img src={categoryImage(category)} alt={name} width="400px" />
       <h3>{name}</h3>
       <p>{description}</p>
       <p>{`R$ ${price}`}</p>

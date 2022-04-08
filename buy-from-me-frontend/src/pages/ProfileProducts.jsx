@@ -56,7 +56,6 @@ function ProfileProducts() {
   }, []);
 
   const container = () => {
-    console.log(path);
     if (path === 'products') {
       return (
         <ProductsContainer products={profile.Products} />

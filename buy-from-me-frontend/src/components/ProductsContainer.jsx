@@ -14,12 +14,15 @@ function ProductsContainer({ products }) {
 
       <ProductContainerStyled>
         {products
-          ? products.map(({ name, id, price }) => (
+          ? products.map(({
+            name, id, price, categoriesId,
+          }) => (
             <Product
               key={id}
               name={name}
               id={id}
               price={price}
+              categoriesId={categoriesId}
             />
           ))
           : []}

@@ -3,30 +3,30 @@ import buyFromMeContext from '../context/AppContext';
 import { FilterBox } from '../styles/HomePageStyles';
 
 const categories = [
-  { name: 'Acessórios para Veículos' },
-  { name: 'Alimentos e Bebidas' },
-  { name: 'Animais' },
-  { name: 'Antiguidades e Coleções' },
-  { name: 'Arte, Papelaria e Armarinho' },
-  { name: 'Bebês' },
-  { name: 'Beleza e Cuidado Pessoal' },
-  { name: 'Brinquedos e Hobbies' },
-  { name: 'Calçados, Roupas e Bolsas' },
-  { name: 'Casa, Móveis e Decoração' },
-  { name: 'Celulares e Telefones' },
-  { name: 'Eletrodomésticos' },
-  { name: 'Eletrônicos, Áudio e Vídeo' },
-  { name: 'Esportes e Fitness' },
-  { name: 'Ferramentas' },
-  { name: 'Festas e Lembrancinhas' },
-  { name: 'Games' },
-  { name: 'Indústria e Comércio' },
-  { name: 'Informática' },
-  { name: 'Instrumentos Musicais' },
-  { name: 'Livros, Revistas e Comics' },
-  { name: 'Música, Filmes e Seriados' },
-  { name: 'Saúde' },
-  { name: 'Serviços' },
+  { id: 1, name: 'Acessórios para Veículos' },
+  { id: 2, name: 'Alimentos e Bebidas' },
+  { id: 3, name: 'Animais' },
+  { id: 4, name: 'Antiguidades e Coleções' },
+  { id: 5, name: 'Arte, Papelaria e Armarinho' },
+  { id: 6, name: 'Bebês' },
+  { id: 7, name: 'Beleza e Cuidado Pessoal' },
+  { id: 8, name: 'Brinquedos e Hobbies' },
+  { id: 9, name: 'Calçados, Roupas e Bolsas' },
+  { id: 10, name: 'Casa, Móveis e Decoração' },
+  { id: 11, name: 'Celulares e Telefones' },
+  { id: 12, name: 'Eletrodomésticos' },
+  { id: 13, name: 'Eletrônicos, Áudio e Vídeo' },
+  { id: 14, name: 'Esportes e Fitness' },
+  { id: 15, name: 'Ferramentas' },
+  { id: 16, name: 'Festas e Lembrancinhas' },
+  { id: 17, name: 'Games' },
+  { id: 18, name: 'Indústria e Comércio' },
+  { id: 19, name: 'Informática' },
+  { id: 20, name: 'Instrumentos Musicais' },
+  { id: 21, name: 'Livros, Revistas e Comics' },
+  { id: 22, name: 'Música, Filmes e Seriados' },
+  { id: 23, name: 'Saúde' },
+  { id: 24, name: 'Serviços' },
 ];
 
 function ProductsFilters() {
@@ -145,11 +145,11 @@ function ProductsFilters() {
         />
       </label>
       {
-        categories.map(({ name }, index) => (
+        categories.map(({ id, name }) => (
           <button
             type="button"
             name="category"
-            value={index}
+            value={id}
             key={name}
             onClick={(event) => submitCategory(event)}
           >
