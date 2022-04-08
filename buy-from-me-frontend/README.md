@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# buy-from-me
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h1 align="center">Bem-vindo Buy From Me👋</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />  
+</p>
 
-## Available Scripts
+> Esse projeto faz parte de uma aplicação completa com backend e frontend de site de anuncios de produtos novos e usados.
 
-In the project directory, you can run:
+### 🏠 [Homepage](https://github.com/esdrasoliveira5/buy-from-me)
 
-### `npm start`
+### Sobre
+> Esse repositório armazena uma aplicação web feita React.js de um site de anuncios. O usuário pode criar uma conta e anunciar e encomendar produtos.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Pré-requisitos
 
-### `npm test`
+- `npm version 6.14.13`
+- `node version 14.17.0`
+- `docker version 20.10.13`
+- `docker-compose version 1.29.2`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Instalação
 
-### `npm run build`
+- Clone o repositório
+  ```sh
+    git clone git@github.com:esdrasoliveira5/buy-from-me.git
+    
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Vá para a pasta da aplicação
+  ```sh
+    cd buy-from-me
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Instruções para iniciar o projeto
 
-### `npm run eject`
+<br>
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Comando para iniciar
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  ```sh
+    sudo docker-compose up
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+<br/>
 
-## Learn More
+<img src="./public/Screenshot from 2022-03-03 17-00-06.png" >
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+👤 **Esdras Oliveira**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Website: [Game library](https://gameslibrary5713.vercel.app/)
+* Github: [@esdrasoliveira5](https://github.com/esdrasoliveira5)
+* LinkedIn: [Esdras Oliveira](https://www.linkedin.com/in/esdrasmoliveira/)
