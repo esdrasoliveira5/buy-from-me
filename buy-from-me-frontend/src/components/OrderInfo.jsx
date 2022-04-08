@@ -20,7 +20,11 @@ function OrderInfo({
       const orderResponse = await requests.deleteOrder(localResponse.token, id);
       if (orderResponse.message === 'order deleted') {
         global.alert('Pedido Cancelado');
-        navigate('/profile/orders');
+        if (seller.email === logged.email) {
+          navigate('/profile/sales');
+        } else {
+          navigate('/profile/orders');
+        }
       }
     }
   };
