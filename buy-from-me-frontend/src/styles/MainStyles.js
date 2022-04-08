@@ -5,7 +5,7 @@ export const MainStyled = styled.main`
   padding-bottom: 100px;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
   min-height: 100vh;
   width: 100%;
   @media screen and (min-width: 1000px) {

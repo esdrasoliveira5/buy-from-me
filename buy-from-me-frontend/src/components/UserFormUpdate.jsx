@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
+import { ButtonGreen, ButtonRed, ButtonYellow } from '../styles/ButtonsStyles';
 import FormStyled from '../styles/FormStyles';
 import { userValidation, addressValidation } from '../validation/validations';
 
@@ -166,21 +167,25 @@ function UserFormUpdate() {
                   onChange={(event) => handleFormData(event)}
                 />
               </label>
-              <Link to="/profile">
+              <ButtonRed>
+                <Link to="/profile">
+                  <button
+                    type="button"
+                  >
+                    Cancelar
+                  </button>
+                </Link>
+              </ButtonRed>
+              <ButtonGreen>
                 <button
                   type="button"
+                  name="form"
+                  value="address"
+                  onClick={(event) => handleForm(event)}
                 >
-                  Cancelar
+                  Próximo
                 </button>
-              </Link>
-              <button
-                type="button"
-                name="form"
-                value="address"
-                onClick={(event) => handleForm(event)}
-              >
-                Proximo
-              </button>
+              </ButtonGreen>
             </FormStyled>
           )
           : (
@@ -247,27 +252,33 @@ function UserFormUpdate() {
                   )) }
                 </select>
               </label>
-              <Link to="/profile">
+              <ButtonRed>
+                <Link to="/profile">
+                  <button
+                    type="button"
+                  >
+                    Cancelar
+                  </button>
+                </Link>
+              </ButtonRed>
+              <ButtonYellow>
                 <button
                   type="button"
+                  name="form"
+                  value="user"
+                  onClick={(event) => handleForm(event)}
                 >
-                  Cancelar
+                  Anterior
                 </button>
-              </Link>
-              <button
-                type="button"
-                name="form"
-                value="user"
-                onClick={(event) => handleForm(event)}
-              >
-                Anterior
-              </button>
-              <button
-                type="button"
-                onClick={submitForm}
-              >
-                Atualizar
-              </button>
+              </ButtonYellow>
+              <ButtonGreen>
+                <button
+                  type="button"
+                  onClick={submitForm}
+                >
+                  Atualizar
+                </button>
+              </ButtonGreen>
             </FormStyled>
           )
       }

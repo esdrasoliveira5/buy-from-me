@@ -8,7 +8,8 @@ import ProfileBar from '../components/ProfileBar';
 import UserFormUpdate from '../components/UserFormUpdate';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
-import { BodyStyled } from '../styles/BodyStyles';
+import BodyStyled from '../styles/BodyStyles';
+import { ButtonRed } from '../styles/ButtonsStyles';
 import { MainStyled } from '../styles/MainStyles';
 
 function ProfileEdit() {
@@ -64,13 +65,15 @@ function ProfileEdit() {
         <ProfileBar />
         <UserFormUpdate />
         <div>
-          <p>Deletar a conta e todas as informacoes?</p>
-          <button
-            type="button"
-            onClick={handleDelete}
-          >
-            Excluir Conta
-          </button>
+          <p>Excluir sua Conta?</p>
+          <ButtonRed>
+            <button
+              type="button"
+              onClick={handleDelete}
+            >
+              Excluir Conta
+            </button>
+          </ButtonRed>
         </div>
       </MainStyled>
       <Footer />

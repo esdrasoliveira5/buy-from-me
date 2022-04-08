@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FormStyled from '../styles/FormStyles';
-import { BodyStyled } from '../styles/BodyStyles';
+import BodyStyled from '../styles/BodyStyles';
 import { LoginMainStyled } from '../styles/MainStyles';
 import buyFromMeContext from '../context/AppContext';
 import request from '../services/requests';

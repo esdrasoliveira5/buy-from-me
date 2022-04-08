@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
+import TableStyled from '../styles/TableStyles';
 import Order from './Order';
 
 function OrdersContainer({ orders }) {
@@ -9,7 +10,7 @@ function OrdersContainer({ orders }) {
     );
   }
   return (
-    <div>
+    <TableStyled>
       <table>
         <thead>
           <tr>
@@ -18,7 +19,7 @@ function OrdersContainer({ orders }) {
             <th>Comprador</th>
             <th>Vendedor</th>
             <th>Data do Pedido</th>
-            <th> </th>
+            <th>Vizualizar</th>
           </tr>
         </thead>
         <tbody>
@@ -38,7 +39,7 @@ function OrdersContainer({ orders }) {
             : []}
         </tbody>
       </table>
-    </div>
+    </TableStyled>
   );
 }
 

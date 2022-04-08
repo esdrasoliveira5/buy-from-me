@@ -138,6 +138,7 @@ export const ProfileBox = styled.div`
     font: inherit;
     cursor: pointer;
     outline: inherit;
+    width: 100%;
   }
 
   button:hover {

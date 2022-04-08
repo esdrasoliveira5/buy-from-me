@@ -5,7 +5,7 @@ import Header from '../components/Header';
 import ProductsContainer from '../components/ProductsContainer';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
-import { BodyStyled } from '../styles/BodyStyles';
+import BodyStyled from '../styles/BodyStyles';
 import { MainStyled } from '../styles/MainStyles';
 
 function FrontPage() {

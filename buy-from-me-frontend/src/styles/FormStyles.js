@@ -6,6 +6,7 @@ const FormStyled = styled.form`
   background-color: #F8961E;
   padding: 15px;
   color: #FFFFFF;
+  min-width: 300px;
   width: 100%;
   input {
     outline: 0;

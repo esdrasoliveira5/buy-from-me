@@ -7,7 +7,7 @@ import ProductsFilters from '../components/ProductsFilters';
 import ProfileBar from '../components/ProfileBar';
 import buyFromMeContext from '../context/AppContext';
 import requests from '../services/requests';
-import { BodyStyled } from '../styles/BodyStyles';
+import BodyStyled from '../styles/BodyStyles';
 import { HomeMainStyled } from '../styles/MainStyles';
 
 function Home() {
