@@ -22,10 +22,8 @@ class App {
     this.app.use(Express.json());
   }
 
-  public start():void {
-    this.app.listen(process.env.PORT || 3001, () => {
-      console.log(`Server is running on PORT: ${process.env.PORT || 3001}`);
-    });
+  public start(PORT: string | number):void {
+    this.app.listen(PORT, () => console.log(`Server is running on PORT: ${PORT}`));
   }
 }
 
