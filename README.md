@@ -30,13 +30,16 @@
 
 ## Descrição
 
-**Objetivo**: Neste projeto foi desenvolvido uma CRUD api que gerencia dados de um usuario e vendedor em um site de vendas, no formato de uma API RESTful, utilizando Typescript.
+**Objetivo**: Neste projeto foi desenvolvido um backend CRUD api que gerencia dados de um usuario e vendedor em um site de vendas, no formato de uma API RESTful, utilizando Typescript e um frontend em javascript e React.js.
 
+- React.js;
 - Arquitetura REST;
+- Conseitos de SOLID e POO;
+- Typescript e Javascript;
 - Autenticações e Permissões com JWT;
-- Cryptografia de senha com bcrypt
+- Cryptografia de senha com bcrypt;
 - Banco de Dados PostgreSQL;
-- Docker
+- Docker;
 
 ## Pré-requisitos
 
@@ -64,6 +67,12 @@
   sudo docker-compose up
 
 <br/>
+
+<img src="./buy-from-me-frontend/public/Screenshot from 2022-04-09 01-57-40.png" >
+
+
+* Website: [Buy From Me](https://buy-from-me.vercel.app/home)
+
 
 ## Documentação
 
