@@ -2,6 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "v14.17.0"
+  },
   "main": "./dist/build/server",
   "scripts": {
     "test": "mocha -r ts-node/register ./src/tests/BuyFromMe.test.ts -t 10000 --exit",
