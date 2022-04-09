@@ -1,1 +1,4 @@
-buyfrommeaws.pem
+/dist
+/node_modules
+.env
+.nyc_output
