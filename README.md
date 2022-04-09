@@ -1,4 +1,4 @@
-# buy-from-me-backend
+# buy-from-me
 
 ## Sumário
 
