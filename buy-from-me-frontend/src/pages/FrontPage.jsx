@@ -60,7 +60,6 @@ function FrontPage() {
     <BodyStyled>
       <Header />
       <MainStyled>
-        <h1>BUY FROM ME</h1>
         <ProductsContainer products={products} />
       </MainStyled>
       <Footer />
