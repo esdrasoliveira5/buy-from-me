@@ -4,14 +4,15 @@
   "description": "",
   "main": "./dist/build/server",
   "scripts": {
+    "build": "tsc",
+    "postinstall": "npm run build && npx prisma generate && npx prisma migrate dev && npm run prismaSeed",
+    "start": "node ./dist/server.js",
     "test": "mocha -r ts-node/register ./src/tests/BuyFromMe.test.ts -t 10000 --exit",
     "test:coverage": "nyc --all npm run test",
     "prismaSeed": "ts-node ./prisma/seeds/states.ts && ts-node ./prisma/seeds/categories.ts && ts-node ./prisma/seeds/address.ts && ts-node ./prisma/seeds/users.ts && ts-node ./prisma/seeds/products.ts && ts-node ./prisma/seeds/orders.ts",
-    "prestart": "npx prisma generate && npx prisma migrate dev && npm run prismaSeed",
-    "start": "npm run build && npm run prestart && node ./dist/server.js",
+    "prestart": "",
     "debug": "nodemon --watch \"./src/**\" --ext \"ts,js\" --ignore \"src/**/*.spec.ts,src/**/*.json\" --exec \"ts-node src/server.ts\"",
-    "dev": "tsnd ./src/server.ts",
-    "build": "tsc"
+    "dev": "tsnd ./src/server.ts"
   },
   "prisma": {
     "seed": "npm run prismaSeed"
