@@ -10,37 +10,57 @@ const orders = [
   {
     productsId: 12,
     buyerId: '11',
-    sellerId: '12',
+    sellerId: '20',
   },
   {
     productsId: 13,
     buyerId: '14',
-    sellerId: '13',
+    sellerId: '12',
   },
   {
     productsId: 14,
     buyerId: '13',
-    sellerId: '14',
+    sellerId: '19',
   },
   {
-    productsId: 18,
+    productsId: 15,
     buyerId: '12',
-    sellerId: '14',
-  },
-  {
-    productsId: 17,
-    buyerId: '11',
     sellerId: '13',
   },
   {
     productsId: 16,
-    buyerId: '14',
-    sellerId: '12',
+    buyerId: '11',
+    sellerId: '18',
   },
   {
-    productsId: 15,
+    productsId: 17,
+    buyerId: '17',
+    sellerId: '14',
+  },
+  {
+    productsId: 18,
     buyerId: '13',
-    sellerId: '11',
+    sellerId: '17',
+  },
+  {
+    productsId: 19,
+    buyerId: '14',
+    sellerId: '15',
+  },
+  {
+    productsId: 20,
+    buyerId: '13',
+    sellerId: '16',
+  },
+  {
+    productsId: 24,
+    buyerId: '13',
+    sellerId: '14',
+  },
+  {
+    productsId: 41,
+    buyerId: '19',
+    sellerId: '14',
   },
 ];
 
