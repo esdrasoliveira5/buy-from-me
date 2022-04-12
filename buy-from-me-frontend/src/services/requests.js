@@ -1,4 +1,4 @@
-const URL_FETCH = 'http://localhost:3001/';
+const URL_FETCH = 'https://buy-from-me.herokuapp.com/';
 const APLICATION = 'application/json';
 
 async function loginUser({ email, password }) {
