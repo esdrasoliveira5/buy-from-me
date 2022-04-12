@@ -16,6 +16,25 @@ export const MainStyled = styled.main`
   }
 `;
 
+export const FrontPageStyled = styled.main`
+  padding-top: 200px;
+  padding-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 100vh;
+  width: 100%;
+  h1 {
+    text-align: center;
+  }
+  @media screen and (min-width: 1000px) {
+    width: 60%;
+  }
+  @media screen and (min-width: 600px) {
+    width: 80%;
+  }
+`;
+
 export const HomeMainStyled = styled.main`
   padding-top: 200px;
   padding-bottom: 100px;
