@@ -1,4 +1,4 @@
-# buy-from-me-backend
+# buy-from-me
 
 ## Sumário
 
@@ -30,7 +30,7 @@
 
 ## Descrição
 
-**Objetivo**: Neste projeto foi desenvolvido um backend CRUD api que gerencia dados de um usuario e vendedor em um site de vendas, no formato de uma API RESTful, utilizando Typescript e um frontend em javascript e React.js.
+**Objetivo**: Neste projeto foi desenvolvido uma aplicação completa com frontend em javascript e React.js, um backend em typescript e node.js e um banco de dados PostgreSQL. Essa aplicação simula um site de anúncios de produtos novos e usados.
 
 - React.js;
 - Arquitetura REST;
