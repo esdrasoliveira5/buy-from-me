@@ -1,4 +1,6 @@
-const URL_FETCH = 'http://localhost:3001/';
+import 'dotenv/config';
+
+const URL_FETCH = process.env.BACKEND_URL || 'http://localhost:3001/';
 const APLICATION = 'application/json';
 
 async function loginUser({ email, password }) {

@@ -3,3 +3,4 @@ buyfrommeaws.pem
 /node_modules
 .env
 .nyc_output
+/backup
