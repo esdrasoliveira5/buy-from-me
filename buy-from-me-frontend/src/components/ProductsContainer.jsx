@@ -6,7 +6,7 @@ import Product from './Product';
 function ProductsContainer({ products }) {
   if (products.length === 0) {
     return (
-      <h1>Voce nao tem produtos</h1>
+      <h1>Carregando...</h1>
     );
   }
   return (
